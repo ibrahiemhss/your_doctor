@@ -39,7 +39,6 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
   Widget build(BuildContext context) {
     return new Scaffold(
         key: globalKey,
-        backgroundColor: ThemeColors.CanvasColor,
         body: new Stack(
           children: <Widget>[_loginContainer(), progressDialog],
         ));
@@ -47,7 +46,14 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
 
 //------------------------------------------------------------------------------
   Widget _loginContainer() {
-    return new Container(
+    return new Container(decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment(0, 1), //
+        colors: [const Color(0xFF003B55), const Color(0xaa005B5B)],
+        tileMode: TileMode.clamp,
+      ),
+    ),
         child: new ListView(
           children: <Widget>[
             new Center(
@@ -93,7 +99,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
                   Container(
                     margin: EdgeInsets.only(bottom: 30, top: 50),
                     decoration: BoxDecoration(
-                        color: Color(0xffffffff),
+                        color: Color(0x33ffffff),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: Color(0x44000000),

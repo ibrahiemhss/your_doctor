@@ -11,26 +11,27 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   get emailController => null;
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: ThemeColors.PrimaryColor_Dark,
-        title: Text("Reset Password"),),
-      body:
+    body:
       Container(
+        decoration:ThemeColors.Canvas,
         alignment: Alignment.center,
         height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.all(30),
-        child: Column(
+        child: ListView(
           children: <Widget>[
 
+            Divider(height:20),
+            Image.asset("images/urdr.png",height:200 ,width: 200,),
             ///==============================
-            Divider(height:20,
-                color:Colors.transparent),
+            Divider(height:20),
 
             Text("Please enter your  EMail "
                 "\nand wait afew seconds to get a link to "
-                "\nreset your password,"),
+                "\nreset your password,",style: TextStyle(color: ThemeColors.white100),),
 
             ///==============================
             Divider(height: 40,
@@ -51,7 +52,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             ),
             ///======================================
             Divider(height: 30,
-              color: ThemeColors.CanvasColor,),
+              ),
             ///====================Button====================
             Container(
                 width: 170,
@@ -63,7 +64,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   onPressed: null,
                   child: new Text(
                     "Send",
-                    style: new TextStyle(color:ThemeColors.white,fontWeight: FontWeight.bold, fontSize: 16.0),
+                    style: new TextStyle(color:ThemeColors.white100,fontWeight: FontWeight.bold, fontSize: 16.0),
                   ),
                 ),
                 margin: EdgeInsets.only(bottom: 30.0)),

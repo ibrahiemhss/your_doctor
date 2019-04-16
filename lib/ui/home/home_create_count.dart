@@ -36,10 +36,10 @@ class _CreatingCountState extends State<HomeCreatingCount>
     return new Scaffold(
       appBar: new AppBar(
         elevation: 0.0,
-        backgroundColor: ThemeColors.CanvasColor,
+        backgroundColor: Colors.transparent,
         bottom: new TabBar(
           isScrollable: true,
-          unselectedLabelColor: Colors.grey,
+          unselectedLabelColor: Colors.transparent,
           labelColor: ThemeColors.PrimaryColor,
           labelStyle: new TextStyle(
               fontSize: 32.0,

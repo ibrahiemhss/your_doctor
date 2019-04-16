@@ -65,6 +65,14 @@ class _RegisterPageState extends State<RegisterPage>
 //------------------------------------------------------------------------------
   Widget _loginContainer() {
     return new Container(
+        decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment(0, 1), //
+        colors: [const Color(0xFF003B55), const Color(0xaa005B5B)],
+        tileMode: TileMode.clamp,
+      ),
+    ),
         child: new ListView(
       children: <Widget>[
         new Center(
@@ -109,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage>
                   Container(
                     margin: EdgeInsets.only(bottom: 8, top: 8),
                     decoration: BoxDecoration(
-                        color: Color(0xffffffff),
+                        color: Color(0x44ffffff),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                             color: Color(0x44000000),

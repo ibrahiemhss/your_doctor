@@ -132,14 +132,30 @@ class Texts {
 ////////////////////////////////////////////
 
 class ThemeColors {
-  static const Color PrimaryColor_Dark = Color(0xff080a2a);
-  static const Color PrimaryColor = Color(0xff222288);
-  static const Color PrimaryColor60 = Color(0x94222288);
-  static const Color CanvasColor = Color(0xfffafbfe);
-  static const Color white = Color(0xffffffff);
+  static const Color PrimaryColor_Dark = Color(0xff003B55);
+  static const Color PrimaryColor = Color(0xff005A82);
+  static const Color PrimaryColor60 = Color(0xff007EB7);
+
+  static const Color white100 = Color(0xffffffff);
+  static const Color white80 = Color(0xbbffffff);
+  static const Color white60 = Color(0x99ffffff);
+  static const Color white33 = Color(0x44ffffff);
   static const Color Material_Accent_Color = Colors.teal;
-  static const Color AccentColor = Color(0xff12D4AC);
+  static const Color AccentColor = Color(0xff00BABB);
   static const Color ShadowColor = Color(0x44000000);
+  static const CanvasColor =Color(0xff005A82);
+
+
+         ///gradient Canvas Color /////
+  static  BoxDecoration Canvas = BoxDecoration(
+    gradient: LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment(0, 1), //
+      colors: [const Color(0xFF003B55), const Color(0xaa005B5B)],
+      tileMode: TileMode.clamp,
+    ),
+  );
+/// ====================================
 
 }
 ///////////////////////////////////////////////////

@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:your_doctor/data/user/user_data.dart';
+import 'package:your_doctor/ui/customviews/gradientContainer.dart';
 import 'package:your_doctor/ui/home/home_page/home_screen_page.dart';
 import 'package:your_doctor/ui/home/profile/profile_page.dart';
 import 'package:your_doctor/ui/main_app_bar.dart';
@@ -59,8 +60,8 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     HomeScreenPage(),
     Text("SearchPage"),
     ProfilePage(),
-    Text("SearchPage"),
-    Text("SearchPage"),
+    Grad(child: ListView(children: <Widget>[ListTile(title: Text("rzzzzzzzzrr")),Center(child: Text("fdfdddddddddd")),],),),
+    Grad(child:Center(child: Text("hellooyu World",style: TextStyle(fontSize: 24,color: Color(0xeeffffff)),)) ,),
   ];
 
   Future<bool> _getLogInStatus() async {
