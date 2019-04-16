@@ -330,7 +330,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
     return Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.all(8),
-      height: 40,color: Color(0xaaeeeeee),
+      height: 40,color:ThemeColors.white22,
       child: GestureDetector(
         onTap: () {
           Navigator.push(
@@ -341,7 +341,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
         },
         child: Text(
           "Forgot Password?",
-          style: TextStyle(color: ThemeColors.PrimaryColor),
+          style: TextStyle(color: ThemeColors.white100),
         ),
       ),
     );

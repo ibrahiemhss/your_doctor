@@ -139,7 +139,7 @@ class ThemeColors {
   static const Color white100 = Color(0xffffffff);
   static const Color white80 = Color(0xbbffffff);
   static const Color white60 = Color(0x99ffffff);
-  static const Color white33 = Color(0x44ffffff);
+  static const Color white22 = Color(0x22ffffff);
   static const Color Material_Accent_Color = Colors.teal;
   static const Color AccentColor = Color(0xff00BABB);
   static const Color ShadowColor = Color(0x44000000);
