@@ -107,7 +107,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
 
       // setting canvasColor to transparent
 
-      body: Grad(child: _children[_currentIndex]),
+      body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         onTap: onTabTapped,
