@@ -63,9 +63,7 @@ class _MeetingsState extends State<Meetings>
           expandedHeight: 20.0,
           floating: true,
           pinned:false,
-          flexibleSpace: FlexibleSpaceBar(collapseMode: CollapseMode.parallax,
-              background:Image.asset("/images/urdr.png"),
-              )
+
           )
 
     ///==============================================

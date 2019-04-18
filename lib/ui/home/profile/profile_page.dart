@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:your_doctor/data/user/user_data.dart';
+import 'package:your_doctor/ui/customviews/gradientContainer.dart';
 import 'package:your_doctor/ui/home/meetings.dart';
 import 'package:your_doctor/ui/home/log_in/register_page.dart';
 import 'package:your_doctor/ui/home/profile/more_options_widget.dart';
@@ -74,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage>
                 valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
               ))
             : !isLogedIn
-                ? buttonCreateCount()
+                ? WelcomeNewUser()
                 : new Container(
                     child: new ListView(
                     children: <Widget>[
@@ -97,40 +98,47 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
 ////////////////////////////////////////////////////////////////////////////////
-  Widget buttonCreateCount() {
-    return Center(
-        child: new RawMaterialButton(
-      fillColor: Colors.white,
-      splashColor: Colors.blueGrey,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Text(
-              'Creat Acount',
-              style: TextStyle(color: ThemeColors.PrimaryColor),
+  Widget WelcomeNewUser() {
+    return Container(
+      decoration: ThemeColors.Canvas,
+      height: double.maxFinite,
+      width:double.maxFinite,
+      child: Column(textDirection: TextDirection.rtl,
+        children: <Widget>[
+          Divider(height: 100,),
+          Text("اهلاً بكم",style: TextStyle(
+            color:Colors.amber,fontSize: 24,fontWeight: FontWeight.bold,
+          ),),
+          Divider(height: 10,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("يرجى تسجيل الدخول لتتمكن من الاستفادة من خدماتنا..سائلين المولى دوام العافية على الجميع ", style:
+              TextStyle(
+                color: ThemeColors.white80,
+              ),),
+          ),
+          Divider(height: 30,color: Colors.transparent,),
+          new FlatButton(
+            splashColor: Color(0xffaaaaaa),
+            color: ThemeColors.AccentColor,
+            shape: StadiumBorder(),
+            onPressed: () => _goToCreateCount(),
+            child: Text(
+              Texts.REGISTER_NOW,
+              style: new TextStyle(
+                  color: ThemeColors.white100,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0),
             ),
-            const SizedBox(
-              width: 8.0,
-            ),
-            const Icon(
-              Icons.play_circle_outline,
-              color: ThemeColors.AccentColor,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-      onPressed: () {
-        _goToCreateCount();
-      },
-      shape: const StadiumBorder(),
-    ));
+    );
   }
 
 ////////////////////////////////////////////////////////////////////////////////
   void _goToCreateCount() {
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       new MaterialPageRoute(builder: (context) => new RegisterPage()),
     );

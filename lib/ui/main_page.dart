@@ -59,7 +59,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomeScreenPage(),
-    Text("SearchPage"),
+    Grad(child: Text("SearchPage")),
     Meetings(),
     ProfilePage(),
     Grad(child:Center(child: Text("hellooyu World",style: TextStyle(fontSize: 24,color: Color(0xeeffffff)),)) ,),
@@ -107,6 +107,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
 
 
       // setting canvasColor to transparent
+      backgroundColor: ThemeColors.PrimaryColor_Dark,
 
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(iconSize: 24,
