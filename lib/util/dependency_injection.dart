@@ -1,5 +1,7 @@
 
 
+import 'package:your_doctor/data/articles/articles_data.dart';
+import 'package:your_doctor/data/articles/articles_data_mock.dart';
 import 'package:your_doctor/data/user/login_data_prod.dart';
 import 'package:your_doctor/data/user/register_data_prod.dart';
 import 'package:your_doctor/data/user/reset_password_prod.dart';
@@ -50,5 +52,15 @@ class Injector {
 ////////////////////////////////////////////////////////////////////////////////
   ResetPasswordRepository get resetPasswordRepository {
     return ResetPassword();
+  }
+
+///////////////Articles Data////////////////////////////////////////////////////
+  ArticlesRepository get articlesRepository {
+    // switch (_flavor) {
+    //  case Flavor.MOCK:
+    return new MockArticlesRepository();
+    // default:
+    // return new ProdCategoriesRepository();
+    // }
   }
 }

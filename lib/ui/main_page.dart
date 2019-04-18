@@ -71,7 +71,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       });
     } else {
       setState(() {
-        isLogedIn = false;
+        isLogedIn = true;
       });
     }
   }
@@ -116,69 +116,74 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.home,
-              color: ThemeColors.PrimaryColor_Dark,
+              color: Colors.white,
             ),
             activeIcon: Icon(
               Icons.home,
-              color: ThemeColors.AccentColor,
+              color: Colors.white,
             ),
             title: Text(
-              'Home',
-              style: TextStyle(color: ThemeColors.AccentColor),
+              'الرئيسيه',
+              style: TextStyle(color: Colors.white),
             ),
           ),
           BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.search,
-              color: ThemeColors.AccentColor,
+              color: Colors.white,
             ),
             icon: Icon(
               Icons.search,
-              color: ThemeColors.PrimaryColor_Dark,
+              color: Colors.white,
             ),
             title: Text(
-              'Search',
-              style: TextStyle(color: ThemeColors.AccentColor),
+              'بحث',
+              style: TextStyle(color: Colors.white),
             ),
           ),
           BottomNavigationBarItem(
             activeIcon: Icon(
-              Icons.person,
-              color: ThemeColors.AccentColor,
+              Icons.event_note,
+              color: Colors.white,
             ),
             icon: Icon(
-              Icons.person,
-              color: ThemeColors.PrimaryColor_Dark,
+              Icons.event_note,
+              color: Colors.white,
             ),
             title: Text(
-              'Profile',
-              style: TextStyle(color: ThemeColors.AccentColor),
+              'مواعيدى',
+              style: TextStyle(color: Colors.white),
             ),
           ),
+
           BottomNavigationBarItem(
             activeIcon: Icon(
-              Icons.shopping_cart,
-              color: ThemeColors.AccentColor,
+              Icons.person,
+              color: Colors.white,
             ),
             icon: Icon(
-              Icons.shopping_cart,
-              color: ThemeColors.PrimaryColor_Dark,
+              Icons.person,
+              color: Colors.white,
             ),
             title: Text(
-              'Cart',
-              style: TextStyle(color: ThemeColors.AccentColor),
+              'حسابي',
+              style: TextStyle(color: Colors.white),
             ),
           ),
+
           BottomNavigationBarItem(
               activeIcon: Icon(
                 Icons.menu,
-                color: ThemeColors.AccentColor,
+                color: Colors.white,
               ),
               icon: Icon(
                 Icons.menu,
-                color: ThemeColors.PrimaryColor_Dark,
+                color: Colors.white,
               ),
-              title: Text('Profile'))
+              title: Text('المزيد',
+            style: TextStyle(color: Colors.white),
+              )
+          )
         ],
       ),
     );
