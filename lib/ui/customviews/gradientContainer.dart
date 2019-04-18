@@ -29,12 +29,8 @@ class GradState extends State<Grad> {
   Widget build(BuildContext context) {
     return Container(
       child: widget.child,
-      height: widget.height == null
-          ? double.infinity
-          : widget.height,
-      width: widget.width == null
-          ?double.maxFinite
-          : widget.width,
+      height: widget.height == null ? double.infinity : widget.height,
+      width: widget.width == null ? double.maxFinite : widget.width,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,

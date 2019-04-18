@@ -3,7 +3,7 @@ import 'package:your_doctor/data/user/base/event_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/module/login_user_presenter.dart';
 import 'package:your_doctor/ui/customviews/progress_dialog.dart';
-import 'package:your_doctor/ui/home/log_in/register_page.dart';
+import 'package:your_doctor/ui/home/profile/log_in/register_page.dart';
 import 'package:your_doctor/ui/main_page.dart';
 import 'package:your_doctor/util/app_shared_preferences.dart';
 import 'package:your_doctor/util/constant.dart';

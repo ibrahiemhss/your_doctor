@@ -15,6 +15,7 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
   ArticlesPresenter _articlesPresenter;
 
   bool _isLoading;
+  int quantity = 1;
 
   // final List<MaterialColor> _colors = [Colors.blue, Colors.indigo, Colors.red];
 
@@ -89,7 +90,55 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
             // final MaterialColor color = _colors[i % _colors.length];
             return InkWell(
                 onTap: () {
-                  //onPressed;
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Scaffold(
+                              appBar:
+                                  appBar("Dr: ${lastArticlesVlaues.dr_name}"),
+                              body: Container(
+                                  decoration: ThemeColors.Canvas,
+                                  child: ListView(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.network(
+                                          lastArticlesVlaues.article_img,
+                                          fit: BoxFit.scaleDown,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Container(
+                                          child: Center(
+                                            key: GlobalObjectKey(
+                                                lastArticlesVlaues),
+                                            child: Column(
+                                              children: <Widget>[
+                                                Text(
+                                                  lastArticlesVlaues
+                                                      .article_title,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 24),
+                                                ),
+                                                Text(
+                                                  lastArticlesVlaues.article,
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 16),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                            )),
+                  );
                 },
                 child: Padding(
                   padding:
@@ -112,7 +161,7 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
                               image: new DecorationImage(
                                   image: new NetworkImage(
                                       lastArticlesVlaues.article_img),
-                                  fit: BoxFit.fill),
+                                  fit: BoxFit.contain),
                               color: Colors.blue,
                             ),
                             child: new BackdropFilter(
@@ -197,7 +246,7 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
                               ),
                             )),
                         new Positioned(
-                          bottom: 45.0,
+                          bottom: 60.0,
                           right: 50.0,
                           child: CircleAvatar(
                               backgroundImage: new NetworkImage(
@@ -214,6 +263,36 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
   }
 
 //------------------------------------------------------------------------------
+
+  Widget appBar(String title) {
+    IconData _backIcon() {
+      switch (Theme.of(context).platform) {
+        case TargetPlatform.android:
+        case TargetPlatform.fuchsia:
+          return Icons.arrow_back;
+        case TargetPlatform.iOS:
+          return Icons.arrow_back_ios;
+      }
+      assert(false);
+      return null;
+    }
+
+    return AppBar(
+      elevation: 0,
+      leading: IconButton(
+        icon: Icon(_backIcon()),
+        color: Colors.white,
+        alignment: Alignment.centerLeft,
+        tooltip: 'Back',
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+      title: Text(title),
+      backgroundColor: ThemeColors.CanvasColor,
+    );
+  }
+
 //==============================================================================
   @override
   void onLoadArticlesCompleted(List<Articles> items) {

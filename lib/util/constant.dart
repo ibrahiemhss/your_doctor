@@ -131,6 +131,8 @@ class Texts {
   static const String ForgotPasswordMsg =
       " قم بادخال عنوان البريد الالكتروني \n سيتم ارسال رابط اعادة ضبط كلمة المرور الى بريدك الالكتروني";
   static const String ForgotPassword = "نسيت كلمة المرور ؟";
+
+  static const String SEARCH = "بحث متقدم";
 }
 ////////////////////////////////////////////
 

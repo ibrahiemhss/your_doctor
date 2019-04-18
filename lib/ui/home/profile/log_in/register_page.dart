@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:your_doctor/data/user/base/event_object.dart';
 import 'package:your_doctor/module/register_user_presenter.dart';
 import 'package:your_doctor/ui/customviews/progress_dialog.dart';
-import 'package:your_doctor/ui/home/log_in/login_page.dart';
+import 'package:your_doctor/ui/home/profile/log_in/login_page.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class RegisterPage extends StatefulWidget {

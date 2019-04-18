@@ -5,9 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
 import 'package:your_doctor/ui/home/meetings.dart';
-import 'package:your_doctor/ui/home/log_in/register_page.dart';
+import 'package:your_doctor/ui/home/profile/log_in/register_page.dart';
 import 'package:your_doctor/ui/home/profile/more_options_widget.dart';
-import 'package:your_doctor/ui/home/profile/order_details_widget.dart';
 import 'package:your_doctor/util/app_shared_preferences.dart';
 import 'package:your_doctor/util/constant.dart';
 
@@ -85,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage>
 //------------------------------------------------------------------------------
                             _countInfo(name, email, imgUrl),
 //------------------------------------------------------------------------------
-                            OrdersDetailsWidget(),
+                            //      OrdersDetailsWidget(),
 //------------------------------------------------------------------------------
                             MoreOptionWidget()
 //------------------------------------------------------------------------------
@@ -102,22 +101,37 @@ class _ProfilePageState extends State<ProfilePage>
     return Container(
       decoration: ThemeColors.Canvas,
       height: double.maxFinite,
-      width:double.maxFinite,
-      child: Column(textDirection: TextDirection.rtl,
+      width: double.maxFinite,
+      child: Column(
+        textDirection: TextDirection.rtl,
         children: <Widget>[
-          Divider(height: 100,),
-          Text("اهلاً بكم",style: TextStyle(
-            color:Colors.amber,fontSize: 24,fontWeight: FontWeight.bold,
-          ),),
-          Divider(height: 10,),
+          Divider(
+            height: 100,
+          ),
+          Text(
+            "اهلاً بكم",
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Divider(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("يرجى تسجيل الدخول لتتمكن من الاستفادة من خدماتنا..سائلين المولى دوام العافية على الجميع ", style:
-              TextStyle(
+            child: Text(
+              "يرجى تسجيل الدخول لتتمكن من الاستفادة من خدماتنا..سائلين المولى دوام العافية على الجميع ",
+              style: TextStyle(
                 color: ThemeColors.white80,
-              ),),
+              ),
+            ),
           ),
-          Divider(height: 30,color: Colors.transparent,),
+          Divider(
+            height: 30,
+            color: Colors.transparent,
+          ),
           new FlatButton(
             splashColor: Color(0xffaaaaaa),
             color: ThemeColors.AccentColor,
