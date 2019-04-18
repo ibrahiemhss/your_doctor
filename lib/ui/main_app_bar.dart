@@ -33,6 +33,7 @@ class MainBarWidget extends StatelessWidget {
                           child: const Icon(
                             LineAwesomeIcons.wechat,
                             color: ThemeColors.PrimaryColor,
+
                           ),
                         ),
                         new Positioned(

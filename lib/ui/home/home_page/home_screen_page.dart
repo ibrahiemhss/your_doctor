@@ -128,7 +128,6 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
                                           lastArticlesVlaues.article_title,
                                           style: TextStyle(
                                               fontSize: 24,
-                                              fontFamily: "Cairo",
                                               fontWeight:
                                                   FontWeight.w500, // light
                                               color: Colors.white),
@@ -164,7 +163,6 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
                                             textAlign: TextAlign.end,
                                             style: TextStyle(
                                                 fontSize: 16,
-                                                fontFamily: "Cairo",
                                                 fontWeight:
                                                     FontWeight.w400, // light
                                                 color: Colors.white),
@@ -174,7 +172,6 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
                                             textAlign: TextAlign.end,
                                             style: TextStyle(
                                                 fontSize: 16,
-                                                fontFamily: "Cairo",
                                                 fontWeight:
                                                     FontWeight.w300, // light
                                                 color: Colors.white70),
