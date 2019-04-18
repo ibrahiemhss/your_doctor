@@ -7,7 +7,7 @@ class APIConstants {
   static const String OCTET_STREAM_ENCODING = "application/octet-stream";
 
   // static const String API_BASE_URL = "https://hafinse.000webhostapp.com";
-  static const String API_BASE_URL = "http://enjezni.com";
+  static const String API_BASE_URL = "https://mytestapps.000webhostapp.com";
   static const String API_LOGIN_URL = "${API_BASE_URL}/login/loginUser.php";
   static const String Api_REGISTER_URL =
       "${API_BASE_URL}/login/registerUser.php";

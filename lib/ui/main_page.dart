@@ -40,7 +40,7 @@ abstract class MainScreenCallBack {
 
 class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   int pagId;
-  bool isLogedIn;
+  bool isLogedIn=false;
   bool fromBack = false;
   String name;
   String email;
@@ -80,7 +80,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       });
     } else {
       setState(() {
-        isLogedIn = true;
+        isLogedIn = false;
       });
     }
   }
