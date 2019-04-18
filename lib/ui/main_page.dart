@@ -59,8 +59,8 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   final List<Widget> _children = [
     HomeScreenPage(),
     Text("SearchPage"),
-    ProfilePage(),
     Grad(child: ListView(children: <Widget>[ListTile(title: Text("rzggr")),Center(child: Text("fdniced")),],),),
+    ProfilePage(),
     Grad(child:Center(child: Text("hellooyu World",style: TextStyle(fontSize: 24,color: Color(0xeeffffff)),)) ,),
   ];
 
@@ -124,7 +124,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
             ),
             title: Text(
               'الرئيسيه',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white,fontFamily: "Cairo"),
             ),
           ),
           BottomNavigationBarItem(
@@ -138,7 +138,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
             ),
             title: Text(
               'بحث',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white,fontFamily: "Cairo"),
             ),
           ),
           BottomNavigationBarItem(
@@ -152,7 +152,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
             ),
             title: Text(
               'مواعيدى',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white,fontFamily: "Cairo"),
             ),
           ),
 
@@ -167,7 +167,8 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
             ),
             title: Text(
               'حسابي',
-              style: TextStyle(color: Colors.white),
+
+              style: TextStyle(color: Colors.white,fontFamily: "Cairo"),
             ),
           ),
 

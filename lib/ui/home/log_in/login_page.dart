@@ -165,7 +165,8 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
           onPressed: _loginButtonAction,
           child: new Text(
             Texts.LOGIN,
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0,fontFamily: "Cairo"),
+            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0,
+                fontFamily: "Cairo"),
           ),
         ),
         margin: EdgeInsets.only(bottom: 20.0, top: 10));
