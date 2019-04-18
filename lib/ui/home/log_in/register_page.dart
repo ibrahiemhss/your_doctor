@@ -25,7 +25,9 @@ class _RegisterPageState extends State<RegisterPage>
   ProgressDialog progressDialog =
       ProgressDialog.getProgressDialog(ProgressDialogTitles.USER_REGISTER);
 
-  TextEditingController nameController = new TextEditingController(text: "");
+  TextEditingController nameController = new TextEditingController(
+    text: "",
+  );
   TextEditingController tokenController = new TextEditingController(text: "");
   TextEditingController langController = new TextEditingController(text: "");
 
@@ -65,28 +67,21 @@ class _RegisterPageState extends State<RegisterPage>
 //------------------------------------------------------------------------------
   Widget _loginContainer() {
     return new Container(
-        decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment(0, 1), //
-        colors: [const Color(0xFF003B55), const Color(0xaa005B5B)],
-        tileMode: TileMode.clamp,
-      ),
-    ),
+        decoration: ThemeColors.Canvas,
         child: new ListView(
-      children: <Widget>[
-        new Center(
-          child: new Column(
-            children: <Widget>[
-              _imageUser(isGotFile),
+          children: <Widget>[
+            new Center(
+              child: new Column(
+                children: <Widget>[
+                  _imageUser(isGotFile),
 //------------------------------------------------------------------------------
-              _formContainer(),
+                  _formContainer(),
 //------------------------------------------------------------------------------
-            ],
-          ),
-        ),
-      ],
-    ));
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 
 //------------------------------------------------------------------------------
@@ -95,13 +90,11 @@ class _RegisterPageState extends State<RegisterPage>
         ? SizedBox()
         : new Container(
             width: 300,
-            padding: const EdgeInsets.only(top:8.0),
+            padding: const EdgeInsets.only(top: 8.0),
             child: ClipRRect(
               borderRadius: new BorderRadius.circular(100),
               child: Image.file(_image),
-
-            )
-          );
+            ));
   }
 
 //------------------------------------------------------------------------------
@@ -110,46 +103,40 @@ class _RegisterPageState extends State<RegisterPage>
       child: new Form(
           child: new Theme(
               data: new ThemeData(
+                  fontFamily: "Cairo",
                   primarySwatch: ThemeColors.Material_Accent_Color),
-              child: new Column(
-                children: <Widget>[
+              child: SingleChildScrollView(
+                child: new Column(
+                  children: <Widget>[
 //------------------------------------------------------------------------------
-                  Container(
-                    margin: EdgeInsets.only(bottom: 8, top: 8),
-                    decoration: BoxDecoration(
-                        color: Color(0x44ffffff),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Color(0x44000000),
-                            offset: Offset(1.0, 4.0),
-                            blurRadius: 8.0,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Padding(
+                    Padding(
                       padding: const EdgeInsets.only(
                           right: 40.0, left: 16.0, bottom: 20.0),
                       child: Column(
                         children: <Widget>[
+
+
+                          SizedBox(width: 150,height: 150,
+                          child: Image.asset("images/urdr.png"),),
                           _nameContainer(),
 //------------------------------------------------------------------------------
                           _emailContainer(),
 //------------------------------------------------------------------------------
                           _passwordContainer(),
 //------------------------------------------------------------------------------
-                          _cameraButton(),
+                      //    _cameraButton(),
 //------------------------------------------------------------------------------
                         ],
                       ),
                     ),
-                  ),
 //------------------------------------------------------------------------------
 
-                  _registerButtonContainer(),
-                  _loginNowLabel(),
+                    _registerButtonContainer(),
+                    _loginNowLabel(),
 
 //------------------------------------------------------------------------------
-                ],
+                  ],
+                ),
               ))),
       margin: EdgeInsets.only(
         top: 20.0,
@@ -163,15 +150,20 @@ class _RegisterPageState extends State<RegisterPage>
   Widget _nameContainer() {
     return new Container(
         child: new TextFormField(
+            textDirection: TextDirection.rtl,
+            textAlign: TextAlign.right,
+            style: TextStyle(fontFamily: "Cairo", fontSize: 14),
             controller: nameController,
             decoration: InputDecoration(
-                fillColor: Colors.white,
-                icon: new Icon(
-                  LineAwesomeIcons.user,
-                  color: ThemeColors.PrimaryColor_Dark,
+                hintText: "الاسم الاول",
+                hintStyle: TextStyle(
+                  color: ThemeColors.white80,
                 ),
-                labelText: Texts.NAME,
-                labelStyle: TextStyle(fontSize: 18.0)),
+                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                fillColor: ThemeColors.white40,
+                filled: true),
             keyboardType: TextInputType.text),
         margin: EdgeInsets.only(bottom: 5.0));
   }
@@ -256,13 +248,14 @@ class _RegisterPageState extends State<RegisterPage>
 //------------------------------------------------------------------------------
   Widget _registerButtonContainer() {
     return new Container(
-        width: 150,
+        width: 125,
         decoration: new BoxDecoration(
             color: ThemeColors.PrimaryColor_Dark,
-            borderRadius: BorderRadius.all(Radius.circular(25.0))),
-        child: new MaterialButton(
+           ),
+        child: new FlatButton(
+          shape: StadiumBorder(),
           textColor: Colors.white,
-          padding: EdgeInsets.all(15.0),
+         // padding: EdgeInsets.all(15.0),
           onPressed: () {
             setState(() {
               _registerButtonAction();

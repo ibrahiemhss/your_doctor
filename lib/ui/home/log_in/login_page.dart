@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:your_doctor/data/user/base/event_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
@@ -20,12 +19,12 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
   final globalKey = new GlobalKey<ScaffoldState>();
 
   ProgressDialog progressDialog =
-  ProgressDialog.getProgressDialog(ProgressDialogTitles.USER_LOG_IN);
+      ProgressDialog.getProgressDialog(ProgressDialogTitles.USER_LOG_IN);
 
   TextEditingController emailController = new TextEditingController(text: "");
 
   TextEditingController passwordController =
-  new TextEditingController(text: "");
+      new TextEditingController(text: "");
 
   User user;
   LogInPresenter _presenter;
@@ -46,46 +45,29 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
 
 //------------------------------------------------------------------------------
   Widget _loginContainer() {
-    return new Container(decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment(0, 1), //
-        colors: [const Color(0xFF003B55), const Color(0xaa005B5B)],
-        tileMode: TileMode.clamp,
-      ),
-    ),
-        child: new ListView(
-          children: <Widget>[
-            new Center(
-              child: new Column(
-                children: <Widget>[
+    return new Container(
+        padding: EdgeInsets.only(right: 24, left: 24, top: 40),
+        height: double.maxFinite,
+        width: double.maxFinite,
+        //MediaQuery.of(context).size.height,
+        decoration: ThemeColors.Canvas,
+        child: SingleChildScrollView(
+          child: new Column(
+            children: <Widget>[
 //------------------------------------------------------------------------------
-                  //    _appIcon(),
-//------------------------------------------------------------------------------
-                  _formContainer(),
-//------------------------------------------------------------------------------
-                ],
+              SizedBox(
+                width: 200,
+                height: 200,
+                child: Image.asset("images/urdr.png"),
               ),
-            ),
-          ],
+//------------------------------------------------------------------------------
+              _formContainer(),
+//------------------------------------------------------------------------------
+            ],
+          ),
         ));
   }
 
-//------------------------------------------------------------------------------
-/*
-  Widget _appIcon() {
-    return new Container(
-      decoration: new BoxDecoration(color: ThemeColors.Dark_Primary_Color),
-      child: new Image(
-        image: new NetworkImage(
-            "https://mir-s3-cdn-cf.behance.net/project_modules/disp/0fe5f968670871.5b64c2565ece3.png"),
-        height: 120,
-        width: 120.0,
-      ),
-      margin: EdgeInsets.only(top: 20.0),
-    );
-  }
-                 */
 //------------------------------------------------------------------------------
   Widget _formContainer() {
     return new Container(
@@ -96,40 +78,21 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
               child: new Column(
                 children: <Widget>[
 //------------------------------------------------------------------------------
-                  Container(
-                    margin: EdgeInsets.only(bottom: 30, top: 50),
-                    decoration: BoxDecoration(
-                        color: Color(0x33ffffff),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Color(0x44000000),
-                            offset: Offset(1.0, 4.0),
-                            blurRadius: 8.0,
-                          ),
-                        ],
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          right: 40.0, left: 16.0, bottom: 40.0),
-                      child: Column(
-                        children: <Widget>[
-                          _emailContainer(), Divider(),
+
 //------------------------------------------------------------------------------
-                          _passwordContainer(),
-                        ],
-                      ),
-                    ),
+
+                  _emailContainer(),
+
+                  Divider(),
+//------------------------------------------------------------------------------
+                  _passwordContainer(),
+                  Divider(
+                    height: 20,
+                    color: Colors.transparent,
                   ),
-//------------------------------------------------------------------------------
-
                   _forgetPasswordLabel(),
-                  Divider(height: 20,color: Colors.transparent,),
-
 
 //=======================================================
-
-
-
 
                   _loginButtonContainer(),
 //------------------------------------------------------------------------------
@@ -137,11 +100,6 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
 //------------------------------------------------------------------------------
                 ],
               ))),
-      margin: EdgeInsets.only(
-        top: 20.0,
-        left: 25.0,
-        right: 25.0,
-      ),
     );
   }
 
@@ -149,14 +107,21 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
   Widget _emailContainer() {
     return new Container(
       child: new TextFormField(
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: "Cairo",
+          ),
           controller: emailController,
           decoration: InputDecoration(
-              icon: new Icon(
-                LineAwesomeIcons.user,
-                color: ThemeColors.PrimaryColor_Dark,
+              hintText: Texts.EMAIL,
+              hintStyle: TextStyle(
+                color: ThemeColors.white80,
               ),
-              labelText: Texts.EMAIL,
-              labelStyle: TextStyle(fontSize: 18.0)),
+              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+              fillColor: ThemeColors.white40,
+              filled: true),
           keyboardType: TextInputType.emailAddress),
       //  margin: EdgeInsets.only(bottom: 2.0)
     );
@@ -167,13 +132,19 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
     return new Container(
       child: new TextFormField(
         controller: passwordController,
+        style: TextStyle(
+          fontSize: 14,
+          fontFamily: "Cairo",
+        ),
         decoration: InputDecoration(
-            icon: new Icon(
-              Icons.lock_outline,
-              color: ThemeColors.PrimaryColor_Dark,
+            hintText: Texts.PASSWORD,
+            hintStyle: TextStyle(
+              color: ThemeColors.white100,
             ),
-            labelText: Texts.PASSWORD,
-            labelStyle: TextStyle(fontSize: 18.0)),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 8.0, 20.0, 8.0),
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+            fillColor: ThemeColors.white40,
+            filled: true),
         keyboardType: TextInputType.text,
         obscureText: true,
       ),
@@ -184,43 +155,33 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
 //------------------------------------------------------------------------------
   Widget _loginButtonContainer() {
     return new Container(
-        width: 170,
+        width: 160,
+        height: 43,
         decoration: new BoxDecoration(
-            color: ThemeColors.PrimaryColor_Dark,
-            borderRadius: BorderRadius.all(Radius.circular(30))),
+            color: ThemeColors.AccentColor,
+            borderRadius: BorderRadius.all(Radius.circular(22))),
         child: new MaterialButton(
           textColor: Colors.white,
-          padding: EdgeInsets.all(15.0),
           onPressed: _loginButtonAction,
           child: new Text(
             Texts.LOGIN,
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0,fontFamily: "Cairo"),
           ),
         ),
-        margin: EdgeInsets.only(bottom: 30.0));
+        margin: EdgeInsets.only(bottom: 20.0, top: 10));
   }
 
 //------------------------------------------------------------------------------
   Widget _registerNowLabel() {
-    return new GestureDetector(
-      onTap: _goToRegisterScreen,
-      child: new Container(
-          child: Row(
-            children: <Widget>[
-              Text(
-                "Not Registered !! ",
-                style: TextStyle(fontSize: 16.0, color: Colors.grey),
-              ),
-              Text(
-                Texts.REGISTER_NOW,
-                style: TextStyle(
-                    fontSize: 16.0,
-                    color: ThemeColors.AccentColor,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
+    return new Container(height: 43,width: 160,
+      child: OutlineButton(padding: EdgeInsets.only(top: 8,left: 28,right: 28,bottom: 8),
+          child: Text(
+            Texts.REGISTER,
+            style: TextStyle(color: ThemeColors.white100,fontFamily: "Cairo",fontWeight: FontWeight.bold),
           ),
-          margin: EdgeInsets.only(bottom: 30.0)),
+          shape: StadiumBorder(),
+          color: ThemeColors.white100,
+          onPressed:_goToRegisterScreen),
     );
   }
 
@@ -257,10 +218,10 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
       context,
       new MaterialPageRoute(
           builder: (context) => new MainPage(
-            fromBack: true,
-            isLogedIn: true,
-            pagId: 2,
-          )),
+                fromBack: true,
+                isLogedIn: true,
+                pagId: 2,
+              )),
     );
   }
 
@@ -323,34 +284,26 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
     // TODO: implement onLoadLogIngError
   }
 
-
 //------------------------------------------------------------------------------
   _forgetPasswordLabel() {
-
     return Container(
-      alignment: Alignment.centerLeft,
+      alignment: Alignment.bottomRight,
       padding: EdgeInsets.all(8),
-      height: 40,color:ThemeColors.white22,
+      height: 40,
+      color: Color(0x08ffffff),
       child: GestureDetector(
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) =>
-                ForgotPasswordPage()),
+            MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
           );
         },
         child: Text(
-          "Forgot Password?",
-          style: TextStyle(color: ThemeColors.white100),
+          Texts.ForgotPassword,
+          textAlign: TextAlign.right,
+          style: TextStyle(color: ThemeColors.white100,fontSize: 12),
         ),
       ),
     );
   }
-
-
-
-
-
-
-
 }

@@ -60,7 +60,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     HomeScreenPage(),
     Text("SearchPage"),
     ProfilePage(),
-    Grad(child: ListView(children: <Widget>[ListTile(title: Text("rzzzzzzzzrr")),Center(child: Text("fdfdddddddddd")),],),),
+    Grad(child: ListView(children: <Widget>[ListTile(title: Text("rzggr")),Center(child: Text("fdniced")),],),),
     Grad(child:Center(child: Text("hellooyu World",style: TextStyle(fontSize: 24,color: Color(0xeeffffff)),)) ,),
   ];
 

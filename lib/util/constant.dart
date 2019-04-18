@@ -86,47 +86,49 @@ class SharedPreferenceKeys {
 
 ///////////////////////////////////////////////////////////////////////////////
 class ProgressDialogTitles {
-  static const String IN_PROGRESS = "In Progress...";
-  static const String USER_LOG_IN = "Logging In...";
-  static const String USER_CHANGE_PASSWORD = "Changing...";
-  static const String USER_REGISTER = "Registering...";
+  static const String IN_PROGRESS = "جاري ...";
+  static const String USER_LOG_IN = "جاري التسجيل...";
+  static const String USER_CHANGE_PASSWORD = "جاري التغيير";
+  static const String USER_REGISTER = "جاري التسجيل ...";
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 class SnackBarText {
-  static const String NO_INTERNET_CONNECTION = "No Internet Conenction";
-  static const String LOGIN_SUCCESSFUL = "Login Successful";
-  static const String LOGIN_UN_SUCCESSFUL = "Login Un Successful";
-  static const String CHANGE_PASSWORD_SUCCESSFUL = "Change Password Successful";
+  static const String NO_INTERNET_CONNECTION = "لا يوجد اتصال !!";
+  static const String LOGIN_SUCCESSFUL = "نجحت عملية تسجيل الدخول";
+  static const String LOGIN_UN_SUCCESSFUL = "فشل تسجيل الدخول";
+  static const String CHANGE_PASSWORD_SUCCESSFUL = "تم تغيير كبمة المرور بنجاح";
   static const String CHANGE_PASSWORD_UN_SUCCESSFUL =
-      "Change Password Un Successful";
-  static const String REGISTER_SUCCESSFUL = "Register Successful";
-  static const String REGISTER_UN_SUCCESSFUL = "Register Un Successful";
-  static const String USER_ALREADY_REGISTERED = "User Already Registered";
-  static const String ENTER_PASS = "Please Enter your Password";
-  static const String ENTER_NEW_PASS = "Please Enter your New Password";
-  static const String ENTER_OLD_PASS = "Please Enter your Old Password";
-  static const String ENTER_EMAIL = "Please Enter your Email Id";
-  static const String ENTER_VALID_MAIL = "Please Enter Valid Email Id";
-  static const String ENTER_NAME = "Please Enter your Name";
-  static const String INVALID_OLD_PASSWORD = "Invalid Old Password";
+      "فشل عملية تغيير كلمة المرور";
+  static const String REGISTER_SUCCESSFUL = "تم التسجيل بنجاح";
+  static const String REGISTER_UN_SUCCESSFUL = "فشل عملية التسجيل";
+  static const String USER_ALREADY_REGISTERED = "الحساب موجود من قبل مستخدم آخر";
+  static const String ENTER_PASS = "يرجى ادخال كلمة المرور";
+  static const String ENTER_NEW_PASS = "ادخل كلمة المرور الجديدة";
+  static const String ENTER_OLD_PASS = "ادخل كلمة المرور القديمة";
+  static const String ENTER_EMAIL = "ادخل بريدك الالكتروني";
+  static const String ENTER_VALID_MAIL = "ادخل بريدك الالكتروني بشكل صحيح";
+  static const String ENTER_NAME = "يرجى ادخال الاسم";
+  static const String INVALID_OLD_PASSWORD = "كلمة المرور القديمة خاطئة";
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 class Texts {
-  static const String REGISTER_NOW = "Register Now !";
-  static const String LOGIN_NOW = " Login Now !";
-  static const String LOGIN = "LOGIN";
-  static const String REGISTER = "REGISTER";
-  static const String PASSWORD = "Password";
-  static const String OLD_PASSWORD = "Old Password";
-  static const String NEW_PASSWORD = "New Password";
-  static const String CHANGE_PASSWORD = "CHANGE PASSWORD";
-  static const String LOGOUT = "LOGOUT";
-  static const String EMAIL = "Email";
-  static const String NAME = "Name";
-  static const String RECENTLY = "RECENTLY VIEWED";
-  static const String CLEAR = "CLEAR";
+  static const String REGISTER_NOW = "حساب جديد ؟";
+  static const String LOGIN_NOW = " سجل دخول!";
+  static const String LOGIN = "تسجيل دخول";
+  static const String REGISTER = "حساب جديد";
+  static const String PASSWORD = "كلمة المرور";
+  static const String OLD_PASSWORD = "كلمة المرور القديمة";
+  static const String NEW_PASSWORD = "كلمة المرور الجديدة";
+  static const String CHANGE_PASSWORD = "نغيير كلمة المرور";
+  static const String LOGOUT = "تسجيل خروج";
+  static const String EMAIL = "البريد الالكتروني";
+  static const String NAME = "الاسم";
+  static const String RECENTLY = "عُرِض مؤخراٌ";
+  static const String CLEAR = "مسح";
+  static const String ForgotPasswordMsg = " قم بادخال عنوان البريد الالكتروني \n سيتم ارسال رابط اعادة ضبط كلمة المرور الى بريدك الالكتروني";
+  static const String ForgotPassword ="نسيت كلمة المرور ؟";
 
 }
 ////////////////////////////////////////////
@@ -139,6 +141,7 @@ class ThemeColors {
   static const Color white100 = Color(0xffffffff);
   static const Color white80 = Color(0xbbffffff);
   static const Color white60 = Color(0x99ffffff);
+  static const Color white40 = Color(0x44ffffff);
   static const Color white22 = Color(0x22ffffff);
   static const Color Material_Accent_Color = Colors.teal;
   static const Color AccentColor = Color(0xff00BABB);
