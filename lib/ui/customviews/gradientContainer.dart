@@ -30,10 +30,10 @@ class GradState extends State<Grad> {
     return Container(
       child: widget.child,
       height: widget.height == null
-          ? MediaQuery.of(context).size.height
+          ? double.infinity
           : widget.height,
       width: widget.width == null
-          ? MediaQuery.of(context).size.width
+          ?double.maxFinite
           : widget.width,
       decoration: BoxDecoration(
         gradient: LinearGradient(

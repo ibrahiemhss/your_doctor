@@ -32,7 +32,7 @@ class MainBarWidget extends StatelessWidget {
                           top: 10.0,
                           child: const Icon(
                             LineAwesomeIcons.wechat,
-                            color: ThemeColors.PrimaryColor,
+                            color: ThemeColors.white100,
                           ),
                         ),
                         new Positioned(
@@ -71,8 +71,8 @@ class MainBarWidget extends StatelessWidget {
                           left: 30.0,
                           top: 10.0,
                           child: const Icon(
-                            LineAwesomeIcons.sticky_note,
-                            color: ThemeColors.PrimaryColor,
+                            Icons.notifications,
+                            color: ThemeColors.white100,
                           ),
                         ),
                         new Positioned(
