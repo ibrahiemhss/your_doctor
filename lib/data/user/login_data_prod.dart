@@ -10,8 +10,8 @@ import 'package:your_doctor/util/constant.dart';
 
 class ProdLogInRepository implements LogInUserRepository {
   @override
-  Future<EventObject> fetchLogInUser(
-      String emailId, String password, String token, String lang,String image) async {
+  Future<EventObject> fetchLogInUser(String emailId, String password,
+      String token, String lang, String image) async {
     // TODO: implement fetchUser
     var queryParameters = {
       APIOperations.PHONE: emailId,
@@ -19,11 +19,14 @@ class ProdLogInRepository implements LogInUserRepository {
       APIOperations.TOKEN: token,
       APIOperations.LANG: lang,
       APIOperations.IMAGE_URL: image,
-
     };
     ApiRequest apiRequest = new ApiRequest();
-    User user =
-    new User(phone: emailId,imgUrl: image, password: password, token: token, lang: lang);
+    User user = new User(
+        phone: emailId,
+        imgUrl: image,
+        password: password,
+        token: token,
+        lang: lang);
 
     apiRequest.operation = APIOperations.LOGIN;
     apiRequest.user = user;

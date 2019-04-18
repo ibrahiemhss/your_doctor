@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
@@ -14,11 +13,13 @@ class MainPage extends StatefulWidget {
   bool isLogedIn;
 
   MainPage(
-      {@required this.isLogedIn, @required this.fromBack, @required this.pagId});
+      {@required this.isLogedIn,
+      @required this.fromBack,
+      @required this.pagId});
 
   @override
-  _ScreenOneState createState() =>
-      new _ScreenOneState(isLogedIn: isLogedIn, fromBack: fromBack, pagId: pagId);
+  _ScreenOneState createState() => new _ScreenOneState(
+      isLogedIn: isLogedIn, fromBack: fromBack, pagId: pagId);
 }
 
 const List<String> tabNames = const <String>[
@@ -60,8 +61,21 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     HomeScreenPage(),
     Text("SearchPage"),
     ProfilePage(),
-    Grad(child: ListView(children: <Widget>[ListTile(title: Text("rzggr")),Center(child: Text("fdniced")),],),),
-    Grad(child:Center(child: Text("hellooyu World",style: TextStyle(fontSize: 24,color: Color(0xeeffffff)),)) ,),
+    Grad(
+      child: ListView(
+        children: <Widget>[
+          ListTile(title: Text("rzggr")),
+          Center(child: Text("fdniced")),
+        ],
+      ),
+    ),
+    Grad(
+      child: Center(
+          child: Text(
+        "hellooyu World",
+        style: TextStyle(fontSize: 24, color: Color(0xeeffffff)),
+      )),
+    ),
   ];
 
   Future<bool> _getLogInStatus() async {
@@ -85,7 +99,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       userEmail = email;
       userPhone = phone;
     }
-     _getLogInStatus();
+    _getLogInStatus();
   }
 
   @override
@@ -103,7 +117,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
           ))
         ],
       ),
-
 
       // setting canvasColor to transparent
 
@@ -155,7 +168,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
               style: TextStyle(color: Colors.white),
             ),
           ),
-
           BottomNavigationBarItem(
             activeIcon: Icon(
               Icons.person,
@@ -167,11 +179,9 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
             ),
             title: Text(
               'حسابي',
-
               style: TextStyle(color: Colors.white),
             ),
           ),
-
           BottomNavigationBarItem(
               activeIcon: Icon(
                 Icons.menu,
@@ -181,10 +191,10 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
                 Icons.menu,
                 color: Colors.white,
               ),
-              title: Text('المزيد',
-            style: TextStyle(color: Colors.white),
-              )
-          )
+              title: Text(
+                'المزيد',
+                style: TextStyle(color: Colors.white),
+              ))
         ],
       ),
     );
@@ -196,7 +206,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
 
       if (index == 4) {
         setState(() {
-         // _showModalSheet();
+          // _showModalSheet();
         });
       }
     });

@@ -23,26 +23,25 @@ class User extends Object with _$UserSerializerMixin {
 
   User(
       {this.name,
-        this.email,
-        this.phone,
-        this.imgUrl,
-
-        this.token,
-        this.lang,
-        this.place,
-        this.area,
-        this.building,
-        this.unique_id,
-        this.password,
-        this.old_password,
-        this.new_password});
+      this.email,
+      this.phone,
+      this.imgUrl,
+      this.token,
+      this.lang,
+      this.place,
+      this.area,
+      this.building,
+      this.unique_id,
+      this.password,
+      this.old_password,
+      this.new_password});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
 
 abstract class LogInUserRepository {
   Future<EventObject> fetchLogInUser(
-      String emailId, String password, String token, String lang,String image);
+      String emailId, String password, String token, String lang, String image);
 }
 
 abstract class RegisterUserRepository {

@@ -7,7 +7,7 @@ part of 'api_request.dart';
 // **************************************************************************
 
 ApiRequest _$ApiRequestFromJson(Map<String, dynamic> json) => new ApiRequest(
-  // operation: json['operation'] as String,
+    // operation: json['operation'] as String,
     user: json[APIOperations.USER] == null
         ? null
         : new User.fromJson(json[APIOperations.USER] as Map<String, dynamic>));
@@ -18,9 +18,9 @@ abstract class _$ApiRequestSerializerMixin {
   User get user;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-    APIOperations.PHONE: user.phone,
-    APIOperations.PASSWORD: user.password,
-    APIOperations.TOKEN: user.token,
-    APIOperations.LANG: user.lang
-  };
+        APIOperations.PHONE: user.phone,
+        APIOperations.PASSWORD: user.password,
+        APIOperations.TOKEN: user.token,
+        APIOperations.LANG: user.lang
+      };
 }

@@ -3,21 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class MoreOptionWidget extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
 
-
     return Padding(
-      padding: const EdgeInsets.only(left:16.0,right: 16.0),
+      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
       child: Container(
           child: new Theme(
-              data:
-              new ThemeData(primarySwatch: ThemeColors.Material_Accent_Color),
+              data: new ThemeData(
+                  primarySwatch: ThemeColors.Material_Accent_Color),
               child: new Column(
-
                 children: <Widget>[
 //------------------------------------------------------------------------------
                   Container(
@@ -36,12 +32,9 @@ class MoreOptionWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           right: 8.0, left: 8.0, bottom: 4.0),
                       child: Column(
-
-
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.end,
-
                         children: <Widget>[
                           _invite(context),
 //------------------------------------------------------------------------------
@@ -63,18 +56,14 @@ class MoreOptionWidget extends StatelessWidget {
                     ),
                   ),
                 ],
-              ))
-
-      ),
+              ))),
     );
   }
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 _itemsDivider(BuildContext context) {
   double _width;
-
 
   final mediaQueryData = MediaQuery.of(context);
   if (mediaQueryData.orientation == Orientation.landscape) {
@@ -82,12 +71,11 @@ _itemsDivider(BuildContext context) {
   } else {
     _width = MediaQuery.of(context).size.height / 2.30;
   }
-  return   Container(
+  return Container(
     alignment: Alignment.centerRight,
     width: _width,
     color: Colors.grey[200],
     height: 1.0,
-
   );
 }
 
@@ -112,16 +100,13 @@ Widget _invite(BuildContext context) {
         children: <Widget>[
           Container(child: const Icon(Icons.share)),
           Padding(
-            padding: const EdgeInsets.only(top:4.0),
+            padding: const EdgeInsets.only(top: 4.0),
             child: Container(
               alignment: Alignment.centerLeft,
-
               child: const Text(
                 'Invite Friends',
-                textAlign:TextAlign.left,
-
-                style: TextStyle(
-                    color: ThemeColors.PrimaryColor_Dark),
+                textAlign: TextAlign.left,
+                style: TextStyle(color: ThemeColors.PrimaryColor_Dark),
               ),
             ),
           ),
@@ -129,14 +114,11 @@ Widget _invite(BuildContext context) {
             width: _width,
           ),
           Container(
-
-              margin: EdgeInsets.only(
-                  top: 4.0),
+              margin: EdgeInsets.only(top: 4.0),
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Icon(
-
                   Icons.arrow_forward_ios,
                   color: Colors.black,
                   size: 10.0,
@@ -145,8 +127,7 @@ Widget _invite(BuildContext context) {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey,
-              )
-          ),
+              )),
         ],
       ),
     ),
@@ -165,7 +146,8 @@ Widget _support(BuildContext context) {
     _width = MediaQuery.of(context).size.width / 4;
   } else {
     _width = MediaQuery.of(context).size.height / 4.5;
-  }  return RawMaterialButton(
+  }
+  return RawMaterialButton(
     fillColor: Colors.white,
     splashColor: Colors.blueGrey,
     elevation: 0.0,
@@ -177,14 +159,12 @@ Widget _support(BuildContext context) {
         children: <Widget>[
           Container(child: const Icon(Icons.center_focus_strong)),
           Padding(
-            padding: const EdgeInsets.only(top:4.0),
+            padding: const EdgeInsets.only(top: 4.0),
             child: Container(
               alignment: Alignment.centerLeft,
-
               child: const Text(
                 'Customer Support',
-                textAlign:TextAlign.left,
-
+                textAlign: TextAlign.left,
                 style: TextStyle(color: ThemeColors.PrimaryColor_Dark),
               ),
             ),
@@ -193,14 +173,11 @@ Widget _support(BuildContext context) {
             width: _width,
           ),
           Container(
-
-              margin: EdgeInsets.only(
-                  top: 4.0),
+              margin: EdgeInsets.only(top: 4.0),
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Icon(
-
                   Icons.arrow_forward_ios,
                   color: Colors.black,
                   size: 10.0,
@@ -209,8 +186,7 @@ Widget _support(BuildContext context) {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey,
-              )
-          ),
+              )),
         ],
       ),
     ),
@@ -219,6 +195,7 @@ Widget _support(BuildContext context) {
     //onPressed,
   );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 Widget _rate(BuildContext context) {
   double _width;
@@ -241,13 +218,12 @@ Widget _rate(BuildContext context) {
         children: <Widget>[
           Container(child: const Icon(Icons.star)),
           Padding(
-            padding: const EdgeInsets.only(top:4.0),
+            padding: const EdgeInsets.only(top: 4.0),
             child: Container(
               alignment: Alignment.centerLeft,
               child: const Text(
                 'Rate Our App',
-                textAlign:TextAlign.left,
-
+                textAlign: TextAlign.left,
                 style: TextStyle(color: ThemeColors.PrimaryColor_Dark),
               ),
             ),
@@ -256,14 +232,11 @@ Widget _rate(BuildContext context) {
             width: _width,
           ),
           Container(
-
-              margin: EdgeInsets.only(
-                  top: 4.0),
+              margin: EdgeInsets.only(top: 4.0),
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Icon(
-
                   Icons.arrow_forward_ios,
                   color: Colors.black,
                   size: 10.0,
@@ -272,8 +245,7 @@ Widget _rate(BuildContext context) {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey,
-              )
-          ),
+              )),
         ],
       ),
     ),
@@ -282,6 +254,7 @@ Widget _rate(BuildContext context) {
     //onPressed,
   );
 }
+
 ////////////////////////////////////////////////////////////////////////////////
 Widget _suggestion(BuildContext context) {
   double _width;
@@ -304,15 +277,14 @@ Widget _suggestion(BuildContext context) {
         children: <Widget>[
           Container(child: const Icon(Icons.mode_edit)),
           Padding(
-            padding: const EdgeInsets.only(top:4.0),
+            padding: const EdgeInsets.only(top: 4.0),
             child: Container(
-            //  width: _width,
+              //  width: _width,
               alignment: Alignment.centerLeft,
 
               child: const Text(
                 'Make a Suggestion',
-                textAlign:TextAlign.left,
-
+                textAlign: TextAlign.left,
                 style: TextStyle(color: ThemeColors.PrimaryColor_Dark),
               ),
             ),
@@ -321,14 +293,11 @@ Widget _suggestion(BuildContext context) {
             width: _width,
           ),
           Container(
-
-              margin: EdgeInsets.only(
-                  top: 4.0),
+              margin: EdgeInsets.only(top: 4.0),
               alignment: Alignment.centerRight,
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Icon(
-
                   Icons.arrow_forward_ios,
                   color: Colors.black,
                   size: 10.0,
@@ -337,8 +306,7 @@ Widget _suggestion(BuildContext context) {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.grey,
-              )
-          ),
+              )),
         ],
       ),
     ),
@@ -347,4 +315,3 @@ Widget _suggestion(BuildContext context) {
     //onPressed,
   );
 }
-

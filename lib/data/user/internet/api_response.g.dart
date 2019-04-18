@@ -21,8 +21,8 @@ abstract class _$ApiResponseSerializerMixin {
   User get user;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-    APIOperations.ERROR: error,
-    APIOperations.SUCCESS_MESSAGE: message,
-    APIOperations.USER: user
-  };
+        APIOperations.ERROR: error,
+        APIOperations.SUCCESS_MESSAGE: message,
+        APIOperations.USER: user
+      };
 }

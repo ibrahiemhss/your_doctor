@@ -22,5 +22,3 @@ class ArticlesPresenter {
         .catchError((onError) => _view.onLoadArticlesError());
   }
 }
-
-

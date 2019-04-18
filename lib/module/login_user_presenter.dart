@@ -1,4 +1,3 @@
-
 import 'package:your_doctor/data/user/base/event_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/util/dependency_injection.dart';
@@ -19,7 +18,7 @@ class LogInPresenter {
 
   void loadLogIn(String emailId, String password) {
     _repository
-        .fetchLogInUser(emailId, password, "uu", "uu","")
+        .fetchLogInUser(emailId, password, "uu", "uu", "")
         .then((c) => _view.onLoadLogInCompleted(c))
         .catchError((onError) => _view.onLoadLogIngError());
   }

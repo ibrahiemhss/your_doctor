@@ -1,5 +1,3 @@
-
-
 import 'package:your_doctor/data/user/base/event_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/util/dependency_injection.dart';

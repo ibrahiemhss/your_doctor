@@ -2,32 +2,39 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 
-
 class Grad extends StatefulWidget {
-   Widget child;
-   double height;
-   double width;
+  Widget child;
+  double height;
+  double width;
+
   Grad({this.child, this.height, this.width});
 
   @override
-  GradState createState() => GradState(child:this.child,
-      height: this.height,width: this.width);
+  GradState createState() =>
+      GradState(child: this.child, height: this.height, width: this.width);
 }
 
 class GradState extends State<Grad> {
   Widget child;
-  final  double height;
-  final  double width;
+  final double height;
+  final double width;
 
-  GradState({this.child, this.height, this.width, });
+  GradState({
+    this.child,
+    this.height,
+    this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-
-      child:widget.child,
-      height:widget.height==null?MediaQuery.of(context).size.height:widget.height,
-      width:widget.width==null?MediaQuery.of(context).size.width:widget.width,
+    return Container(
+      child: widget.child,
+      height: widget.height == null
+          ? MediaQuery.of(context).size.height
+          : widget.height,
+      width: widget.width == null
+          ? MediaQuery.of(context).size.width
+          : widget.width,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -39,16 +46,3 @@ class GradState extends State<Grad> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

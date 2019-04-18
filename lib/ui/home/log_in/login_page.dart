@@ -165,7 +165,9 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
           onPressed: _loginButtonAction,
           child: new Text(
             Texts.LOGIN,
-            style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0,
+            style: new TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
                 fontFamily: "Cairo"),
           ),
         ),
@@ -174,15 +176,21 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
 
 //------------------------------------------------------------------------------
   Widget _registerNowLabel() {
-    return new Container(height: 43,width: 160,
-      child: OutlineButton(padding: EdgeInsets.only(top: 8,left: 28,right: 28,bottom: 8),
+    return new Container(
+      height: 43,
+      width: 160,
+      child: OutlineButton(
+          padding: EdgeInsets.only(top: 8, left: 28, right: 28, bottom: 8),
           child: Text(
             Texts.REGISTER,
-            style: TextStyle(color: ThemeColors.white100,fontFamily: "Cairo",fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: ThemeColors.white100,
+                fontFamily: "Cairo",
+                fontWeight: FontWeight.bold),
           ),
           shape: StadiumBorder(),
           color: ThemeColors.white100,
-          onPressed:_goToRegisterScreen),
+          onPressed: _goToRegisterScreen),
     );
   }
 
@@ -302,7 +310,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
         child: Text(
           Texts.ForgotPassword,
           textAlign: TextAlign.right,
-          style: TextStyle(color: ThemeColors.white100,fontSize: 12),
+          style: TextStyle(color: ThemeColors.white100, fontSize: 12),
         ),
       ),
     );

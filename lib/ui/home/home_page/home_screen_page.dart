@@ -101,41 +101,38 @@ class _HomePageState extends State<HomeScreenPage> implements ArticlesContract {
                       //alignment:new Alignment(x, y)
                       children: <Widget>[
                         new Positioned(
-                            top: 0.0,
-                            right: 0,
-                            left: 0,
-                            child: Container(
-                                width: 300,
-                                height: 180,
-                                alignment: Alignment.center,
-                                decoration: new BoxDecoration(
-                                  image: new DecorationImage(
-                                      image: new NetworkImage(
-                                          lastArticlesVlaues.article_img),
-                                      fit: BoxFit.fill),
-                                  color: Colors.blue,
+                          top: 0.0,
+                          right: 0,
+                          left: 0,
+                          child: Container(
+                            width: 300,
+                            height: 180,
+                            alignment: Alignment.center,
+                            decoration: new BoxDecoration(
+                              image: new DecorationImage(
+                                  image: new NetworkImage(
+                                      lastArticlesVlaues.article_img),
+                                  fit: BoxFit.fill),
+                              color: Colors.blue,
+                            ),
+                            child: new BackdropFilter(
+                              filter: new ui.ImageFilter.blur(
+                                sigmaX: 1.0,
+                                sigmaY: 1.0,
+                              ),
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: new Text(
+                                  lastArticlesVlaues.article_title,
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w500, // light
+                                      color: Colors.white),
                                 ),
-                                    child: new BackdropFilter(
-
-                                      filter: new ui.ImageFilter.blur(
-                                        sigmaX: 1.0,
-                                        sigmaY: 1.0,
-
-                                      ),
-                                      child: FittedBox(
-                                        fit: BoxFit.contain,
-                                        child: new Text(
-                                          lastArticlesVlaues.article_title,
-                                          style: TextStyle(
-                                              fontSize: 24,
-                                              fontWeight:
-                                                  FontWeight.w500, // light
-                                              color: Colors.white),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                         new Positioned(
                             bottom: 0.0,
                             right: 0,

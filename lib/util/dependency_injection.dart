@@ -1,5 +1,3 @@
-
-
 import 'package:your_doctor/data/articles/articles_data.dart';
 import 'package:your_doctor/data/articles/articles_data_mock.dart';
 import 'package:your_doctor/data/user/login_data_prod.dart';
@@ -14,7 +12,6 @@ class Injector {
   static final Injector _singleton = new Injector._internal();
   static Flavor _flavor;
 
-
   static void configure(Flavor flavor) {
     _flavor = flavor;
   }
@@ -24,7 +21,6 @@ class Injector {
   }
 
   Injector._internal();
-
 
 //TODO========|==Get All Wanted Data From Repositories Classes===|==============
 //TODO        v                                                  v

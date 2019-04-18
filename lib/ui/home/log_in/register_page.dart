@@ -114,17 +114,18 @@ class _RegisterPageState extends State<RegisterPage>
                           right: 40.0, left: 16.0, bottom: 20.0),
                       child: Column(
                         children: <Widget>[
-
-
-                          SizedBox(width: 150,height: 150,
-                          child: Image.asset("images/urdr.png"),),
+                          SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: Image.asset("images/urdr.png"),
+                          ),
                           _nameContainer(),
 //------------------------------------------------------------------------------
                           _emailContainer(),
 //------------------------------------------------------------------------------
                           _passwordContainer(),
 //------------------------------------------------------------------------------
-                      //    _cameraButton(),
+                          //    _cameraButton(),
 //------------------------------------------------------------------------------
                         ],
                       ),
@@ -250,12 +251,12 @@ class _RegisterPageState extends State<RegisterPage>
     return new Container(
         width: 125,
         decoration: new BoxDecoration(
-            color: ThemeColors.PrimaryColor_Dark,
-           ),
+          color: ThemeColors.PrimaryColor_Dark,
+        ),
         child: new FlatButton(
           shape: StadiumBorder(),
           textColor: Colors.white,
-         // padding: EdgeInsets.all(15.0),
+          // padding: EdgeInsets.all(15.0),
           onPressed: () {
             setState(() {
               _registerButtonAction();

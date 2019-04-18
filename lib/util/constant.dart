@@ -102,7 +102,8 @@ class SnackBarText {
       "فشل عملية تغيير كلمة المرور";
   static const String REGISTER_SUCCESSFUL = "تم التسجيل بنجاح";
   static const String REGISTER_UN_SUCCESSFUL = "فشل عملية التسجيل";
-  static const String USER_ALREADY_REGISTERED = "الحساب موجود من قبل مستخدم آخر";
+  static const String USER_ALREADY_REGISTERED =
+      "الحساب موجود من قبل مستخدم آخر";
   static const String ENTER_PASS = "يرجى ادخال كلمة المرور";
   static const String ENTER_NEW_PASS = "ادخل كلمة المرور الجديدة";
   static const String ENTER_OLD_PASS = "ادخل كلمة المرور القديمة";
@@ -127,9 +128,9 @@ class Texts {
   static const String NAME = "الاسم";
   static const String RECENTLY = "عُرِض مؤخراٌ";
   static const String CLEAR = "مسح";
-  static const String ForgotPasswordMsg = " قم بادخال عنوان البريد الالكتروني \n سيتم ارسال رابط اعادة ضبط كلمة المرور الى بريدك الالكتروني";
-  static const String ForgotPassword ="نسيت كلمة المرور ؟";
-
+  static const String ForgotPasswordMsg =
+      " قم بادخال عنوان البريد الالكتروني \n سيتم ارسال رابط اعادة ضبط كلمة المرور الى بريدك الالكتروني";
+  static const String ForgotPassword = "نسيت كلمة المرور ؟";
 }
 ////////////////////////////////////////////
 
@@ -146,11 +147,10 @@ class ThemeColors {
   static const Color Material_Accent_Color = Colors.teal;
   static const Color AccentColor = Color(0xff00BABB);
   static const Color ShadowColor = Color(0x44000000);
-  static const CanvasColor =Color(0xff005A82);
+  static const CanvasColor = Color(0xff005A82);
 
-
-         ///gradient Canvas Color /////
-  static  BoxDecoration Canvas = BoxDecoration(
+  ///gradient Canvas Color /////
+  static BoxDecoration Canvas = BoxDecoration(
     gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment(0, 1), //
@@ -158,7 +158,8 @@ class ThemeColors {
       tileMode: TileMode.clamp,
     ),
   );
-/// ====================================
+
+  /// ====================================
 
 }
 ///////////////////////////////////////////////////

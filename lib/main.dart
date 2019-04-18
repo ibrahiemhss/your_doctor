@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: new ThemeData(fontFamily: "Cairo",bottomAppBarColor: ThemeColors.white60,
+      theme: new ThemeData(
+        fontFamily: "Cairo",
+        bottomAppBarColor: ThemeColors.white60,
         canvasColor: ThemeColors.CanvasColor,
         // setting canvasColor to transparent
         primarySwatch: Colors.teal,
@@ -25,7 +27,9 @@ class MyApp extends StatelessWidget {
         accentColor: ThemeColors.AccentColor,
       ),
       home: new MainPage(
-        isLogedIn: false, fromBack: false, pagId: 0,
+        isLogedIn: false,
+        fromBack: false,
+        pagId: 0,
       ),
     );
   }

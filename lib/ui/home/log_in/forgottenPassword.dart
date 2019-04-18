@@ -58,12 +58,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ///  text field
                   ///
                   ///
-                  TextFormField( controller: emailController,
+                  TextFormField(
+                      controller: emailController,
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: "Cairo",
                       ),
-
                       decoration: InputDecoration(
                           hintText: Texts.EMAIL,
                           hintStyle: TextStyle(

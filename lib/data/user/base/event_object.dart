@@ -1,4 +1,3 @@
-
 import 'package:your_doctor/util/constant.dart';
 
 class EventObject {

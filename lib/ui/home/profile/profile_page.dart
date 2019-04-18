@@ -26,8 +26,6 @@ class _ProfilePageState extends State<ProfilePage>
 
   bool isLogedIn = false;
 
-
-
   File _image;
 
   Future getImage() async {
@@ -37,7 +35,6 @@ class _ProfilePageState extends State<ProfilePage>
       _image = image;
     });
   }
-
 
   Future<Null> _checkIsLogin() async {
     User sharedUserValue = await AppSharedPreferences.getUserProfile();
@@ -49,14 +46,12 @@ class _ProfilePageState extends State<ProfilePage>
           email = sharedUserValue.email;
           phone = sharedUserValue.phone;
           imgUrl = sharedUserValue.imgUrl;
-          isLoaded=true;
-
+          isLoaded = true;
         });
       } else {
         setState(() {
           isLogedIn = false;
-          isLoaded=true;
-
+          isLoaded = true;
         });
       } //your home page is loaded
     }
@@ -73,32 +68,31 @@ class _ProfilePageState extends State<ProfilePage>
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-        body: ! isLoaded
-            ?
-        Center(
-            child: new CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
-            ))
+        body: !isLoaded
+            ? Center(
+                child: new CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
+              ))
             : !isLogedIn
-            ? buttonCreateCount()
-            : new Container(
-                child: new ListView(
-      children: <Widget>[
-        new Center(
-          child: new Column(
-            children: <Widget>[
+                ? buttonCreateCount()
+                : new Container(
+                    child: new ListView(
+                    children: <Widget>[
+                      new Center(
+                        child: new Column(
+                          children: <Widget>[
 //------------------------------------------------------------------------------
-              _countInfo(name,email,imgUrl),
+                            _countInfo(name, email, imgUrl),
 //------------------------------------------------------------------------------
-              OrdersDetailsWidget(),
+                            OrdersDetailsWidget(),
 //------------------------------------------------------------------------------
-              MoreOptionWidget()
+                            MoreOptionWidget()
 //------------------------------------------------------------------------------
-            ],
-          ),
-        ),
-      ],
-    )));
+                          ],
+                        ),
+                      ),
+                    ],
+                  )));
     //new Text("name : $name\nemail : $email\nphone : $phone"));
   }
 
@@ -144,7 +138,7 @@ class _ProfilePageState extends State<ProfilePage>
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-Widget _countInfo(String name,String email,String imageUrl) {
+Widget _countInfo(String name, String email, String imageUrl) {
   return Padding(
     padding: const EdgeInsets.only(top: 8.0),
     child: Align(
@@ -158,11 +152,10 @@ Widget _countInfo(String name,String email,String imageUrl) {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              width: 96.0,
-              height: 96.0,
-              child: CircleAvatar(
-                  backgroundImage: new NetworkImage(imageUrl))
-            ),
+                width: 96.0,
+                height: 96.0,
+                child:
+                    CircleAvatar(backgroundImage: new NetworkImage(imageUrl))),
           ),
           //--------------------------------------------------------------------
           Padding(
@@ -179,24 +172,20 @@ Widget _countInfo(String name,String email,String imageUrl) {
                       fontWeight: FontWeight.w900),
                 ),
               ),
-              Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(email)),
+              Container(alignment: Alignment.centerLeft, child: Text(email)),
               Container(
                 height: 32,
-                margin: const EdgeInsets.only(top:8.0),
+                margin: const EdgeInsets.only(top: 8.0),
 
                 decoration: new BoxDecoration(
-                    border: new Border.all(color: Colors.grey[300]),
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(16.0) //                 <--- border radius here
-                  ),
-
+                  border: new Border.all(color: Colors.grey[300]),
+                  borderRadius: BorderRadius.all(Radius.circular(
+                          16.0) //                 <--- border radius here
+                      ),
                 ),
                 //------------------------------------------------------------
 
                 child: RawMaterialButton(
-
                   // fillColor: Colors.grey,
                   //splashColor: Colors.blueGrey,
                   highlightColor: Colors.grey,
@@ -207,22 +196,16 @@ Widget _countInfo(String name,String email,String imageUrl) {
                     child: const Text(
                       'EDIT PROFILE',
                       style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w900),
-
+                          color: Colors.black, fontWeight: FontWeight.w900),
                     ),
                   ),
                   shape: const StadiumBorder(),
 
+                  //------------------------------------------------------------
 
-                    //------------------------------------------------------------
+                  onPressed: null,
 
-                     onPressed: null,
-
-
-
-                    //------------------------------------------------------------
-
+                  //------------------------------------------------------------
                 ),
               )
             ]),
@@ -232,6 +215,3 @@ Widget _countInfo(String name,String email,String imageUrl) {
     ),
   );
 }
-
-
-
