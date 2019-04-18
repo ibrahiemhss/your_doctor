@@ -84,7 +84,6 @@ class _ProfilePageState extends State<ProfilePage>
 //------------------------------------------------------------------------------
                             _countInfo(name, email, imgUrl),
 //------------------------------------------------------------------------------
-                            //      OrdersDetailsWidget(),
 //------------------------------------------------------------------------------
                             MoreOptionWidget()
 //------------------------------------------------------------------------------
@@ -101,37 +100,22 @@ class _ProfilePageState extends State<ProfilePage>
     return Container(
       decoration: ThemeColors.Canvas,
       height: double.maxFinite,
-      width: double.maxFinite,
-      child: Column(
-        textDirection: TextDirection.rtl,
+      width:double.maxFinite,
+      child: Column(textDirection: TextDirection.rtl,
         children: <Widget>[
-          Divider(
-            height: 100,
-          ),
-          Text(
-            "اهلاً بكم",
-            style: TextStyle(
-              color: Colors.amber,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Divider(
-            height: 10,
-          ),
+          Divider(height: 100,),
+          Text("اهلاً بكم",style: TextStyle(
+            color:Colors.amber,fontSize: 24,fontWeight: FontWeight.bold,
+          ),),
+          Divider(height: 10,),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "يرجى تسجيل الدخول لتتمكن من الاستفادة من خدماتنا..سائلين المولى دوام العافية على الجميع ",
-              style: TextStyle(
+            child: Text("يرجى تسجيل الدخول لتتمكن من الاستفادة من خدماتنا..سائلين المولى دوام العافية على الجميع ", style:
+              TextStyle(
                 color: ThemeColors.white80,
-              ),
-            ),
+              ),),
           ),
-          Divider(
-            height: 30,
-            color: Colors.transparent,
-          ),
+          Divider(height: 30,color: Colors.transparent,),
           new FlatButton(
             splashColor: Color(0xffaaaaaa),
             color: ThemeColors.AccentColor,

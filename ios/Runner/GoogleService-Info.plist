@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>936303218432-vcd8e0c11vll4ffu89mn655u58dn0h3m.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.936303218432-vcd8e0c11vll4ffu89mn655u58dn0h3m</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB4YgcTnPo7NlmzniUefbjWphvGt3LCz5s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>936303218432</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.app.yourdoctor.lybia.yourdoctor</string>
+	<key>PROJECT_ID</key>
+	<string>urdoctor-5c9f0</string>
+	<key>STORAGE_BUCKET</key>
+	<string>urdoctor-5c9f0.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:936303218432:ios:254860269dad634b</string>
+	<key>DATABASE_URL</key>
+	<string>https://urdoctor-5c9f0.firebaseio.com</string>
+</dict>
+</plist>
