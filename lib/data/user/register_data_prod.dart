@@ -17,46 +17,42 @@ class ProdRegisterRepository implements RegisterUserRepository {
       String phone,
       String password,
       String place,
-      String area,
-      String building,
       String token,
       String lang) async {
     // TODO: implement fetchUser
     var queryParameters = {
       APIOperations.NAME: name,
-      //APIOperations.EMAIL: name,
-      APIOperations.PHONE: "000",
+      APIOperations.EMAIL: emailId,
+      APIOperations.PHONE: phone,
       APIOperations.PASSWORD: password,
-
-      APIOperations.PLACE: token,
-      APIOperations.AREA: token,
-      APIOperations.BUILDING: token,
+      APIOperations.PLACE: place,
       APIOperations.TOKEN: token,
       APIOperations.LANG: lang,
     };
     ApiRequest apiRequest = new ApiRequest();
-    User user = new User(name: name, email: emailId, password: password);
+    User user = new User(name: name, email: emailId,phone: phone,token:token, password: password);
 
     apiRequest.operation = APIOperations.REGISTER;
     apiRequest.user = user;
 
     try {
       final encoding = APIConstants.OCTET_STREAM_ENCODING;
-      final response = await http.post(APIConstants.API_BASE_URL,
+      final response = await http.post(APIConstants.Api_REGISTER_URL,
           body: queryParameters, encoding: Encoding.getByName(encoding));
       if (response != null) {
         if (response.statusCode == APIResponseCode.SC_OK &&
             response.body != null) {
-          final responseJson = json.decode(response.body);
+          final responseJson = json.decode(
+              response.body);
           ApiResponse apiResponse = ApiResponse.fromJson(responseJson);
-          if (apiResponse.message == APIOperations.SUCCESS) {
+          if (apiResponse.error == false) {
             return new EventObject(
                 id: EventConstants.USER_REGISTRATION_SUCCESSFUL, object: null);
           } else if (apiResponse.message == APIOperations.FAILURE) {
-            return new EventObject(id: EventConstants.USER_ALREADY_REGISTERED);
+            return new EventObject(id: EventConstants.USER_ALREADY_REGISTERED,messageResponse: apiResponse.message.toString());
           } else {
             return new EventObject(
-                id: EventConstants.USER_REGISTRATION_UN_SUCCESSFUL);
+                id: EventConstants.USER_REGISTRATION_UN_SUCCESSFUL,messageResponse: apiResponse.message.toString());
           }
         } else {
           return new EventObject(
@@ -66,6 +62,7 @@ class ProdRegisterRepository implements RegisterUserRepository {
         return new EventObject();
       }
     } catch (Exception) {
+      print("errorIn Register =========>============>=========>is => ${Exception.toString()}");
       return EventObject();
     }
 // TODO: implement fetchteColors

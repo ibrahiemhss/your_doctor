@@ -9,18 +9,28 @@ import 'package:your_doctor/ui/customviews/progress_dialog.dart';
 import 'package:your_doctor/ui/home/profile/log_in/login_page.dart';
 import 'package:your_doctor/util/constant.dart';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 class RegisterPage extends StatefulWidget {
+
   @override
   createState() => new _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage>
     implements RegisterUserContract {
+
+
+  FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  new FlutterLocalNotificationsPlugin();
+
   final globalKey = new GlobalKey<ScaffoldState>();
-
   File _image;
-
   bool isGotFile = false;
+  String tokenValue;
 
   ProgressDialog progressDialog =
       ProgressDialog.getProgressDialog(ProgressDialogTitles.USER_REGISTER);
@@ -35,11 +45,43 @@ class _RegisterPageState extends State<RegisterPage>
 
   TextEditingController passwordController =
       new TextEditingController(text: "");
+  TextEditingController phoneController =
+  new TextEditingController(text: "");
 
   TextEditingController placeController = new TextEditingController(text: "");
   TextEditingController areaController = new TextEditingController(text: "");
   TextEditingController buildingController =
       new TextEditingController(text: "");
+
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    var android = new AndroidInitializationSettings('mipmap/ic_launcher');
+    var ios = new IOSInitializationSettings();
+    var platform = new InitializationSettings(android, ios);
+    flutterLocalNotificationsPlugin.initialize(platform);
+
+
+    firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, alert: true, badge: true));
+    firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings setting) {
+      print('IOS Setting Registed');
+    });
+    firebaseMessaging.getToken().then((token) {
+      tokenValue=token;
+      print('token = $token');
+
+    });
+    print('token3 = $tokenValue');
+
+
+
+  }
+
 
 //------------------------------------------------------------------------------
 
@@ -123,6 +165,8 @@ class _RegisterPageState extends State<RegisterPage>
 //------------------------------------------------------------------------------
                           _emailContainer(),
 //------------------------------------------------------------------------------
+                          _phoneContainer(),
+//------------------------------------------------------------------------------
                           _passwordContainer(),
 //------------------------------------------------------------------------------
                           //    _cameraButton(),
@@ -184,6 +228,27 @@ class _RegisterPageState extends State<RegisterPage>
             keyboardType: TextInputType.emailAddress),
         margin: EdgeInsets.only(bottom: 20.0));
   }
+
+
+//------------------------------------------------------------------------------
+  Widget _phoneContainer() {
+    return new Container(
+        child: new TextFormField(
+          controller: phoneController,
+          decoration: InputDecoration(
+              icon: Icon(
+                Icons.phone,
+                color: ThemeColors.PrimaryColor_Dark,
+              ),
+              labelText: Texts.PHONE,
+              labelStyle: TextStyle(fontSize: 18.0)),
+          keyboardType: TextInputType.text,
+          obscureText: true,
+        ),
+        margin: EdgeInsets.only(bottom: 30.0));
+  }
+
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
   Widget _passwordContainer() {
@@ -340,14 +405,12 @@ class _RegisterPageState extends State<RegisterPage>
       _presenter.loadRegister(
           nameController.text,
           emailController.text,
-          "",
-          "",
+          "imageUrl",
+          phoneController.text,
           passwordController.text,
-          placeController.text,
-          areaController.text,
-          buildingController.text,
-          langController.text,
-          tokenController.text);
+          "place",
+          tokenValue,
+          "en");
     });
   }
 
@@ -415,7 +478,7 @@ class _RegisterPageState extends State<RegisterPage>
         {
           setState(() {
             globalKey.currentState.showSnackBar(new SnackBar(
-              content: new Text(SnackBarText.REGISTER_SUCCESSFUL),
+              content: new Text(data.messageResponse.toString()),
             ));
             progressDialog.hideProgress();
             _goToLoginScreen();
@@ -426,7 +489,7 @@ class _RegisterPageState extends State<RegisterPage>
         {
           setState(() {
             globalKey.currentState.showSnackBar(new SnackBar(
-              content: new Text(SnackBarText.USER_ALREADY_REGISTERED),
+              content: new Text(data.messageResponse.toString()),
             ));
             progressDialog.hideProgress();
           });
@@ -436,7 +499,7 @@ class _RegisterPageState extends State<RegisterPage>
         {
           setState(() {
             globalKey.currentState.showSnackBar(new SnackBar(
-              content: new Text(SnackBarText.REGISTER_UN_SUCCESSFUL),
+              content: new Text(data.messageResponse.toString()),
             ));
             progressDialog.hideProgress();
           });

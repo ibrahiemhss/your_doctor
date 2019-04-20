@@ -9,6 +9,9 @@ import 'package:your_doctor/util/app_shared_preferences.dart';
 import 'package:your_doctor/util/constant.dart';
 import 'forgottenPassword.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -18,6 +21,11 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> implements LogInContract {
   final globalKey = new GlobalKey<ScaffoldState>();
 
+
+  FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  new FlutterLocalNotificationsPlugin();
+
   ProgressDialog progressDialog =
       ProgressDialog.getProgressDialog(ProgressDialogTitles.USER_LOG_IN);
 
@@ -25,6 +33,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
 
   TextEditingController passwordController =
       new TextEditingController(text: "");
+  String tokenValue;
 
   User user;
   LogInPresenter _presenter;
@@ -33,6 +42,34 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
     _presenter = new LogInPresenter(this);
   }
 
+
+  @override
+  void initState() {
+    super.initState();
+
+
+    var android = new AndroidInitializationSettings('mipmap/ic_launcher');
+    var ios = new IOSInitializationSettings();
+    var platform = new InitializationSettings(android, ios);
+    flutterLocalNotificationsPlugin.initialize(platform);
+
+
+    firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, alert: true, badge: true));
+    firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings setting) {
+      print('IOS Setting Registed');
+    });
+    firebaseMessaging.getToken().then((token) {
+      tokenValue=token;
+      print('token = $token');
+
+    });
+    print('token3 = $tokenValue');
+
+
+
+  }
 //------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
@@ -212,7 +249,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
     FocusScope.of(context).requestFocus(new FocusNode());
     progressDialog.showProgress();
     setState(() {
-      _presenter.loadLogIn(emailController.text, passwordController.text);
+      _presenter.loadLogIn(emailController.text, passwordController.text,tokenValue);
     });
 
     //_loginUser(emailController.text, passwordController.text);
@@ -255,7 +292,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
               // _callback.onLogIn(true);
               AppSharedPreferences.setUserProfile(data.object);
               globalKey.currentState.showSnackBar(new SnackBar(
-                content: new Text(SnackBarText.LOGIN_SUCCESSFUL),
+                content: new Text(data.messageResponse),
               ));
               progressDialog.hideProgress();
               _goToHomeScreen();
@@ -266,7 +303,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
           {
             setState(() {
               globalKey.currentState.showSnackBar(new SnackBar(
-                content: new Text(SnackBarText.LOGIN_UN_SUCCESSFUL),
+                content: new Text(data.messageResponse),
               ));
               progressDialog.hideProgress();
             });

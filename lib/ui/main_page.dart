@@ -1,13 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
+import 'package:your_doctor/ui/home/chat_support/chat_screen.dart';
 import 'package:your_doctor/ui/home/home_page/home_screen_page.dart';
-import 'package:your_doctor/ui/home/meetings.dart';
+import 'package:your_doctor/ui/home/meeting_page/meetings_page.dart';
 import 'package:your_doctor/ui/home/profile/profile_page.dart';
 import 'package:your_doctor/ui/home/search_page/search_page.dart';
 import 'package:your_doctor/ui/main_app_bar.dart';
 import 'package:your_doctor/util/app_shared_preferences.dart';
 import 'package:your_doctor/util/constant.dart';
+
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class MainPage extends StatefulWidget {
   int pagId = 0;
@@ -38,6 +45,41 @@ abstract class MainScreenCallBack {
   void onError(String message);
 }
 
+//==============================================================================
+const jsonCodec=const JsonCodec(reviver:_reviver,/*toEncodable:_toEncodable*/);
+_reviver( key,  value) {
+  if(key!=null&&value is Map && key.contains("")){
+
+    return new Todo.fromJson(value);
+  }
+
+  return value;
+}
+class Todo{
+  String title;
+  String message;
+   List<String> data;
+
+  Todo(this.title,this.message,this.data);
+
+  Todo.fromJson(Map value){
+    title=value["title"];
+    message=value["message"];
+    data=value["data"];
+
+  }
+
+  Map toJson(){
+    return {"title":title,"message":message};
+  }
+
+}
+
+/*_toEncodable(Todo todo) {
+
+    return {"title":todo.title,"message":todo.message};
+}*/
+//==============================================================================
 class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   int pagId;
   bool isLogedIn=false;
@@ -45,6 +87,80 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   String name;
   String email;
   String phone;
+  String message;
+  String title;
+  static String tokenValue;
+
+
+  FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  new FlutterLocalNotificationsPlugin();
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (fromBack) {
+      _currentIndex = pagId;
+      userName = name;
+      userEmail = email;
+      userPhone = phone;
+    }
+    _getLogInStatus();
+    var android = new AndroidInitializationSettings('mipmap/ic_launcher');
+    var ios = new IOSInitializationSettings();
+    var platform = new InitializationSettings(android, ios);
+    flutterLocalNotificationsPlugin.initialize(platform);
+
+
+
+
+
+    firebaseMessaging.configure(
+      onLaunch: (Map<String, dynamic> msg) {
+        print(" onLaunch called ${(msg.containsKey("title"))}");
+      },
+      onResume: (Map<String, dynamic> msg) {
+        print(" onResume called ${(msg)}");
+      },
+      onMessage: (Map<String, dynamic> msg) {
+        showNotification(msg);
+        print(" onMessage called ${(msg['data']['title'])}");
+
+      },
+    );
+    firebaseMessaging.requestNotificationPermissions(
+        const IosNotificationSettings(sound: true, alert: true, badge: true));
+    firebaseMessaging.onIosSettingsRegistered
+        .listen((IosNotificationSettings setting) {
+      print('IOS Setting Registed');
+    });
+    firebaseMessaging.getToken().then((token) {
+      update(token);
+      print('token = $token');
+
+    });
+  }
+
+  showNotification(Map<String, dynamic> msg) async {
+    var android = new AndroidNotificationDetails(
+      'sdffds dsffds',
+      "CHANNLE NAME",
+      "channelDescription",
+    );
+    var iOS = new IOSNotificationDetails();
+    var platform = new NotificationDetails(android, iOS);
+    await flutterLocalNotificationsPlugin.show(
+        0, msg['data']['title'],msg['data']['message'], platform);
+  }
+
+  update(String token) {
+    print(token);
+    DatabaseReference databaseReference = new FirebaseDatabase().reference();
+    databaseReference.child('fcm-token/${token}').set({"token": token});
+    tokenValue = token;
+    setState(() {});
+  }
 
   Future<User> user = AppSharedPreferences.getUserProfile();
   static String userName;
@@ -62,15 +178,9 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   final List<Widget> _children = [
     HomeScreenPage(),
     SearchPage(),
-    Meetings(),
+    MeetingsPage(),
     ProfilePage(),
-    Grad(
-      child: Center(
-          child: Text(
-        "hellooyu World",
-        style: TextStyle(fontSize: 24, color: Color(0xeeffffff)),
-      )),
-    ),
+    ChatScreen()
   ];
 
   Future<bool> _getLogInStatus() async {
@@ -85,17 +195,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    if (fromBack) {
-      _currentIndex = pagId;
-      userName = name;
-      userEmail = email;
-      userPhone = phone;
-    }
-    _getLogInStatus();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -222,4 +322,10 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     // TODO: implement onError
     print(message);
   }
+
+
 }
+
+
+
+

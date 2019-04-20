@@ -4,19 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
-import 'package:your_doctor/ui/home/meetings.dart';
 import 'package:your_doctor/ui/home/profile/log_in/register_page.dart';
 import 'package:your_doctor/ui/home/profile/more_options_widget.dart';
 import 'package:your_doctor/util/app_shared_preferences.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class ProfilePage extends StatefulWidget {
+
+
+
   @override
   _ProfilePageState createState() => new _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
+
+
   String name;
   String email;
   String phone;
@@ -47,6 +51,7 @@ class _ProfilePageState extends State<ProfilePage>
           phone = sharedUserValue.phone;
           imgUrl = sharedUserValue.imgUrl;
           isLoaded = true;
+
         });
       } else {
         setState(() {
@@ -60,7 +65,6 @@ class _ProfilePageState extends State<ProfilePage>
   @override
   void initState() {
     super.initState();
-
     _checkIsLogin();
   }
 

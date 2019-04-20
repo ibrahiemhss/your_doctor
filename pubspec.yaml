@@ -29,7 +29,13 @@ dependencies:
   bubble_tab_indicator: ^0.1.4
   line_awesome_icons:  ^1.0.4
   image_picker:  ^0.5.3
-  firebase_messaging: 0.2.1
+  firebase_core:
+  firebase_messaging:
+  firebase_database:
+  firebase_storage:
+  flutter_local_notifications:
+  shimmer:
+  rxdart:
 
 dev_dependencies:
   flutter_test:

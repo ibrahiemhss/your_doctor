@@ -16,9 +16,9 @@ class LogInPresenter {
     _repository = new Injector().logInRepository;
   }
 
-  void loadLogIn(String emailId, String password) {
+  void loadLogIn(String emailId, String password,String token) {
     _repository
-        .fetchLogInUser(emailId, password, "uu", "uu", "")
+        .fetchLogInUser(emailId, password, token)
         .then((c) => _view.onLoadLogInCompleted(c))
         .catchError((onError) => _view.onLoadLogIngError());
   }

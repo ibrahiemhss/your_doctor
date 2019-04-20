@@ -5,6 +5,8 @@ part 'user_data.g.dart';
 
 @JsonSerializable()
 class User extends Object with _$UserSerializerMixin {
+
+  String id;
   String name;
   String email;
   String phone;
@@ -16,13 +18,15 @@ class User extends Object with _$UserSerializerMixin {
   String building;
   String area;
 
-  String unique_id;
   String password;
   String old_password;
   String new_password;
 
   User(
-      {this.name,
+      {
+        this.id,
+
+        this.name,
       this.email,
       this.phone,
       this.imgUrl,
@@ -31,7 +35,6 @@ class User extends Object with _$UserSerializerMixin {
       this.place,
       this.area,
       this.building,
-      this.unique_id,
       this.password,
       this.old_password,
       this.new_password});
@@ -41,7 +44,7 @@ class User extends Object with _$UserSerializerMixin {
 
 abstract class LogInUserRepository {
   Future<EventObject> fetchLogInUser(
-      String emailId, String password, String token, String lang, String image);
+      String emailId, String password, String token);
 }
 
 abstract class RegisterUserRepository {
@@ -52,8 +55,6 @@ abstract class RegisterUserRepository {
       String phone,
       String password,
       String place,
-      String area,
-      String building,
       String token,
       String lang);
 }

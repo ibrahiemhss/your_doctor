@@ -29,6 +29,9 @@ class APIOperations {
 
   static const String FAILURE = "failure";
 
+  static const String ID = "id";
+
+  static const String EMAIL = "email";
   static const String NAME = "name";
   static const String PHONE = "phone";
   static const String PASSWORD = "password";
@@ -119,6 +122,8 @@ class Texts {
   static const String LOGIN_NOW = " سجل دخول!";
   static const String LOGIN = "تسجيل دخول";
   static const String REGISTER = "حساب جديد";
+  static const String PHONE = " الهاتف";
+
   static const String PASSWORD = "كلمة المرور";
   static const String OLD_PASSWORD = "كلمة المرور القديمة";
   static const String NEW_PASSWORD = "كلمة المرور الجديدة";

@@ -11,22 +11,18 @@ import 'package:your_doctor/util/constant.dart';
 class ProdLogInRepository implements LogInUserRepository {
   @override
   Future<EventObject> fetchLogInUser(String emailId, String password,
-      String token, String lang, String image) async {
+      String token) async {
     // TODO: implement fetchUser
     var queryParameters = {
       APIOperations.PHONE: emailId,
       APIOperations.PASSWORD: password,
       APIOperations.TOKEN: token,
-      APIOperations.LANG: lang,
-      APIOperations.IMAGE_URL: image,
+      APIOperations.LANG: "en",
     };
     ApiRequest apiRequest = new ApiRequest();
     User user = new User(
         phone: emailId,
-        imgUrl: image,
-        password: password,
-        token: token,
-        lang: lang);
+        password: password);
 
     apiRequest.operation = APIOperations.LOGIN;
     apiRequest.user = user;
@@ -42,10 +38,10 @@ class ProdLogInRepository implements LogInUserRepository {
           ApiResponse apiResponse = ApiResponse.fromJson(responseJson);
           if (apiResponse.error == false) {
             return new EventObject(
-                id: EventConstants.LOGIN_USER_SUCCESSFUL,
+                id: EventConstants.LOGIN_USER_SUCCESSFUL,messageResponse: apiResponse.message,
                 object: apiResponse.user);
           } else {
-            return new EventObject(id: EventConstants.LOGIN_USER_UN_SUCCESSFUL);
+            return new EventObject(id: EventConstants.LOGIN_USER_UN_SUCCESSFUL,messageResponse: apiResponse.message);
           }
         } else {
           return new EventObject(id: EventConstants.LOGIN_USER_UN_SUCCESSFUL);
@@ -54,6 +50,8 @@ class ProdLogInRepository implements LogInUserRepository {
         return new EventObject();
       }
     } catch (Exception) {
+      print("errorIn LogIn =========>============>=========>is => ${Exception.toString()}");
+
       return EventObject();
     }
   }

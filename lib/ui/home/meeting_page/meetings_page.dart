@@ -3,12 +3,12 @@ import 'package:bubble_tab_indicator/bubble_tab_indicator.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
 import 'package:your_doctor/util/constant.dart';
 
-class Meetings extends StatefulWidget {
+class MeetingsPage extends StatefulWidget {
   @override
   _MeetingsState createState() => new _MeetingsState();
 }
 
-class _MeetingsState extends State<Meetings> with TickerProviderStateMixin {
+class _MeetingsState extends State<MeetingsPage> with TickerProviderStateMixin {
   final List<Tab> tabs = <Tab>[
     new Tab(text: "حجوزات"),
     new Tab(text: "مراجعات")

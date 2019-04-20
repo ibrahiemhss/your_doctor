@@ -19,19 +19,17 @@ class RegisterPresenter {
   }
 
   void loadRegister(
+
       String name,
       String emailId,
       String imgUrl,
       String phone,
       String password,
       String place,
-      String area,
-      String building,
       String token,
       String lang) {
     _repository
-        .fetchRegisteringUser(name, emailId, imgUrl, phone, password, place,
-            area, building, token, lang)
+        .fetchRegisteringUser(name, emailId, imgUrl, phone, password, place, token, lang)
         .then((c) => _view.onLoadRegisterCompleted(c))
         .catchError((onError) => _view.onLoadRegisterError());
   }
