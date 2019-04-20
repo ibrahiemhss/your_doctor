@@ -1,5 +1,8 @@
 import 'package:your_doctor/data/articles/articles_data.dart';
 import 'package:your_doctor/data/articles/articles_data_mock.dart';
+import 'package:your_doctor/data/doctors/all_doctors_data_mock.dart';
+import 'package:your_doctor/data/doctors/doctors_data.dart';
+import 'package:your_doctor/data/doctors/selected_doctor_data_mock.dart';
 import 'package:your_doctor/data/user/login_data_prod.dart';
 import 'package:your_doctor/data/user/register_data_prod.dart';
 import 'package:your_doctor/data/user/reset_password_prod.dart';
@@ -55,6 +58,25 @@ class Injector {
     // switch (_flavor) {
     //  case Flavor.MOCK:
     return new MockArticlesRepository();
+    // default:
+    // return new ProdCategoriesRepository();
+    // }
+  }
+
+  ///////////////All Doctors Data////////////////////////////////////////////////////
+  DoctorsRepository get doctorsRepository {
+    // switch (_flavor) {
+    //  case Flavor.MOCK:
+    return new MockDoctorsRepository();
+    // default:
+    // return new ProdCategoriesRepository();
+    // }
+  }
+  ///////////////All Doctors Data////////////////////////////////////////////////////
+  SelctedDoctorsRepository get selcteddoctorsRepository {
+    // switch (_flavor) {
+    //  case Flavor.MOCK:
+    return new MockSelctedDoctorsRepository();
     // default:
     // return new ProdCategoriesRepository();
     // }

@@ -12,4 +12,4 @@ class Message {
   Message({String id, @required String text})
       : this.id = id ?? UniqueKey().toString(),
         this.text = text;
- }
+}

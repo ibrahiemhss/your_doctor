@@ -16,8 +16,8 @@ class MessageOutgoing extends Message {
   /// Constructor
   MessageOutgoing(
       {String id,
-        @required String text,
-        MessageOutgoingStatus status = MessageOutgoingStatus.NEW})
+      @required String text,
+      MessageOutgoingStatus status = MessageOutgoingStatus.NEW})
       : this.status = status,
         super(id: id, text: text);
 

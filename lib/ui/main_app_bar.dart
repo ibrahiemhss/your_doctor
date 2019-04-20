@@ -19,7 +19,7 @@ class MainBarWidget extends StatelessWidget {
     return Container(
       child: !isCreatingAcount
           ? new SizedBox.shrink()
-          : Row(
+          :  Row(
               children: <Widget>[
                 Container(
                   width: 60,
