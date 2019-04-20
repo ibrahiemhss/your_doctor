@@ -180,7 +180,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     SearchPage(),
     MeetingsPage(),
     ProfilePage(),
-    Text("more")
+    ChatScreen()
   ];
 
   Future<bool> _getLogInStatus() async {

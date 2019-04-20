@@ -39,6 +39,9 @@ abstract class SelctedDoctorsRepository {
   Future<List<Doctors>> fetchSelctedDoctors(String id);
 }
 
+abstract class DoctorDetailRepository {
+  Future<Doctors> fetchDoctotDetails(String id);
+}
 class FetchDataException implements Exception {
   final _message;
 

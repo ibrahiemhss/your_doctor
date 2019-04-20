@@ -4,6 +4,7 @@ import 'package:your_doctor/data/articles/articles_data.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
 import 'package:your_doctor/module/articles_presenter.dart';
 import 'package:your_doctor/module/doctors_presenter.dart';
+import 'package:your_doctor/ui/home/search_page/doctor_details.dart';
 import 'package:your_doctor/util/constant.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -99,7 +100,7 @@ class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContrac
               // final MaterialColor color = _colors[i % _colors.length];
               return InkWell(
                   onTap: () {
-                    //onPressed;
+                    _goToDetailsDoctorsWidget(lastDoctors.id);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 4.0,right: 4.0,left: 4.0),
@@ -134,7 +135,14 @@ class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContrac
       ),
     );
   }
-
+//------------------------------------------------------------------------------
+  void _goToDetailsDoctorsWidget(String id) {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(
+          builder: (context) => new DoctorDetailWidget(id: id,)),
+    );
+  }
 //------------------------------------------------------------------------------
 
   Widget appBar(String title) {
@@ -180,5 +188,10 @@ class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContrac
   @override
   void onLoadDoctorsError() {
     // TODO: implement onLoadDoctorsError
+  }
+
+  @override
+  void onLoadDoctorDetialsCompleted(Doctors item) {
+    // TODO: implement onLoadDoctorDetialsCompleted
   }
 }
