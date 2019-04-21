@@ -616,16 +616,13 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
   }
 
   Widget buildListMessage() {
-    return Container(
-      color: Colors.white,
-      child: Flexible(
-        child:  ListView.builder(
-          itemCount: listMessage.length,
-          itemBuilder: (context, index) => buildItem(index, listMessage[index]),
-          reverse: true,
-          controller: listScrollController,
-          scrollDirection: Axis.horizontal,
-        ),
+    return Flexible(
+      child:  ListView.builder(
+        itemCount: listMessage.length,
+        itemBuilder: (context, index) => buildItem(index, listMessage[index]),
+        reverse: true,
+        controller: listScrollController,
+        scrollDirection: Axis.horizontal,
       ),
     );
   }
@@ -635,6 +632,10 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
       child: groupChatId == ''
           ? Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(themeColor)))
           :
+
+
+
+
       StreamBuilder(
        // stream:,
         builder: (context, snapshot) {
