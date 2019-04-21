@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:your_doctor/ui/home/chat/models/message.dart';
+import 'package:your_doctor/data/chat/message_data.dart';
 
 
 /// ChatMessage is base abstract class for outgoing and incoming message widgets
-abstract class ChatMessage extends Widget {
+abstract class ChatMessages extends Widget {
   /// Message content
-  Message get message;
+  Messages get message;
 
   /// Controller of animation for message widget
   AnimationController get animationController;

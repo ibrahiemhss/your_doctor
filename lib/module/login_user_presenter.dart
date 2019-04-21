@@ -1,9 +1,9 @@
-import 'package:your_doctor/data/user/base/event_object.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/util/dependency_injection.dart';
 
 abstract class LogInContract {
-  void onLoadLogInCompleted(EventObject data);
+  void onLoadLogInCompleted(EventUserObject data);
 
   void onLoadLogIngError();
 }

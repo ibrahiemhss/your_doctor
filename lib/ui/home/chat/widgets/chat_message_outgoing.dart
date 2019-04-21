@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:shimmer/shimmer.dart';
-import 'package:your_doctor/ui/home/chat/models/message_outgoing.dart';
+import 'package:your_doctor/data/chat/message_data_outgoing.dart';
 import 'package:your_doctor/util/constant.dart';
 
 
@@ -11,7 +11,7 @@ import 'chat_message.dart';
 const String _name = "Me";
 
 /// ChatMessageOutgoing is widget to display outgoing to server message
-class ChatMessageOutgoing extends StatelessWidget implements ChatMessage {
+class ChatMessageOutgoing extends StatelessWidget implements ChatMessages {
   /// Incoming message content
   final MessageOutgoing message;
 

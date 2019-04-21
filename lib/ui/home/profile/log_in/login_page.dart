@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:your_doctor/data/user/base/event_object.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/module/login_user_presenter.dart';
 import 'package:your_doctor/ui/customviews/progress_dialog.dart';
@@ -10,7 +10,6 @@ import 'package:your_doctor/util/constant.dart';
 import 'forgottenPassword.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class LoginPage extends StatefulWidget {
@@ -280,12 +279,12 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
   }
 
   @override
-  void onLoadLogInCompleted(EventObject data) {
+  void onLoadLogInCompleted(EventUserObject data) {
     // MainPageCallback _callback;
 
     setState(() {
       switch (data.id) {
-        case EventConstants.LOGIN_USER_SUCCESSFUL:
+        case EventUserConstants.LOGIN_USER_SUCCESSFUL:
           {
             setState(() {
               AppSharedPreferences.setUserLoggedIn(true);
@@ -299,7 +298,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
             });
           }
           break;
-        case EventConstants.LOGIN_USER_UN_SUCCESSFUL:
+        case EventUserConstants.LOGIN_USER_UN_SUCCESSFUL:
           {
             setState(() {
               globalKey.currentState.showSnackBar(new SnackBar(
@@ -309,7 +308,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
             });
           }
           break;
-        case EventConstants.NO_INTERNET_CONNECTION:
+        case EventUserConstants.NO_INTERNET_CONNECTION:
           {
             setState(() {
               globalKey.currentState.showSnackBar(new SnackBar(

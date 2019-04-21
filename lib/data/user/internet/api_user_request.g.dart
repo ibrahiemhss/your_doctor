@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_request.dart';
+part of 'api_user_request.dart';
 
 // **************************************************************************
 // Generator: JsonSerializableGenerator
 // **************************************************************************
 
-ApiRequest _$ApiRequestFromJson(Map<String, dynamic> json) => new ApiRequest(
+ApiUserRequest _$ApiRequestFromJson(Map<String, dynamic> json) => new ApiUserRequest(
     // operation: json['operation'] as String,
     user: json[APIOperations.USER] == null
         ? null

@@ -1,11 +1,9 @@
 import 'dart:collection';
 
 import 'package:rxdart/rxdart.dart';
-import 'package:your_doctor/ui/home/chat/models/message.dart';
-import 'package:your_doctor/ui/home/chat/models/message_incoming.dart';
-import 'package:your_doctor/ui/home/chat/models/message_outgoing.dart';
-
-
+import 'package:your_doctor/data/chat/message_data.dart';
+import 'package:your_doctor/data/chat/message_data_incoming.dart';
+import 'package:your_doctor/data/chat/message_data_outgoing.dart';
 
 import 'bloc_provider.dart';
 import 'message_events.dart';
@@ -13,7 +11,7 @@ import 'message_events.dart';
 /// BLoC class
 class ApplicationBloc implements BlocBase {
   // Application state (chat messages)
-  final _messages = Set<Message>();
+  final _messages = Set<Messages>();
 
   /// Controller is used to notify when message created
   final _messageCreatedController =
@@ -44,13 +42,13 @@ class ApplicationBloc implements BlocBase {
       _messageReceivedController.sink;
 
   /// Controller is used to provide state (chat messages) to the widgets
-  final _messagesController = new BehaviorSubject<List<Message>>();
-  Sink<List<Message>> get _inMessages => _messagesController.sink;
-  Stream<List<Message>> get outMessages => _messagesController.stream;
+  final _messagesController = new BehaviorSubject<List<Messages>>(seedValue: []);
+  Sink<List<Messages>> get _inMessages => _messagesController.sink;
+  Stream<List<Messages>> get outMessages => _messagesController.stream;
 
   /// Constructor
   ApplicationBloc() {
-    _messageCreatedController.listen(_onNewMessageCreated);
+    _messageCreatedController.listen(onNewMessageCreated);
     _messageSentController.listen(_onMessageSent);
     _messageSendFailedController.listen(_onMessageSendFailed);
     _messageReceivedController.listen(_onMessageReceived);
@@ -67,7 +65,7 @@ class ApplicationBloc implements BlocBase {
   }
 
   /// Handle event: new message created
-  void _onNewMessageCreated(MessageNewCreatedEvent event) {
+  void onNewMessageCreated(MessageNewCreatedEvent event) {
     _messages.add(event.message);
     _notify();
     _messageSendController.add(event);

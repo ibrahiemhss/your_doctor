@@ -9,13 +9,13 @@ abstract class DoctorsContract {
 }
 
 class DoctorsPresenter {
-  DoctorsContract _all_doctors_view;
+  DoctorsContract _view;
   DoctorsRepository _all_doctors_repository;
   SelctedDoctorsRepository _selcted_doctors_repository;
   DoctorDetailRepository _doctors_details_repository;
 
 
-  DoctorsPresenter(this._all_doctors_view) {
+  DoctorsPresenter(this._view) {
     _all_doctors_repository = new Injector().doctorsRepository;
     _selcted_doctors_repository = new Injector().selcteddoctorsRepository;
     _doctors_details_repository = new Injector().doctorDetailsRepository;
@@ -25,21 +25,21 @@ class DoctorsPresenter {
   void loadAllDoctors() {
     _all_doctors_repository
         .fetchAllDoctors()
-        .then((c) => _all_doctors_view.onLoadDoctorsCompleted(c))
-        .catchError((onError) => _all_doctors_view.onLoadDoctorsError());
+        .then((c) => _view.onLoadDoctorsCompleted(c))
+        .catchError((onError) => _view.onLoadDoctorsError());
   }
 
   void loadSelctedDoctors(String id) {
     _selcted_doctors_repository
         .fetchSelctedDoctors(id)
-        .then((c) => _all_doctors_view.onLoadDoctorsCompleted(c))
-        .catchError((onError) => _all_doctors_view.onLoadDoctorsError());
+        .then((c) => _view.onLoadDoctorsCompleted(c))
+        .catchError((onError) => _view.onLoadDoctorsError());
   }
 
   void loadDoctorDetails(String id) {
     _doctors_details_repository
         .fetchDoctotDetails(id)
-        .then((c) => _all_doctors_view.onLoadDoctorDetialsCompleted(c))
-        .catchError((onError) => _all_doctors_view.onLoadDoctorsError());
+        .then((c) => _view.onLoadDoctorDetialsCompleted(c))
+        .catchError((onError) => _view.onLoadDoctorsError());
   }
 }

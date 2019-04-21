@@ -3,14 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:your_doctor/data/user/base/event_object.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
 import 'package:your_doctor/module/register_user_presenter.dart';
 import 'package:your_doctor/ui/customviews/progress_dialog.dart';
 import 'package:your_doctor/ui/home/profile/log_in/login_page.dart';
 import 'package:your_doctor/util/constant.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -472,9 +471,9 @@ class _RegisterPageState extends State<RegisterPage>
   }
 
   @override
-  void onLoadRegisterCompleted(EventObject data) {
+  void onLoadRegisterCompleted(EventUserObject data) {
     switch (data.id) {
-      case EventConstants.USER_REGISTRATION_SUCCESSFUL:
+      case EventUserConstants.USER_REGISTRATION_SUCCESSFUL:
         {
           setState(() {
             globalKey.currentState.showSnackBar(new SnackBar(
@@ -485,7 +484,7 @@ class _RegisterPageState extends State<RegisterPage>
           });
         }
         break;
-      case EventConstants.USER_ALREADY_REGISTERED:
+      case EventUserConstants.USER_ALREADY_REGISTERED:
         {
           setState(() {
             globalKey.currentState.showSnackBar(new SnackBar(
@@ -495,7 +494,7 @@ class _RegisterPageState extends State<RegisterPage>
           });
         }
         break;
-      case EventConstants.USER_REGISTRATION_UN_SUCCESSFUL:
+      case EventUserConstants.USER_REGISTRATION_UN_SUCCESSFUL:
         {
           setState(() {
             globalKey.currentState.showSnackBar(new SnackBar(
@@ -505,7 +504,7 @@ class _RegisterPageState extends State<RegisterPage>
           });
         }
         break;
-      case EventConstants.NO_INTERNET_CONNECTION:
+      case EventUserConstants.NO_INTERNET_CONNECTION:
         {
           setState(() {
             globalKey.currentState.showSnackBar(new SnackBar(

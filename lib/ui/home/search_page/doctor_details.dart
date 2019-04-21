@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
 import 'package:your_doctor/module/doctors_presenter.dart';
+import 'package:your_doctor/ui/home/chat/pages/home_chat.dart';
 import 'package:your_doctor/ui/home/search_page/latest_doctors_widget.dart';
 import 'package:your_doctor/ui/home/search_page/search_by_widget.dart';
 import 'package:your_doctor/util/constant.dart';
@@ -25,7 +26,11 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
   bool _isLoading;
 
   DoctorsPresenter _doctorsPresenter;
-  _DoctorDetailWidgetState({@required this.id});
+
+  _DoctorDetailWidgetState( {@required this.id}){
+    _doctorsPresenter = new DoctorsPresenter(this);
+
+  }
   @override
   void initState() {
     super.initState();
@@ -53,7 +58,7 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
 //------------------------------------------------------------------------------
                       _itemsDivider(context),
 //------------------------------------------------------------------------------
-                      _chatContainer(),
+                      //_chatContainer(),
 //------------------------------------------------------------------------------
                     ],
                   ),
@@ -65,17 +70,9 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
 
 ////////////////////////////////////////////////////////////////////////////////
   _itemsDivider(BuildContext context) {
-    double _width;
 
-    final mediaQueryData = MediaQuery.of(context);
-    if (mediaQueryData.orientation == Orientation.landscape) {
-      _width = MediaQuery.of(context).size.width / 1.310;
-    } else {
-      _width = MediaQuery.of(context).size.height / 1.95;
-    }
     return   Container(
       alignment: Alignment.centerRight,
-      width: _width,
       color: Colors.grey[200],
       height: 1.0,
 
@@ -112,21 +109,30 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
 ////////////////////////////////////////////////////////////////////////////////
   Widget _chatContainer() {
     return new Container(
-      child: Row(children: <Widget>[
-
-
-      ],),
-
-      margin: EdgeInsets.only(
-        top: 16.0,
-        left: 16.0,
-        right: 16.0,
-      ),
+      child:   new FlatButton(
+        splashColor: Color(0xffaaaaaa),
+        color: ThemeColors.AccentColor,
+        shape: StadiumBorder(),
+        onPressed: () => _goToChat(),
+        child: Text(
+          Texts.CHAT_DOCTOR,
+          style: new TextStyle(
+              color: ThemeColors.white100,
+              fontWeight: FontWeight.bold,
+              fontSize: 16.0),
+        ),
+      )
 
       //  margin: EdgeInsets.only(bottom: 2.0)
     );
   }
-
+////////////////////////////////////////////////////////////////////////////////
+  void _goToChat() {
+    Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => new HomeChatScreen()),
+    );
+  }
 ////////////////////////////////////////////////////////////////////////////////
   Widget appBar() {
     IconData _backIcon() {

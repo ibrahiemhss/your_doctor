@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:your_doctor/data/user/base/event_object.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/module/Reset_Password_Presenter.dart';
 import 'package:your_doctor/util/constant.dart';
@@ -11,7 +11,7 @@ class ResetPassword_Page extends StatefulWidget
   _ResetPassword_PageState createState() => _ResetPassword_PageState();
 
   @override
-  void onLoadResetPasswordCompleted(EventObject data) {
+  void onLoadResetPasswordCompleted(EventUserObject data) {
     // TODO: implement onLoadResetPasswordCompleted
   }
 

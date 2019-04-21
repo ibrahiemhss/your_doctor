@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:your_doctor/data/user/base/event_object.dart';
-import 'package:your_doctor/data/user/internet/api_request.dart';
-import 'package:your_doctor/data/user/internet/api_response.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
+import 'package:your_doctor/data/user/internet/api_user_request.dart';
+import 'package:your_doctor/data/user/internet/api_user_response.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class ProdRegisterRepository implements RegisterUserRepository {
   @override
-  Future<EventObject> fetchRegisteringUser(
+  Future<EventUserObject> fetchRegisteringUser(
       String name,
       String emailId,
       String imgUrl,
@@ -29,7 +29,7 @@ class ProdRegisterRepository implements RegisterUserRepository {
       APIOperations.TOKEN: token,
       APIOperations.LANG: lang,
     };
-    ApiRequest apiRequest = new ApiRequest();
+    ApiUserRequest apiRequest = new ApiUserRequest();
     User user = new User(name: name, email: emailId,phone: phone,token:token, password: password);
 
     apiRequest.operation = APIOperations.REGISTER;
@@ -44,26 +44,26 @@ class ProdRegisterRepository implements RegisterUserRepository {
             response.body != null) {
           final responseJson = json.decode(
               response.body);
-          ApiResponse apiResponse = ApiResponse.fromJson(responseJson);
+          ApiUserResponse apiResponse = ApiUserResponse.fromJson(responseJson);
           if (apiResponse.error == false) {
-            return new EventObject(
-                id: EventConstants.USER_REGISTRATION_SUCCESSFUL, object: null);
+            return new EventUserObject(
+                id: EventUserConstants.USER_REGISTRATION_SUCCESSFUL, object: null);
           } else if (apiResponse.message == APIOperations.FAILURE) {
-            return new EventObject(id: EventConstants.USER_ALREADY_REGISTERED,messageResponse: apiResponse.message.toString());
+            return new EventUserObject(id: EventUserConstants.USER_ALREADY_REGISTERED,messageResponse: apiResponse.message.toString());
           } else {
-            return new EventObject(
-                id: EventConstants.USER_REGISTRATION_UN_SUCCESSFUL,messageResponse: apiResponse.message.toString());
+            return new EventUserObject(
+                id: EventUserConstants.USER_REGISTRATION_UN_SUCCESSFUL,messageResponse: apiResponse.message.toString());
           }
         } else {
-          return new EventObject(
-              id: EventConstants.USER_REGISTRATION_UN_SUCCESSFUL);
+          return new EventUserObject(
+              id: EventUserConstants.USER_REGISTRATION_UN_SUCCESSFUL);
         }
       } else {
-        return new EventObject();
+        return new EventUserObject();
       }
     } catch (Exception) {
       print("errorIn Register =========>============>=========>is => ${Exception.toString()}");
-      return EventObject();
+      return EventUserObject();
     }
 // TODO: implement fetchteColors
   }

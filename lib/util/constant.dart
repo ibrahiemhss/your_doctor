@@ -9,8 +9,9 @@ class APIConstants {
   // static const String API_BASE_URL = "https://hafinse.000webhostapp.com";
   static const String API_BASE_URL = "https://mytestapps.000webhostapp.com";
   static const String API_LOGIN_URL = "${API_BASE_URL}/login/loginUser.php";
-  static const String Api_REGISTER_URL =
-      "${API_BASE_URL}/login/registerUser.php";
+  static const String Api_REGISTER_URL = "${API_BASE_URL}/login/registerUser.php";
+  static const String Api_SEND_MESSAGE_URL = "${API_BASE_URL}/FCM/sendMessage.php";
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,6 +19,7 @@ class APIOperations {
   static const String LOGIN = "login";
   static const String REGISTER = "register";
   static const String CHANGE_PASSWORD = "chgPass";
+  static const String SEND_MESSAGE = "send_message";
 
 //------query parameters And Response JSON Messages----------------------------
 
@@ -25,6 +27,8 @@ class APIOperations {
   static const String TRUE = "true";
   static const bool FALSE = false;
   static const String SUCCESS = "success";
+  static const String MESSAGE_BODY = "message";
+
   static const String SUCCESS_MESSAGE = "success_msg";
 
   static const String FAILURE = "failure";
@@ -57,7 +61,7 @@ class APIResponse {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-class EventConstants {
+class EventUserConstants {
   static const int NO_INTERNET_CONNECTION = 0;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,6 +78,17 @@ class EventConstants {
   static const int CHANGE_PASSWORD_UN_SUCCESSFUL = 506;
   static const int INVALID_OLD_PASSWORD = 507;
 ///////////////////////////////////////////////////////////////////////////////
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+class EventMessageConstants {
+  static const int NO_INTERNET_CONNECTION = 3;
+
+///////////////////////////////////////////////////////////////////////////////
+  static const int SEND_SUCCESSFUL = 300;
+  static const int SEND_UN_SUCCESSFUL = 301;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -138,6 +153,8 @@ class Texts {
   static const String ForgotPassword = "نسيت كلمة المرور ؟";
 
   static const String SEARCH = "بحث متقدم";
+  static const String CHAT_DOCTOR = "مراسلة الطبيب";
+
 }
 ////////////////////////////////////////////
 final ThemeData kIOSTheme = new ThemeData(

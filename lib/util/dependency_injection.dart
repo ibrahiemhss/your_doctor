@@ -1,5 +1,11 @@
 import 'package:your_doctor/data/articles/articles_data.dart';
 import 'package:your_doctor/data/articles/articles_data_mock.dart';
+import 'package:your_doctor/data/chat/get_incomming_message_data_prod.dart';
+import 'package:your_doctor/data/chat/get_outgoing_message_data_prod.dart';
+import 'package:your_doctor/data/chat/message_data.dart';
+import 'package:your_doctor/data/chat/message_data_incoming.dart';
+import 'package:your_doctor/data/chat/message_data_outgoing.dart';
+import 'package:your_doctor/data/chat/send_message_data_prod.dart';
 import 'package:your_doctor/data/doctors/all_doctors_data_mock.dart';
 import 'package:your_doctor/data/doctors/doctor_details_data_mock.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
@@ -88,6 +94,35 @@ class Injector {
     // switch (_flavor) {
     //  case Flavor.MOCK:
     return new MockDoctorDetailsRepository();
+    // default:
+    // return new ProdCategoriesRepository();
+    // }
+  }
+
+  ///////////////All Doctors Data////////////////////////////////////////////////////
+  SendMessageRepository get senMessageRepsitory {
+    // switch (_flavor) {
+    //  case Flavor.MOCK:
+    return new MockSendMessageRepository();
+    // default:
+    // return new ProdCategoriesRepository();
+    // }
+  }
+
+  ///////////////All Doctors Data////////////////////////////////////////////////////
+  GetMessagesRepository get getMessages {
+    // switch (_flavor) {
+    //  case Flavor.MOCK:
+    return new ProdMessagesRepository();
+    // default:
+    // return new ProdCategoriesRepository();
+    // }
+  }
+  ///////////////All Doctors Data////////////////////////////////////////////////////
+  GetOutgoingMessagesRepository get getOutGoingMessages {
+    // switch (_flavor) {
+    //  case Flavor.MOCK:
+    return new ProdGetMessageOutgoingRepository();
     // default:
     // return new ProdCategoriesRepository();
     // }

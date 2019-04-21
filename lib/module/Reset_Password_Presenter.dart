@@ -1,9 +1,9 @@
-import 'package:your_doctor/data/user/base/event_object.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/util/dependency_injection.dart';
 
 abstract class ResetPasswordContract {
-  void onLoadResetPasswordCompleted(EventObject data);
+  void onLoadResetPasswordCompleted(EventUserObject data);
 
   void onLoadResetPasswordError();
 }

@@ -8,8 +8,6 @@ import 'package:your_doctor/ui/home/search_page/doctor_details.dart';
 import 'package:your_doctor/util/constant.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:ui' as ui;
 
 class DoctorsWidget extends StatefulWidget {
@@ -22,8 +20,8 @@ class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContrac
   DoctorsPresenter _doctorsPresenter;
 
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  new FlutterLocalNotificationsPlugin();
+ // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //new FlutterLocalNotificationsPlugin();
 
 
   bool _isLoading;

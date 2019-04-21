@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:your_doctor/data/user/base/event_object.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
 
 part 'user_data.g.dart';
 
@@ -43,12 +43,12 @@ class User extends Object with _$UserSerializerMixin {
 }
 
 abstract class LogInUserRepository {
-  Future<EventObject> fetchLogInUser(
+  Future<EventUserObject> fetchLogInUser(
       String emailId, String password, String token);
 }
 
 abstract class RegisterUserRepository {
-  Future<EventObject> fetchRegisteringUser(
+  Future<EventUserObject> fetchRegisteringUser(
       String name,
       String emailId,
       String imagUrl,
@@ -60,7 +60,7 @@ abstract class RegisterUserRepository {
 }
 
 abstract class ResetPasswordRepository {
-  Future<EventObject> fetchResetingPassword(
+  Future<EventUserObject> fetchResetingPassword(
       String name, String emailId, String password);
 }
 

@@ -1,16 +1,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:your_doctor/data/user/base/event_object.dart';
-import 'package:your_doctor/data/user/internet/api_request.dart';
-import 'package:your_doctor/data/user/internet/api_response.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
+import 'package:your_doctor/data/user/internet/api_user_request.dart';
+import 'package:your_doctor/data/user/internet/api_user_response.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class ResetPassword implements ResetPasswordRepository {
   @override
-  Future<EventObject> fetchResetingPassword(
+  Future<EventUserObject> fetchResetingPassword(
       String emailId, String oldPassword, String newPassword) async {
-    ApiRequest apiRequest = new ApiRequest();
+    ApiUserRequest apiRequest = new ApiUserRequest();
     User user = new User(
         email: emailId, old_password: oldPassword, new_password: newPassword);
 
@@ -26,25 +26,25 @@ class ResetPassword implements ResetPasswordRepository {
         if (response.statusCode == APIResponseCode.SC_OK &&
             response.body != null) {
           final responseJson = json.decode(response.body);
-          ApiResponse apiResponse = ApiResponse.fromJson(responseJson);
+          ApiUserResponse apiResponse = ApiUserResponse.fromJson(responseJson);
           if (apiResponse.message == APIOperations.SUCCESS) {
-            return new EventObject(
-                id: EventConstants.CHANGE_PASSWORD_SUCCESSFUL, object: null);
+            return new EventUserObject(
+                id: EventUserConstants.CHANGE_PASSWORD_SUCCESSFUL, object: null);
           } else if (apiResponse.message == APIOperations.FAILURE) {
-            return new EventObject(id: EventConstants.INVALID_OLD_PASSWORD);
+            return new EventUserObject(id: EventUserConstants.INVALID_OLD_PASSWORD);
           } else {
-            return new EventObject(
-                id: EventConstants.CHANGE_PASSWORD_UN_SUCCESSFUL);
+            return new EventUserObject(
+                id: EventUserConstants.CHANGE_PASSWORD_UN_SUCCESSFUL);
           }
         } else {
-          return new EventObject(
-              id: EventConstants.CHANGE_PASSWORD_UN_SUCCESSFUL);
+          return new EventUserObject(
+              id: EventUserConstants.CHANGE_PASSWORD_UN_SUCCESSFUL);
         }
       } else {
-        return new EventObject();
+        return new EventUserObject();
       }
     } catch (Exception) {
-      return EventObject();
+      return EventUserObject();
     }
   }
 }

@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:your_doctor/data/user/base/event_object.dart';
+import 'package:your_doctor/data/user/base/event_user_object.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/util/dependency_injection.dart';
 
 abstract class RegisterUserContract {
-  void onLoadRegisterCompleted(EventObject data);
+  void onLoadRegisterCompleted(EventUserObject data);
 
   void onLoadRegisterError();
 }

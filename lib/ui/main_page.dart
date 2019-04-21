@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
+import 'package:your_doctor/ui/home/chat/pages/home_chat.dart';
+import 'package:your_doctor/ui/home/chat_support/chat2.dart';
 import 'package:your_doctor/ui/home/chat_support/chat_screen.dart';
 import 'package:your_doctor/ui/home/home_page/home_screen_page.dart';
 import 'package:your_doctor/ui/home/meeting_page/meetings_page.dart';
@@ -13,7 +15,6 @@ import 'package:your_doctor/util/app_shared_preferences.dart';
 import 'package:your_doctor/util/constant.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class MainPage extends StatefulWidget {
@@ -156,8 +157,8 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
 
   update(String token) {
     print(token);
-    DatabaseReference databaseReference = new FirebaseDatabase().reference();
-    databaseReference.child('fcm-token/${token}').set({"token": token});
+    //DatabaseReference databaseReference = new FirebaseDatabase().reference();
+    //databaseReference.child('fcm-token/${token}').set({"token": token});
     tokenValue = token;
     setState(() {});
   }
@@ -180,7 +181,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     SearchPage(),
     MeetingsPage(),
     ProfilePage(),
-    ChatScreen()
+    Chat(peerId: "1", peerAvatar: "ibrahim",)
   ];
 
   Future<bool> _getLogInStatus() async {

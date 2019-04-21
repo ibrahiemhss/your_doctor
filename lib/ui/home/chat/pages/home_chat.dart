@@ -1,40 +1,82 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:your_doctor/data/chat/base/event_chat_object.dart';
+import 'package:your_doctor/data/chat/message_data.dart';
+import 'package:your_doctor/data/chat/message_data_incoming.dart';
+import 'package:your_doctor/data/chat/message_data_outgoing.dart';
+import 'package:your_doctor/module/messages_presenter.dart';
 import 'package:your_doctor/ui/home/chat/blocs/application_bloc.dart';
-import 'package:your_doctor/ui/home/chat/blocs/bloc_provider.dart';
-import 'package:your_doctor/ui/home/chat/blocs/message_events.dart';
-import 'package:your_doctor/ui/home/chat/models/message.dart';
-import 'package:your_doctor/ui/home/chat/models/message_incoming.dart';
-import 'package:your_doctor/ui/home/chat/models/message_outgoing.dart';
 import 'package:your_doctor/ui/home/chat/widgets/chat_message.dart';
 import 'package:your_doctor/ui/home/chat/widgets/chat_message_incoming.dart';
 import 'package:your_doctor/ui/home/chat/widgets/chat_message_outgoing.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:your_doctor/util/constant.dart';
 
 
 /// Host screen widget - main window
-class HomeChatPage extends StatefulWidget {
+class HomeChatScreen extends StatefulWidget {
   // Constructor
-  HomeChatPage() : super(key: new ObjectKey("Main window"));
+  HomeChatScreen() : super(key: new ObjectKey("Main window"));
 
   @override
-  State createState() => HomePageState();
+  State createState() => _HomeChatScreenState();
 }
 
 /// State for main window
-class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
+class _HomeChatScreenState extends State<HomeChatScreen> with TickerProviderStateMixin implements MessageContract {
   // BLoc for application
-  ApplicationBloc _appBloc;
+
+  List<Messages> _listMessages;
+
+  Stream<List<MessageIncoming>> _listIcoming;
+  List<MessageOutgoing> _listOutgoing;
+  MessagePresenter _messagePresenter;
+
+  FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  new FlutterLocalNotificationsPlugin();
+
 
   /// Chat messages list to display into ListView
-  final List<ChatMessage> _messages = <ChatMessage>[];
+  final List<ChatMessages> _messages = <ChatMessages>[];
 
   /// Look at the https://codelabs.developers.google.com/codelabs/flutter/#4
   final TextEditingController _textController = TextEditingController();
   bool _isComposing = false;
+  ApplicationBloc _appBloc;
 
   bool _isInit = false;
+
+  _HomeChatScreenState() {
+    _messagePresenter = new MessagePresenter(this);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _messagePresenter.loadGetIncommingMessage("1");
+    _messagePresenter.loadGetOutGoingMessage("1");
+
+    firebaseMessaging.configure(
+      onLaunch: (Map<String, dynamic> msg) {
+        print(" onLaunch called ${(msg.containsKey("title"))}");
+      },
+      onResume: (Map<String, dynamic> msg) {
+        print(" onResume called ${(msg)}");
+      },
+      onMessage: (Map<String, dynamic> msg) {
+        //showNotification(msg);
+        _handleInComming(msg['data']['message']);
+
+        // print(" onMessage called ${(msg['data']['title'])}");
+
+      },
+    );
+
+
+  }
 
   @override
   void didChangeDependencies() {
@@ -45,7 +87,7 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
     // and retrieve the currently selected one, as well as the
     // filter parameters
     if (_isInit == false) {
-      _appBloc = BlocProvider.of<ApplicationBloc>(context);
+      //_appBloc = BlocProvider.of<ApplicationBloc>(context);
       _isInit = true;
     }
   }
@@ -53,7 +95,7 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     // free UI resources
-    for (ChatMessage message in _messages)
+    for (ChatMessages message in _messages)
       message.animationController.dispose();
     super.dispose();
   }
@@ -61,10 +103,10 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+    /*  appBar: AppBar(
         title: Text('Friendlychat'),
         elevation: isIOS(context) ? 0.0 : 4.0,
-      ),
+      ),*/
       body: new Container(
           child: new Column(
             children: <Widget>[
@@ -72,7 +114,7 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
                 child: StreamBuilder(
                   stream: _appBloc.outMessages,
                   builder: (BuildContext context,
-                      AsyncSnapshot<List<Message>> snapshot) {
+                      AsyncSnapshot<List<Messages>> snapshot) {
                     if (snapshot.hasError) {
                       return Text("Error: ${snapshot.error}");
                     } else if (snapshot.hasData) {
@@ -124,7 +166,7 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
                           _isComposing = text.length > 0;
                         });
                       },
-                      onSubmitted: _isComposing ? _handleSubmitted : null,
+                      onSubmitted: _isComposing ? _handleSubmitOutGoing : null,
                     )
                   : TextField(
                       key: Key('message-text-field'),
@@ -136,7 +178,7 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
                           _isComposing = text.length > 0;
                         });
                       },
-                      onSubmitted: _isComposing ? _handleSubmitted : null,
+                      onSubmitted: _isComposing ? _handleSubmitOutGoing : null,
                       decoration:
                           InputDecoration.collapsed(hintText: "Send a message"),
                     ),
@@ -147,14 +189,14 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
                   ? new CupertinoButton(
                       child: new Text("Send"),
                       onPressed: _isComposing
-                          ? () => _handleSubmitted(_textController.text)
+                          ? () => _handleSubmitOutGoing(_textController.text)
                           : null,
                     )
                   : new IconButton(
                       key: Key('send-button'),
                       icon: new Icon(Icons.send),
                       onPressed: _isComposing
-                          ? () => _handleSubmitted(_textController.text)
+                          ? () => _handleSubmitOutGoing(_textController.text)
                           : null,
                     ),
             ),
@@ -164,18 +206,33 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
     );
   }
 
-  /// 'new outgoing message created' event
-  void _handleSubmitted(String text) {
+
+  void _handleInComming(String text) {
     _textController.clear();
     _isComposing = false;
+    ChatMessageIncoming chatMessage = new ChatMessageIncoming(message: MessageIncoming(text: text));
+    setState(() {
+      //used to rebuild our widget
+      _messages.insert(0, chatMessage);
+    });
 
-    _appBloc.inNewMessageCreated
-        .add(MessageNewCreatedEvent(message: MessageOutgoing(text: text)));
+  }
+
+
+  void _handleSubmitOutGoing(String text) {
+    _textController.clear();
+    _isComposing = false;
+    ChatMessageOutgoing chatMessage = new ChatMessageOutgoing(message: MessageOutgoing(text: text));
+    setState(() {
+      //used to rebuild our widget
+      _messages.insert(0, chatMessage);
+    });
+
   }
 
   /// this methods is called to display new (outgoing or incoming) message or
   /// update status of existing outgoing message
-  void _updateMessages(List<Message> messages) {
+  void _updateMessages(List<Messages> messages) {
     for (var message in messages) {
       int i = _messages.indexWhere((msg) => msg.message.id == message.id);
       if (i != -1) {
@@ -202,7 +259,7 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
           }
         }
       } else {
-        ChatMessage chatMessage;
+        ChatMessages chatMessage;
         // new message
         var animationController = AnimationController(
           duration: Duration(milliseconds: 700),
@@ -229,5 +286,40 @@ class HomePageState extends State<HomeChatPage> with TickerProviderStateMixin {
         chatMessage.animationController.forward();
       }
     }
+  }
+
+
+  @override
+  Future onLoadGetIncommingMessagesCompleted(List<Messages> items) async {
+    // TODO: implement onLoadGetIncommingMessagesCompleted
+
+    setState(() {
+
+    //  _listIcoming = items;
+      _updateMessages(items);
+    });
+  }
+
+  @override
+  Future onLoadGetOutGoingMessagesCompleted(List<MessageOutgoing> items) async {
+    // TODO: implement onLoadGetOutGoingMessagesCompleted
+
+    setState(() {
+
+      _updateMessages(items);
+
+    });
+  }
+
+  @override
+  void onLoadSendingMessageCompleted(EventMessageObject item) {
+    // TODO: implement onLoadSendingMessageCompleted
+
+
+  }
+
+  @override
+  void onLoadMessagesError() {
+    // TODO: implement onLoadMessagesError
   }
 }

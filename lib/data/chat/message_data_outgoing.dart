@@ -1,6 +1,7 @@
 import 'package:meta/meta.dart';
+import 'package:your_doctor/data/chat/base/event_chat_object.dart';
 
-import 'message.dart';
+import 'message_data.dart';
 
 /// Outgoing message statuses
 /// NEW - message just created and is not sent yet
@@ -9,19 +10,26 @@ import 'message.dart';
 enum MessageOutgoingStatus { NEW, SENT, FAILED }
 
 /// MessageOutgoing is class defining outgoing message data (id and text) and status
-class MessageOutgoing extends Message {
+class MessageOutgoing extends Messages {
   /// Outgoing message status
   MessageOutgoingStatus status;
 
   /// Constructor
   MessageOutgoing(
       {String id,
-      @required String text,
-      MessageOutgoingStatus status = MessageOutgoingStatus.NEW})
+      @required String to,  @required String text,
+        MessageOutgoingStatus status = MessageOutgoingStatus.NEW})
       : this.status = status,
-        super(id: id, text: text);
+        super(id: id,to:to, text: text);
 
   MessageOutgoing.copy(MessageOutgoing original)
       : this.status = original.status,
-        super(id: original.id, text: original.text);
+        super(id: original.id,to:original.to, text: original.text);
+}
+abstract class GetOutgoingMessagesRepository {
+  Future<List<MessageOutgoing>> getMessages(String id);
+}
+
+abstract class SendMessageRepository {
+  Future<EventMessageObject> sendMessage(String id,String to,String text);
 }

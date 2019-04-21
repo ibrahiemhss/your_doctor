@@ -1,28 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'api_response.dart';
+part of 'api_message_response.dart';
 
 // **************************************************************************
 // Generator: JsonSerializableGenerator
 // **************************************************************************
 
-ApiResponse _$ApiResponseFromJson(Map<String, dynamic> json) => new ApiResponse(
-    error: json[APIOperations.ERROR] as bool,
+ApiMessageResponse _$ApiResponseFromJson(Map<String, dynamic> json) => new ApiMessageResponse(
     message: json[APIOperations.SUCCESS_MESSAGE] as String,
-    user: json[APIOperations.USER] == null
+    messageBody: json[APIOperations.USER] == null
         ? null
-        : new User.fromJson(json[APIOperations.USER] as Map<String, dynamic>));
+        : new Messages.fromJson(json[APIOperations.USER] as Map<String, dynamic>));
 
 abstract class _$ApiResponseSerializerMixin {
-  bool get error;
-
   String get message;
 
-  User get user;
+  Messages get messageBody;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        APIOperations.ERROR: error,
         APIOperations.SUCCESS_MESSAGE: message,
-        APIOperations.USER: user
+        APIOperations.USER: messageBody
       };
 }

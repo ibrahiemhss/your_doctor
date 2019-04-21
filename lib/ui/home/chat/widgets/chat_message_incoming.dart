@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:your_doctor/ui/home/chat/models/message_incoming.dart';
+import 'package:your_doctor/data/chat/message_data_incoming.dart';
 
 
 import 'chat_message.dart';
 
-/// Incoming message author name
-const String _server = "Server";
-
 /// ChatMessageIncoming is widget to display incoming from server message
-class ChatMessageIncoming extends StatelessWidget implements ChatMessage {
+class ChatMessageIncoming extends StatelessWidget implements ChatMessages {
   /// Incoming message content
   final MessageIncoming message;
 
@@ -34,7 +31,7 @@ class ChatMessageIncoming extends StatelessWidget implements ChatMessage {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  Text(_server, style: Theme.of(context).textTheme.subhead),
+                  Text(message.text, style: Theme.of(context).textTheme.subhead),
                   Container(
                     margin: EdgeInsets.only(top: 5.0),
                     child: Text(message.text),
@@ -46,7 +43,7 @@ class ChatMessageIncoming extends StatelessWidget implements ChatMessage {
               margin: EdgeInsets.only(left: 16.0),
               child: CircleAvatar(
                   backgroundColor: Colors.pink.shade600,
-                  child: Text(_server[0])),
+                  child: Text(message.text)),
             ),
           ],
         ),

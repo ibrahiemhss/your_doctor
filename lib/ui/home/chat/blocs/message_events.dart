@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
-import 'package:your_doctor/ui/home/chat/models/message_outgoing.dart';
 
+import 'package:your_doctor/data/chat/message_data_outgoing.dart';
 
 /// New message created event
 class MessageNewCreatedEvent {
