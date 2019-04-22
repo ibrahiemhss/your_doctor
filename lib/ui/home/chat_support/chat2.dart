@@ -88,7 +88,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
     _messagePresenter.loadGetIncommingMessage("1");
     _messagePresenter.loadGetOutGoingMessage("1");
 
-    groupChatId = '';
+   // groupChatId = '';
 
     isLoading = false;
     isShowSticker = false;
@@ -194,6 +194,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
           mssages[index].type==0
           // Text
               ? Container(
+
+            height: 100,
             child: Text(
               mssages[index].text,
               style: TextStyle(color: primaryColor),
@@ -208,6 +210,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
           mssages[index].type==1
           // Image
               ? Container(
+            height: 100,
+
             child: Material(
               child: CachedNetworkImage(
                 placeholder: (context, url) => Container(
@@ -249,6 +253,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
           )
           // Sticker
               : Container(
+            height: 30,
+
             child: new Image.asset(
               'images/${mssages[index].text}.gif',
               width: 100.0,
@@ -263,6 +269,9 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
     } else {
       // Left (peer message)
       return Container(
+        height: 30,
+
+          color: Colors.blue,
         child: Column(
           children: <Widget>[
             Row(
@@ -305,6 +314,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
 
                 mssages[index].type==1
                     ? Container(
+                  height: 200,
+
                   child: Material(
                     child: CachedNetworkImage(
                       placeholder: (context, url) => Container(
@@ -358,7 +369,9 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
             // Time
             isLastMessageLeft(index)
                 ? Container(
-            child: Text(""))
+                height: 30,
+
+                child: Text(""))
              /*   DateFormat('dd MMM kk:mm')
                     .format(DateTime.fromMillisecondsSinceEpoch(int.parse(document['timestamp']))),
                 style: TextStyle(color: greyColor, fontSize: 12.0, fontStyle: FontStyle.italic),
@@ -615,7 +628,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
     );
   }
 
-  Widget buildListMessage() {
+  Widget buildListMessage2() {
     return Flexible(
       child:  ListView.builder(
         itemCount: listMessage.length,
@@ -627,7 +640,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
     );
   }
 
-  Widget buildListMessage2() {
+  Widget buildListMessage() {
     return Flexible(
       child: groupChatId == ''
           ? Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(themeColor)))
@@ -643,7 +656,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract{
             return Center(
                 child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(themeColor)));
           } else {
-           snapshot.data.documents=listMessage;
+           //snapshot.data.documents=listMessage;
             return ListView.builder(
               padding: EdgeInsets.all(10.0),
               itemBuilder: (context, index) => buildItem(index, listMessage[index]),
