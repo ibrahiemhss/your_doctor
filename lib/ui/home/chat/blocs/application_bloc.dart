@@ -42,7 +42,8 @@ class ApplicationBloc implements BlocBase {
       _messageReceivedController.sink;
 
   /// Controller is used to provide state (chat messages) to the widgets
-  final _messagesController = new BehaviorSubject<List<Messages>>(seedValue: []);
+  final _messagesController = new BehaviorSubject<List<Messages>>( //seedValue: []
+     );
   Sink<List<Messages>> get _inMessages => _messagesController.sink;
   Stream<List<Messages>> get outMessages => _messagesController.stream;
 
