@@ -16,6 +16,8 @@ abstract class _$UserSerializerMixin {
   String get text;
 
 
+
+  
   Map<String, dynamic> toJson() => <String, dynamic>{
        'id': id,
        'name': text};

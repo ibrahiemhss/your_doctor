@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:your_doctor/data/chat/base/event_chat_object.dart';
 
 part 'message_data.g.dart';
 /// Message is class defining message data (id and text)
@@ -34,4 +35,7 @@ class Messages {
 }
 abstract class GetMessagesRepository {
   Future<List<Messages>> getMessages(String id);
+}
+abstract class SendingMessageRepository {
+  Future<EventMessageObject> sendMessage(String id,String to,String text);
 }

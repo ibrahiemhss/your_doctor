@@ -1,94 +1,18 @@
 import 'dart:async';
 
-import 'package:your_doctor/data/doctors/doctors_data.dart';
+import 'package:your_doctor/data/chat/message_data.dart';
 
-class MockDoctorsRepository implements DoctorsRepository {
+class ProdMessagesRepository implements GetMessagesRepository {
   @override
-  Future<List<Doctors>> fetchAllDoctors() {
-    // TODO: implement fetch Categories
+  Future<List<Messages>> getMessages(String id) {
+    // TODO: implement getMessages
     return new Future.value(data);
   }
 }
 
-var data = <Doctors>[
-  new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-        "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ),
-  new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ), new Doctors(
-    id: "1",
-    dr_name: "ahmed",
-    specialty: "Bons",
-    doctor_img:
-    "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
-
-  ),
-
+var data = <Messages>[
+  new Messages(id: "2",type:1, text: "hello", from: "ddd"),
+  new Messages(id: "4",type:0, text: "hello", from: "ddd"),
+  new Messages(id: "6",type:1, text: "how are y6ou", from: "ddd"),
+  new Messages(id: "8",type:0, text: "fine", from: "ddd"),
 ];

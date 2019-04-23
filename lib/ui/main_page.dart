@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
-import 'package:your_doctor/ui/home/chat/pages/home_chat.dart';
 import 'package:your_doctor/ui/home/chat_support/chat2.dart';
-import 'package:your_doctor/ui/home/chat_support/chat_screen.dart';
+import 'package:your_doctor/ui/home/chat_support/test_caht.dart';
 import 'package:your_doctor/ui/home/home_page/home_screen_page.dart';
 import 'package:your_doctor/ui/home/meeting_page/meetings_page.dart';
 import 'package:your_doctor/ui/home/profile/profile_page.dart';
@@ -181,7 +180,8 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     SearchPage(),
     MeetingsPage(),
     ProfilePage(),
-    Chat(peerId: "1", peerAvatar: "ibrahim",)
+    ChatScreen2(),
+   // Chat(peerId: "1", peerAvatar: "ibrahim",)
   ];
 
   Future<bool> _getLogInStatus() async {

@@ -8,12 +8,11 @@ import 'package:your_doctor/data/chat/base/event_chat_object.dart';
 import 'package:your_doctor/data/chat/internet/api_message_request.dart';
 import 'package:your_doctor/data/chat/internet/api_message_response.dart';
 import 'package:your_doctor/data/chat/message_data.dart';
-import 'package:your_doctor/data/chat/message_data_incoming.dart';
 import 'package:your_doctor/data/chat/message_data_outgoing.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
 import 'package:your_doctor/util/constant.dart';
 
-class MockSendMessageRepository implements SendMessageRepository {
+class MockSendMessageRepository implements SendingMessageRepository {
   @override
   Future<EventMessageObject> sendMessage(String id,String to, String text) async{
     // TODO: implement sendMessage

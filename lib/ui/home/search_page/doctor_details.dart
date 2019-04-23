@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
 import 'package:your_doctor/module/doctors_presenter.dart';
-import 'package:your_doctor/ui/home/chat/pages/home_chat.dart';
 import 'package:your_doctor/ui/home/search_page/latest_doctors_widget.dart';
 import 'package:your_doctor/ui/home/search_page/search_by_widget.dart';
 import 'package:your_doctor/util/constant.dart';
@@ -128,10 +127,10 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
   }
 ////////////////////////////////////////////////////////////////////////////////
   void _goToChat() {
-    Navigator.push(
-      context,
-      new MaterialPageRoute(builder: (context) => new HomeChatScreen()),
-    );
+   // Navigator.push(
+    //  context,
+     // new MaterialPageRoute(builder: (context) => new HomeChatScreen()),
+   // );
   }
 ////////////////////////////////////////////////////////////////////////////////
   Widget appBar() {
