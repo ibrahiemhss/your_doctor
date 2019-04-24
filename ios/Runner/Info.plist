@@ -4,9 +4,11 @@
 <dict>
 
     <key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access Warning</string>
     <key>NSCameraUsageDescription</key>
+	<string>Camera Access Warning</string>
     <key>NSMicrophoneUsageDescription</key>
-
+     <string>MicroPhone Access Warning</string>
 
     <key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
