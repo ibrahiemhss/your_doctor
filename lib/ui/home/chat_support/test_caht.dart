@@ -1,38 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:your_doctor/data/chat/base/event_chat_object.dart';
 import 'dart:async';
 import 'dart:convert';
+
+import 'package:your_doctor/data/chat/message_data.dart';
+import 'package:your_doctor/module/messages_presenter.dart';
 
 
 
 class ChatScreen2 extends StatefulWidget {
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _ChatScreenState createState() => new _ChatScreenState();
 }
 
-class _MyHomePageState extends State<ChatScreen2> {
-  StreamController _postsController;
+class _ChatScreenState extends State<ChatScreen2> implements MessageContract{
+
+  StreamController _messagesController;
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-
+  MessagePresenter _messagePresenter;
+  ChatScreenState() {
+    _messagePresenter = new MessagePresenter(this);
+  }
   int count = 1;
-
-  Future fetchPost([howMany = 5]) async {
-    final response = await http.get(
-        'https://blog.khophi.co/wp-json/wp/v2/posts/?per_page=$howMany&context=embed');
-
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception('Failed to load post');
-    }
-  }
-
-  loadPosts() async {
-    fetchPost().then((res) async {
-      _postsController.add(res);
-      return res;
-    });
-  }
+  List<Messages> listMessage=[];
 
   showSnack() {
     return scaffoldKey.currentState.showSnackBar(
@@ -43,19 +34,14 @@ class _MyHomePageState extends State<ChatScreen2> {
   }
 
   Future<Null> _handleRefresh() async {
-    count++;
-    print(count);
-    fetchPost(count * 5).then((res) async {
-      _postsController.add(res);
-      showSnack();
-      return null;
-    });
+    _messagePresenter.loadGetMessage("1");
+
   }
 
   @override
   void initState() {
-    _postsController = new StreamController();
-    loadPosts();
+    _messagesController = new StreamController();
+    _messagePresenter.loadGetMessage("1");
     super.initState();
   }
 
@@ -74,7 +60,7 @@ class _MyHomePageState extends State<ChatScreen2> {
         ],
       ),
       body: StreamBuilder(
-        stream: _postsController.stream,
+        stream: _messagesController.stream,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           print('Has error: ${snapshot.hasError}');
           print('Has data: ${snapshot.hasData}');
@@ -122,5 +108,24 @@ class _MyHomePageState extends State<ChatScreen2> {
         },
       ),
     );
+  }
+
+  @override
+  void onLoadMessagesCompleted(List<Messages> items) {
+    setState(() {
+      listMessage=items;
+      _messagesController.add(items);
+
+    });
+  }
+
+  @override
+  void onLoadMessagesError() {
+    // TODO: implement onLoadMessagesError
+  }
+
+  @override
+  void onLoadSendingMessageCompleted(EventMessageObject item) {
+    // TODO: implement onLoadSendingMessageCompleted
   }
 }

@@ -8,7 +8,6 @@ import 'package:your_doctor/data/chat/base/event_chat_object.dart';
 import 'package:your_doctor/data/chat/internet/api_message_request.dart';
 import 'package:your_doctor/data/chat/internet/api_message_response.dart';
 import 'package:your_doctor/data/chat/message_data.dart';
-import 'package:your_doctor/data/chat/message_data_outgoing.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
 import 'package:your_doctor/util/constant.dart';
 
@@ -23,7 +22,7 @@ class MockSendMessageRepository implements SendingMessageRepository {
     ApiMessageRequest apiRequest = new ApiMessageRequest();
     Messages messages = new Messages(
         id: id,
-        text: text, to: to);
+        text: text);
 
     apiRequest.operation = APIOperations.SEND_MESSAGE;
     apiRequest.message = messages;

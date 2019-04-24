@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/ui/customviews/gradientContainer.dart';
+import 'package:your_doctor/ui/home/chat/chat_screen.dart';
 import 'package:your_doctor/ui/home/chat_support/chat2.dart';
 import 'package:your_doctor/ui/home/chat_support/test_caht.dart';
 import 'package:your_doctor/ui/home/home_page/home_screen_page.dart';
@@ -125,7 +126,23 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       },
       onMessage: (Map<String, dynamic> msg) {
         showNotification(msg);
-        print(" onMessage called ${(msg['data']['title'])}");
+        print(" onMessage called ============================================>\n"
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "==================================================================>\n "
+            "${(msg['data']['message'])}");
 
       },
     );
@@ -151,7 +168,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     var iOS = new IOSNotificationDetails();
     var platform = new NotificationDetails(android, iOS);
     await flutterLocalNotificationsPlugin.show(
-        0, msg['data']['title'],msg['data']['message'], platform);
+        0, "your Doctor",msg['data']['message'], platform);
   }
 
   update(String token) {
@@ -180,7 +197,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     SearchPage(),
     MeetingsPage(),
     ProfilePage(),
-    ChatScreen2(),
+    ChatScreentest(),
    // Chat(peerId: "1", peerAvatar: "ibrahim",)
   ];
 

@@ -9,16 +9,17 @@ class Messages {
    String id;
 
   /// to whoe sent this message
-  final String to;
-  final String from;
-   final int type;
-
+   final bool isMe;
+   final String idFrom;
   /// text is content of message
-  final String text;
+   ///
+   final String timeStamp;
+
+   final String text;
   /// _uuid is unique ID generator
   static var _uuid = Uuid();
 
-  Messages({this.text,this.type, this.id, this.from, this.to}) {
+  Messages({this.text,this.isMe,this.timeStamp, this.id,this.idFrom}) {
     if (id == null) {
       id = _uuid.v4();
     }

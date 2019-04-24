@@ -2,7 +2,6 @@ import 'package:your_doctor/data/articles/articles_data.dart';
 import 'package:your_doctor/data/articles/articles_data_mock.dart';
 import 'package:your_doctor/data/chat/get_meeasge_data_mock.dart';
 import 'package:your_doctor/data/chat/message_data.dart';
-import 'package:your_doctor/data/chat/message_data_outgoing.dart';
 import 'package:your_doctor/data/chat/send_message_data_prod.dart';
 import 'package:your_doctor/data/doctors/all_doctors_data_mock.dart';
 import 'package:your_doctor/data/doctors/doctor_details_data_mock.dart';

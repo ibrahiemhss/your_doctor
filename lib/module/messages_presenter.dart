@@ -1,6 +1,5 @@
 import 'package:your_doctor/data/chat/base/event_chat_object.dart';
 import 'package:your_doctor/data/chat/message_data.dart';
-import 'package:your_doctor/data/chat/message_data_outgoing.dart';
 import 'package:your_doctor/util/dependency_injection.dart';
 
 abstract class MessageContract {
