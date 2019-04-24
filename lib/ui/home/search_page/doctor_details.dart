@@ -7,17 +7,18 @@ import 'package:your_doctor/ui/home/search_page/search_by_widget.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class DoctorDetailWidget extends StatefulWidget {
-
-
   final String id;
 
   DoctorDetailWidget({@required this.id});
 
   @override
-  _DoctorDetailWidgetState createState() => new _DoctorDetailWidgetState(id: id);
+  _DoctorDetailWidgetState createState() =>
+      new _DoctorDetailWidgetState(id: id);
 }
 
-class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProviderStateMixin implements DoctorsContract{
+class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
+    with TickerProviderStateMixin
+    implements DoctorsContract {
   TextEditingController searchController = new TextEditingController(text: "");
 
   final String id;
@@ -26,10 +27,10 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
 
   DoctorsPresenter _doctorsPresenter;
 
-  _DoctorDetailWidgetState( {@required this.id}){
+  _DoctorDetailWidgetState({@required this.id}) {
     _doctorsPresenter = new DoctorsPresenter(this);
-
   }
+
   @override
   void initState() {
     super.initState();
@@ -41,8 +42,7 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
   Widget build(BuildContext context) {
     // TODO: implement build
     return new Scaffold(
-        appBar:
-        appBar(),
+        appBar: appBar(),
         body: new Container(
             decoration: ThemeColors.Canvas,
             child: new ListView(
@@ -69,30 +69,28 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
 
 ////////////////////////////////////////////////////////////////////////////////
   _itemsDivider(BuildContext context) {
-
-    return   Container(
+    return Container(
       alignment: Alignment.centerRight,
       color: Colors.grey[200],
       height: 1.0,
-
     );
   }
+
 ////////////////////////////////////////////////////////////////////////////////
   Widget _doctorDetailsContainer() {
     return new Container(
-      child:
-      _isLoading
+      child: _isLoading
           ? new Center(
-        child: new CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
-        ),
-      )
-      : Row(children: <Widget>[
-      CircleAvatar(
-      backgroundImage: new NetworkImage(
-          _doctors.doctor_img)),
-
-      ],),
+              child: new CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
+              ),
+            )
+          : Row(
+              children: <Widget>[
+                CircleAvatar(
+                    backgroundImage: new NetworkImage(_doctors.doctor_img)),
+              ],
+            ),
 
       margin: EdgeInsets.only(
         top: 16.0,
@@ -104,34 +102,35 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget> with TickerProv
     );
   }
 
-
 ////////////////////////////////////////////////////////////////////////////////
   Widget _chatContainer() {
     return new Container(
-      child:   new FlatButton(
-        splashColor: Color(0xffaaaaaa),
-        color: ThemeColors.AccentColor,
-        shape: StadiumBorder(),
-        onPressed: () => _goToChat(),
-        child: Text(
-          Texts.CHAT_DOCTOR,
-          style: new TextStyle(
-              color: ThemeColors.white100,
-              fontWeight: FontWeight.bold,
-              fontSize: 16.0),
-        ),
-      )
+        child: new FlatButton(
+      splashColor: Color(0xffaaaaaa),
+      color: ThemeColors.AccentColor,
+      shape: StadiumBorder(),
+      onPressed: () => _goToChat(),
+      child: Text(
+        Texts.CHAT_DOCTOR,
+        style: new TextStyle(
+            color: ThemeColors.white100,
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0),
+      ),
+    )
 
-      //  margin: EdgeInsets.only(bottom: 2.0)
-    );
+        //  margin: EdgeInsets.only(bottom: 2.0)
+        );
   }
+
 ////////////////////////////////////////////////////////////////////////////////
   void _goToChat() {
-   // Navigator.push(
+    // Navigator.push(
     //  context,
-     // new MaterialPageRoute(builder: (context) => new HomeChatScreen()),
-   // );
+    // new MaterialPageRoute(builder: (context) => new HomeChatScreen()),
+    // );
   }
+
 ////////////////////////////////////////////////////////////////////////////////
   Widget appBar() {
     IconData _backIcon() {

@@ -10,8 +10,8 @@ import 'package:your_doctor/util/constant.dart';
 
 class ProdLogInRepository implements LogInUserRepository {
   @override
-  Future<EventUserObject> fetchLogInUser(String emailId, String password,
-      String token) async {
+  Future<EventUserObject> fetchLogInUser(
+      String emailId, String password, String token) async {
     // TODO: implement fetchUser
     var queryParameters = {
       APIOperations.PHONE: emailId,
@@ -20,9 +20,7 @@ class ProdLogInRepository implements LogInUserRepository {
       APIOperations.LANG: "en",
     };
     ApiUserRequest apiRequest = new ApiUserRequest();
-    User user = new User(
-        phone: emailId,
-        password: password);
+    User user = new User(phone: emailId, password: password);
 
     apiRequest.operation = APIOperations.LOGIN;
     apiRequest.user = user;
@@ -38,19 +36,24 @@ class ProdLogInRepository implements LogInUserRepository {
           ApiUserResponse apiResponse = ApiUserResponse.fromJson(responseJson);
           if (apiResponse.error == false) {
             return new EventUserObject(
-                id: EventUserConstants.LOGIN_USER_SUCCESSFUL,messageResponse: apiResponse.message,
+                id: EventUserConstants.LOGIN_USER_SUCCESSFUL,
+                messageResponse: apiResponse.message,
                 object: apiResponse.user);
           } else {
-            return new EventUserObject(id: EventUserConstants.LOGIN_USER_UN_SUCCESSFUL,messageResponse: apiResponse.message);
+            return new EventUserObject(
+                id: EventUserConstants.LOGIN_USER_UN_SUCCESSFUL,
+                messageResponse: apiResponse.message);
           }
         } else {
-          return new EventUserObject(id: EventUserConstants.LOGIN_USER_UN_SUCCESSFUL);
+          return new EventUserObject(
+              id: EventUserConstants.LOGIN_USER_UN_SUCCESSFUL);
         }
       } else {
         return new EventUserObject();
       }
     } catch (Exception) {
-      print("errorIn LogIn =========>============>=========>is => ${Exception.toString()}");
+      print(
+          "errorIn LogIn =========>============>=========>is => ${Exception.toString()}");
 
       return EventUserObject();
     }

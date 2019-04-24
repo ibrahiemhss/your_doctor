@@ -13,18 +13,15 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class RegisterPage extends StatefulWidget {
-
   @override
   createState() => new _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage>
     implements RegisterUserContract {
-
-
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  new FlutterLocalNotificationsPlugin();
+      new FlutterLocalNotificationsPlugin();
 
   final globalKey = new GlobalKey<ScaffoldState>();
   File _image;
@@ -44,25 +41,21 @@ class _RegisterPageState extends State<RegisterPage>
 
   TextEditingController passwordController =
       new TextEditingController(text: "");
-  TextEditingController phoneController =
-  new TextEditingController(text: "");
+  TextEditingController phoneController = new TextEditingController(text: "");
 
   TextEditingController placeController = new TextEditingController(text: "");
   TextEditingController areaController = new TextEditingController(text: "");
   TextEditingController buildingController =
       new TextEditingController(text: "");
 
-
   @override
   void initState() {
     super.initState();
-
 
     var android = new AndroidInitializationSettings('mipmap/ic_launcher');
     var ios = new IOSInitializationSettings();
     var platform = new InitializationSettings(android, ios);
     flutterLocalNotificationsPlugin.initialize(platform);
-
 
     firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(sound: true, alert: true, badge: true));
@@ -71,16 +64,11 @@ class _RegisterPageState extends State<RegisterPage>
       print('IOS Setting Registed');
     });
     firebaseMessaging.getToken().then((token) {
-      tokenValue=token;
+      tokenValue = token;
       print('token = $token');
-
     });
     print('token3 = $tokenValue');
-
-
-
   }
-
 
 //------------------------------------------------------------------------------
 
@@ -227,7 +215,6 @@ class _RegisterPageState extends State<RegisterPage>
             keyboardType: TextInputType.emailAddress),
         margin: EdgeInsets.only(bottom: 20.0));
   }
-
 
 //------------------------------------------------------------------------------
   Widget _phoneContainer() {

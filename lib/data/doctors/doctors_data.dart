@@ -6,13 +6,12 @@ class Doctors {
   String doctor_img;
   String specialty;
 
-
-  Doctors(
-      {this.id,
-      this.dr_name,
-      this.specialty,
-      this.doctor_img,
-     });
+  Doctors({
+    this.id,
+    this.dr_name,
+    this.specialty,
+    this.doctor_img,
+  });
 
   factory Doctors.fromJson(Map<String, dynamic> json) {
     return new Doctors(
@@ -34,7 +33,6 @@ abstract class DoctorsRepository {
   Future<List<Doctors>> fetchAllDoctors();
 }
 
-
 abstract class SelctedDoctorsRepository {
   Future<List<Doctors>> fetchSelctedDoctors(String id);
 }
@@ -42,6 +40,7 @@ abstract class SelctedDoctorsRepository {
 abstract class DoctorDetailRepository {
   Future<Doctors> fetchDoctotDetails(String id);
 }
+
 class FetchDataException implements Exception {
   final _message;
 

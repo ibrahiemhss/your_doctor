@@ -5,7 +5,6 @@ part 'user_data.g.dart';
 
 @JsonSerializable()
 class User extends Object with _$UserSerializerMixin {
-
   String id;
   String name;
   String email;
@@ -23,10 +22,8 @@ class User extends Object with _$UserSerializerMixin {
   String new_password;
 
   User(
-      {
-        this.id,
-
-        this.name,
+      {this.id,
+      this.name,
       this.email,
       this.phone,
       this.imgUrl,

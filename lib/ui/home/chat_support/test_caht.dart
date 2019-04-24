@@ -7,23 +7,22 @@ import 'dart:convert';
 import 'package:your_doctor/data/chat/message_data.dart';
 import 'package:your_doctor/module/messages_presenter.dart';
 
-
-
 class ChatScreen2 extends StatefulWidget {
   @override
   _ChatScreenState createState() => new _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen2> implements MessageContract{
-
+class _ChatScreenState extends State<ChatScreen2> implements MessageContract {
   StreamController _messagesController;
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   MessagePresenter _messagePresenter;
+
   ChatScreenState() {
     _messagePresenter = new MessagePresenter(this);
   }
+
   int count = 1;
-  List<Messages> listMessage=[];
+  List<Messages> listMessage = [];
 
   showSnack() {
     return scaffoldKey.currentState.showSnackBar(
@@ -35,7 +34,6 @@ class _ChatScreenState extends State<ChatScreen2> implements MessageContract{
 
   Future<Null> _handleRefresh() async {
     _messagePresenter.loadGetMessage("1");
-
   }
 
   @override
@@ -113,9 +111,8 @@ class _ChatScreenState extends State<ChatScreen2> implements MessageContract{
   @override
   void onLoadMessagesCompleted(List<Messages> items) {
     setState(() {
-      listMessage=items;
+      listMessage = items;
       _messagesController.add(items);
-
     });
   }
 

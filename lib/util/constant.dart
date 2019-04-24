@@ -9,9 +9,10 @@ class APIConstants {
   // static const String API_BASE_URL = "https://hafinse.000webhostapp.com";
   static const String API_BASE_URL = "https://mytestapps.000webhostapp.com";
   static const String API_LOGIN_URL = "${API_BASE_URL}/login/loginUser.php";
-  static const String Api_REGISTER_URL = "${API_BASE_URL}/login/registerUser.php";
-  static const String Api_SEND_MESSAGE_URL = "${API_BASE_URL}/FCM/sendMessage.php";
-
+  static const String Api_REGISTER_URL =
+      "${API_BASE_URL}/login/registerUser.php";
+  static const String Api_SEND_MESSAGE_URL =
+      "${API_BASE_URL}/FCM/sendMessage.php";
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -79,8 +80,6 @@ class EventUserConstants {
   static const int INVALID_OLD_PASSWORD = 507;
 ///////////////////////////////////////////////////////////////////////////////
 }
-
-
 
 ///////////////////////////////////////////////////////////////////////////////
 class EventMessageConstants {
@@ -154,8 +153,8 @@ class Texts {
 
   static const String SEARCH = "بحث متقدم";
   static const String CHAT_DOCTOR = "مراسلة الطبيب";
-
 }
+
 ////////////////////////////////////////////
 final ThemeData kIOSTheme = new ThemeData(
   primarySwatch: Colors.orange,
@@ -170,7 +169,6 @@ final Color shimmerHighlightColor = Colors.grey[200]; /*Colors.grey[700];*/
 bool isIOS(BuildContext context) {
   return Theme.of(context).platform == TargetPlatform.iOS;
 }
-
 
 class ThemeColors {
   static const Color PrimaryColor_Dark = Color(0xff003B55);

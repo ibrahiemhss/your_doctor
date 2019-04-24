@@ -9,7 +9,7 @@ class ApiMessageResponse extends Object with _$ApiResponseSerializerMixin {
   String message;
   Messages messageBody;
 
-  ApiMessageResponse({ this.message, this.messageBody});
+  ApiMessageResponse({this.message, this.messageBody});
 
   factory ApiMessageResponse.fromJson(Map<String, dynamic> json) =>
       _$ApiResponseFromJson(json);

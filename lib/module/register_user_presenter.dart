@@ -18,18 +18,11 @@ class RegisterPresenter {
     _repository = new Injector().regisetrRepository;
   }
 
-  void loadRegister(
-
-      String name,
-      String emailId,
-      String imgUrl,
-      String phone,
-      String password,
-      String place,
-      String token,
-      String lang) {
+  void loadRegister(String name, String emailId, String imgUrl, String phone,
+      String password, String place, String token, String lang) {
     _repository
-        .fetchRegisteringUser(name, emailId, imgUrl, phone, password, place, token, lang)
+        .fetchRegisteringUser(
+            name, emailId, imgUrl, phone, password, place, token, lang)
         .then((c) => _view.onLoadRegisterCompleted(c))
         .catchError((onError) => _view.onLoadRegisterError());
   }

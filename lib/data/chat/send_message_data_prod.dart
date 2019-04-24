@@ -13,16 +13,15 @@ import 'package:your_doctor/util/constant.dart';
 
 class MockSendMessageRepository implements SendingMessageRepository {
   @override
-  Future<EventMessageObject> sendMessage(String id,String to, String text) async{
+  Future<EventMessageObject> sendMessage(
+      String id, String to, String text) async {
     // TODO: implement sendMessage
     var queryParameters = {
       APIOperations.NAME: to,
       APIOperations.MESSAGE_BODY: text,
     };
     ApiMessageRequest apiRequest = new ApiMessageRequest();
-    Messages messages = new Messages(
-        id: id,
-        text: text);
+    Messages messages = new Messages(id: id, text: text);
 
     apiRequest.operation = APIOperations.SEND_MESSAGE;
     apiRequest.message = messages;
@@ -35,31 +34,33 @@ class MockSendMessageRepository implements SendingMessageRepository {
         if (response.statusCode == APIResponseCode.SC_OK &&
             response.body != null) {
           final responseJson = json.decode(response.body);
-          ApiMessageResponse apiResponse = ApiMessageResponse.fromJson(responseJson);
+          ApiMessageResponse apiResponse =
+              ApiMessageResponse.fromJson(responseJson);
           if (apiResponse.message == APIOperations.SUCCESS) {
             return new EventMessageObject(
-                id: EventMessageConstants.SEND_SUCCESSFUL,messageResponse: apiResponse.message,
+                id: EventMessageConstants.SEND_SUCCESSFUL,
+                messageResponse: apiResponse.message,
                 object: apiResponse.message);
           } else {
-            return new EventMessageObject(id: EventMessageConstants.SEND_UN_SUCCESSFUL,messageResponse: apiResponse.message);
+            return new EventMessageObject(
+                id: EventMessageConstants.SEND_UN_SUCCESSFUL,
+                messageResponse: apiResponse.message);
           }
         } else {
-          return new EventMessageObject(id: EventMessageConstants.SEND_UN_SUCCESSFUL);
+          return new EventMessageObject(
+              id: EventMessageConstants.SEND_UN_SUCCESSFUL);
         }
       } else {
         return new EventMessageObject();
       }
     } catch (Exception) {
-      print("errorIn LogIn =========>============>=========>is => ${Exception.toString()}");
+      print(
+          "errorIn LogIn =========>============>=========>is => ${Exception.toString()}");
 
       return EventMessageObject();
     }
   }
 
-
-
-
 // TODO: implement fetchteColors
 
 }
-

@@ -47,8 +47,8 @@ abstract class _$UserSerializerMixin {
   String get new_password;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-       'id': id,
-       'name': name,
+        'id': id,
+        'name': name,
         'email': email,
         'phone': phone,
         'image_url': imgUrl,

@@ -29,9 +29,11 @@ class ResetPassword implements ResetPasswordRepository {
           ApiUserResponse apiResponse = ApiUserResponse.fromJson(responseJson);
           if (apiResponse.message == APIOperations.SUCCESS) {
             return new EventUserObject(
-                id: EventUserConstants.CHANGE_PASSWORD_SUCCESSFUL, object: null);
+                id: EventUserConstants.CHANGE_PASSWORD_SUCCESSFUL,
+                object: null);
           } else if (apiResponse.message == APIOperations.FAILURE) {
-            return new EventUserObject(id: EventUserConstants.INVALID_OLD_PASSWORD);
+            return new EventUserObject(
+                id: EventUserConstants.INVALID_OLD_PASSWORD);
           } else {
             return new EventUserObject(
                 id: EventUserConstants.CHANGE_PASSWORD_UN_SUCCESSFUL);

@@ -7,5 +7,7 @@ class EventUserObject {
   Object object;
 
   EventUserObject(
-      {this.id: EventUserConstants.NO_INTERNET_CONNECTION,this.messageResponse, this.object: null});
+      {this.id: EventUserConstants.NO_INTERNET_CONNECTION,
+      this.messageResponse,
+      this.object: null});
 }

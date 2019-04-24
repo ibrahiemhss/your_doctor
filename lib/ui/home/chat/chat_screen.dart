@@ -10,14 +10,11 @@ import 'package:your_doctor/ui/home/chat/chatmessage.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class ChatScreentest extends StatefulWidget {
-
   @override
   State createState() => new ChatScreenState();
 }
 
-class ChatScreenState extends State<ChatScreentest> implements MessageContract{
-
-
+class ChatScreenState extends State<ChatScreentest> implements MessageContract {
   ChatScreenState() {
     _messagePresenter = new MessagePresenter(this);
   }
@@ -26,7 +23,7 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract{
   final TextEditingController _chatController = new TextEditingController();
   final List<ChatMessage> _messagesWidgets = <ChatMessage>[];
   StreamController _messagesStreamController;
-  List<Messages> listMessage=[];
+  List<Messages> listMessage = [];
   MessagePresenter _messagePresenter;
 
   @override
@@ -35,30 +32,32 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract{
     _isLoading = true;
     _messagePresenter.loadGetMessage("1");
     _messagesStreamController = new StreamController();
-
   }
 
-  void _handleSubmit([String text,bool isMe,String id,String date]) {
+  void _handleSubmit([String text, bool isMe, String id, String date]) {
     _chatController.clear();
     ChatMessage message = new ChatMessage(
-        text: text,isMe:isMe,id: id,date: date,
+      text: text,
+      isMe: isMe,
+      id: id,
+      date: date,
     );
     setState(() {
       _messagesWidgets.insert(0, message);
     });
-
   }
 
-  Widget _chatEnvironment (){
+  Widget _chatEnvironment() {
     return IconTheme(
       data: new IconThemeData(color: Colors.blue),
       child: new Container(
-        margin: const EdgeInsets.symmetric(horizontal:8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
         child: new Row(
           children: <Widget>[
             new Flexible(
               child: new TextField(
-                decoration: new InputDecoration.collapsed(hintText: "Starts typing ..."),
+                decoration: new InputDecoration.collapsed(
+                    hintText: "Starts typing ..."),
                 controller: _chatController,
                 onSubmitted: _handleSubmit,
               ),
@@ -67,14 +66,12 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract{
               margin: const EdgeInsets.symmetric(horizontal: 4.0),
               child: new IconButton(
                 icon: new Icon(Icons.send),
-
-                onPressed: ()=> _handleSubmit(_chatController.text,true,"4","this/// is/// date"),
-
+                onPressed: () => _handleSubmit(
+                    _chatController.text, true, "4", "this/// is/// date"),
               ),
             )
           ],
         ),
-
       ),
     );
   }
@@ -96,10 +93,12 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract{
           new Divider(
             height: 1.0,
           ),
-          new Container(decoration: new BoxDecoration(
-            color: Theme.of(context).cardColor,
-          ),
-            child: _chatEnvironment(),)
+          new Container(
+            decoration: new BoxDecoration(
+              color: Theme.of(context).cardColor,
+            ),
+            child: _chatEnvironment(),
+          )
         ],
       ),
     );
@@ -108,20 +107,13 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract{
   @override
   void onLoadMessagesCompleted(List<Messages> items) {
     setState(() {
-
       for (var i = 0; i < items.length; i++) {
-        _handleSubmit(items[i].text,items[i].isMe,items[i].id,items[i].timeStamp);
+        _handleSubmit(
+            items[i].text, items[i].isMe, items[i].id, items[i].timeStamp);
       }
       _isLoading = false;
-
     });
   }
-
-
-
-
-
-
 
   @override
   void onLoadMessagesError() {

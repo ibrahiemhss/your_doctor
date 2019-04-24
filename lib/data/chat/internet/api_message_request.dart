@@ -7,7 +7,7 @@ part 'api_message_request.g.dart';
 @JsonSerializable()
 class ApiMessageRequest extends Object with _$ApiRequestSerializerMixin {
   String operation;
-  Messages  message;
+  Messages message;
 
   ApiMessageRequest({this.operation, this.message});
 

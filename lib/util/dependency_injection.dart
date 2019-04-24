@@ -76,6 +76,7 @@ class Injector {
     // return new ProdCategoriesRepository();
     // }
   }
+
   ///////////////All Doctors Data////////////////////////////////////////////////////
   SelctedDoctorsRepository get selcteddoctorsRepository {
     // switch (_flavor) {
@@ -115,5 +116,4 @@ class Injector {
     // return new ProdCategoriesRepository();
     // }
   }
-
 }

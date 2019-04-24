@@ -30,7 +30,12 @@ class ProdRegisterRepository implements RegisterUserRepository {
       APIOperations.LANG: lang,
     };
     ApiUserRequest apiRequest = new ApiUserRequest();
-    User user = new User(name: name, email: emailId,phone: phone,token:token, password: password);
+    User user = new User(
+        name: name,
+        email: emailId,
+        phone: phone,
+        token: token,
+        password: password);
 
     apiRequest.operation = APIOperations.REGISTER;
     apiRequest.user = user;
@@ -42,17 +47,20 @@ class ProdRegisterRepository implements RegisterUserRepository {
       if (response != null) {
         if (response.statusCode == APIResponseCode.SC_OK &&
             response.body != null) {
-          final responseJson = json.decode(
-              response.body);
+          final responseJson = json.decode(response.body);
           ApiUserResponse apiResponse = ApiUserResponse.fromJson(responseJson);
           if (apiResponse.error == false) {
             return new EventUserObject(
-                id: EventUserConstants.USER_REGISTRATION_SUCCESSFUL, object: null);
+                id: EventUserConstants.USER_REGISTRATION_SUCCESSFUL,
+                object: null);
           } else if (apiResponse.message == APIOperations.FAILURE) {
-            return new EventUserObject(id: EventUserConstants.USER_ALREADY_REGISTERED,messageResponse: apiResponse.message.toString());
+            return new EventUserObject(
+                id: EventUserConstants.USER_ALREADY_REGISTERED,
+                messageResponse: apiResponse.message.toString());
           } else {
             return new EventUserObject(
-                id: EventUserConstants.USER_REGISTRATION_UN_SUCCESSFUL,messageResponse: apiResponse.message.toString());
+                id: EventUserConstants.USER_REGISTRATION_UN_SUCCESSFUL,
+                messageResponse: apiResponse.message.toString());
           }
         } else {
           return new EventUserObject(
@@ -62,7 +70,8 @@ class ProdRegisterRepository implements RegisterUserRepository {
         return new EventUserObject();
       }
     } catch (Exception) {
-      print("errorIn Register =========>============>=========>is => ${Exception.toString()}");
+      print(
+          "errorIn Register =========>============>=========>is => ${Exception.toString()}");
       return EventUserObject();
     }
 // TODO: implement fetchteColors

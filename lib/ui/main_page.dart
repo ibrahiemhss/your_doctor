@@ -47,33 +47,34 @@ abstract class MainScreenCallBack {
 }
 
 //==============================================================================
-const jsonCodec=const JsonCodec(reviver:_reviver,/*toEncodable:_toEncodable*/);
-_reviver( key,  value) {
-  if(key!=null&&value is Map && key.contains("")){
+const jsonCodec = const JsonCodec(
+  reviver: _reviver, /*toEncodable:_toEncodable*/
+);
 
+_reviver(key, value) {
+  if (key != null && value is Map && key.contains("")) {
     return new Todo.fromJson(value);
   }
 
   return value;
 }
-class Todo{
+
+class Todo {
   String title;
   String message;
-   List<String> data;
+  List<String> data;
 
-  Todo(this.title,this.message,this.data);
+  Todo(this.title, this.message, this.data);
 
-  Todo.fromJson(Map value){
-    title=value["title"];
-    message=value["message"];
-    data=value["data"];
-
+  Todo.fromJson(Map value) {
+    title = value["title"];
+    message = value["message"];
+    data = value["data"];
   }
 
-  Map toJson(){
-    return {"title":title,"message":message};
+  Map toJson() {
+    return {"title": title, "message": message};
   }
-
 }
 
 /*_toEncodable(Todo todo) {
@@ -83,7 +84,7 @@ class Todo{
 //==============================================================================
 class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   int pagId;
-  bool isLogedIn=false;
+  bool isLogedIn = false;
   bool fromBack = false;
   String name;
   String email;
@@ -92,10 +93,9 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   String title;
   static String tokenValue;
 
-
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  new FlutterLocalNotificationsPlugin();
+      new FlutterLocalNotificationsPlugin();
 
   @override
   void initState() {
@@ -113,10 +113,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     var platform = new InitializationSettings(android, ios);
     flutterLocalNotificationsPlugin.initialize(platform);
 
-
-
-
-
     firebaseMessaging.configure(
       onLaunch: (Map<String, dynamic> msg) {
         print(" onLaunch called ${(msg.containsKey("title"))}");
@@ -126,7 +122,8 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       },
       onMessage: (Map<String, dynamic> msg) {
         showNotification(msg);
-        print(" onMessage called ============================================>\n"
+        print(
+            " onMessage called ============================================>\n"
             "==================================================================>\n "
             "==================================================================>\n "
             "==================================================================>\n "
@@ -135,15 +132,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
             "==================================================================>\n "
             "==================================================================>\n "
             "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "${(msg['data']['message'])}");
-
+            "==================================================================>${(msg['data']['message'])}");
       },
     );
     firebaseMessaging.requestNotificationPermissions(
@@ -155,7 +144,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     firebaseMessaging.getToken().then((token) {
       update(token);
       print('token = $token');
-
     });
   }
 
@@ -168,7 +156,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     var iOS = new IOSNotificationDetails();
     var platform = new NotificationDetails(android, iOS);
     await flutterLocalNotificationsPlugin.show(
-        0, "your Doctor",msg['data']['message'], platform);
+        0, "your Doctor", msg['data']['message'], platform);
   }
 
   update(String token) {
@@ -198,7 +186,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     MeetingsPage(),
     ProfilePage(),
     ChatScreentest(),
-   // Chat(peerId: "1", peerAvatar: "ibrahim",)
+    // Chat(peerId: "1", peerAvatar: "ibrahim",)
   ];
 
   Future<bool> _getLogInStatus() async {
@@ -212,8 +200,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       });
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -340,10 +326,4 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     // TODO: implement onError
     print(message);
   }
-
-
 }
-
-
-
-

@@ -14,15 +14,16 @@ class DoctorsWidget extends StatefulWidget {
   _DoctorsWidgetState createState() => new _DoctorsWidgetState();
 }
 
-class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContract {
+class _DoctorsWidgetState extends State<DoctorsWidget>
+    implements DoctorsContract {
   List<String> selectedItems = [];
   List<Doctors> _listDoctors;
   DoctorsPresenter _doctorsPresenter;
 
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
- // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  //new FlutterLocalNotificationsPlugin();
 
+  // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //new FlutterLocalNotificationsPlugin();
 
   bool _isLoading;
   int quantity = 1;
@@ -44,14 +45,14 @@ class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContrac
   Widget build(BuildContext context) {
     return new Scaffold(
         body: Container(
-          child: _isLoading
-              ? new Center(
-            child: new CircularProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
-            ),
-          )
-              : _hometWidget(),
-        ));
+      child: _isLoading
+          ? new Center(
+              child: new CircularProgressIndicator(
+                valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
+              ),
+            )
+          : _hometWidget(),
+    ));
   }
 
   Widget _hometWidget() {
@@ -101,15 +102,16 @@ class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContrac
                     _goToDetailsDoctorsWidget(lastDoctors.id);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 4.0,right: 4.0,left: 4.0),
+                    padding:
+                        const EdgeInsets.only(top: 4.0, right: 4.0, left: 4.0),
                     child: Container(
                       child: Column(
 
-                        //  mainAxisSize: MainAxisSize.min,
+                          //  mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Padding(
                               padding:
-                              const EdgeInsets.only(left: 4.0, right: 4.0),
+                                  const EdgeInsets.only(left: 4.0, right: 4.0),
                               child: Container(
                                 height: _container_item_height,
                                 width: _container_item_height,
@@ -133,14 +135,18 @@ class _DoctorsWidgetState extends State<DoctorsWidget> implements DoctorsContrac
       ),
     );
   }
+
 //------------------------------------------------------------------------------
   void _goToDetailsDoctorsWidget(String id) {
     Navigator.push(
       context,
       new MaterialPageRoute(
-          builder: (context) => new DoctorDetailWidget(id: id,)),
+          builder: (context) => new DoctorDetailWidget(
+                id: id,
+              )),
     );
   }
+
 //------------------------------------------------------------------------------
 
   Widget appBar(String title) {

@@ -19,28 +19,28 @@ class _SearchState extends State<SearchPage> with TickerProviderStateMixin {
         body: new Container(
             decoration: ThemeColors.Canvas,
             child: new ListView(
-      children: <Widget>[
-        new Center(
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
+              children: <Widget>[
+                new Center(
+                  child: new Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
 //------------------------------------------------------------------------------
 
-              _formSearchContainer(),
+                      _formSearchContainer(),
 //------------------------------------------------------------------------------
-              SearchByWidget(
-                searchVal: searchController.toString(),
-              ),
+                      SearchByWidget(
+                        searchVal: searchController.toString(),
+                      ),
 //------------------------------------------------------------------------------
-              _itemsDivider(context),
+                      _itemsDivider(context),
 //------------------------------------------------------------------------------
-               Container(height:300,child: DoctorsWidget())
+                      Container(height: 300, child: DoctorsWidget())
 //------------------------------------------------------------------------------
-            ],
-          ),
-        ),
-      ],
-    )));
+                    ],
+                  ),
+                ),
+              ],
+            )));
     //new Text("name : $name\nemail : $email\nphone : $phone"));
   }
 
@@ -54,14 +54,14 @@ class _SearchState extends State<SearchPage> with TickerProviderStateMixin {
     } else {
       _width = MediaQuery.of(context).size.height / 1.95;
     }
-    return   Container(
+    return Container(
       alignment: Alignment.centerRight,
       width: _width,
       color: Colors.grey[200],
       height: 1.0,
-
     );
   }
+
 ////////////////////////////////////////////////////////////////////////////////
   Widget _formSearchContainer() {
     return new Container(

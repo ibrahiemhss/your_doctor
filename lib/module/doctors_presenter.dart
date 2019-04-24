@@ -3,6 +3,7 @@ import 'package:your_doctor/util/dependency_injection.dart';
 
 abstract class DoctorsContract {
   void onLoadDoctorsCompleted(List<Doctors> items);
+
   void onLoadDoctorDetialsCompleted(Doctors item);
 
   void onLoadDoctorsError();
@@ -14,12 +15,10 @@ class DoctorsPresenter {
   SelctedDoctorsRepository _selcted_doctors_repository;
   DoctorDetailRepository _doctors_details_repository;
 
-
   DoctorsPresenter(this._view) {
     _all_doctors_repository = new Injector().doctorsRepository;
     _selcted_doctors_repository = new Injector().selcteddoctorsRepository;
     _doctors_details_repository = new Injector().doctorDetailsRepository;
-
   }
 
   void loadAllDoctors() {

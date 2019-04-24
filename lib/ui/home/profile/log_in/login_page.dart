@@ -20,10 +20,9 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> implements LogInContract {
   final globalKey = new GlobalKey<ScaffoldState>();
 
-
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  new FlutterLocalNotificationsPlugin();
+      new FlutterLocalNotificationsPlugin();
 
   ProgressDialog progressDialog =
       ProgressDialog.getProgressDialog(ProgressDialogTitles.USER_LOG_IN);
@@ -41,17 +40,14 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
     _presenter = new LogInPresenter(this);
   }
 
-
   @override
   void initState() {
     super.initState();
-
 
     var android = new AndroidInitializationSettings('mipmap/ic_launcher');
     var ios = new IOSInitializationSettings();
     var platform = new InitializationSettings(android, ios);
     flutterLocalNotificationsPlugin.initialize(platform);
-
 
     firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(sound: true, alert: true, badge: true));
@@ -60,15 +56,12 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
       print('IOS Setting Registed');
     });
     firebaseMessaging.getToken().then((token) {
-      tokenValue=token;
+      tokenValue = token;
       print('token = $token');
-
     });
     print('token3 = $tokenValue');
-
-
-
   }
+
 //------------------------------------------------------------------------------
   @override
   Widget build(BuildContext context) {
@@ -248,7 +241,8 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
     FocusScope.of(context).requestFocus(new FocusNode());
     progressDialog.showProgress();
     setState(() {
-      _presenter.loadLogIn(emailController.text, passwordController.text,tokenValue);
+      _presenter.loadLogIn(
+          emailController.text, passwordController.text, tokenValue);
     });
 
     //_loginUser(emailController.text, passwordController.text);
