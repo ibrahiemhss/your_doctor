@@ -15,76 +15,34 @@ var data = <Messages>[
     id: "2",
     isMe: true,
     timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "2",
+    name: "ahmed",
+    isImage: false,
     text: "hello",
   ),
   new Messages(
     id: "4",
     isMe: false,
     timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "4",
+    name: "hameed",
+    isImage: false,
     text: "hello",
   ),
   new Messages(
     id: "6",
     isMe: true,
     timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "6",
+    name: "ahmed",
+    isImage: false,
     text: "how are y6ou",
   ),
   new Messages(
-    id: "8",
-    isMe: false,
-    timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "7",
-    text: "fine",
-  ),
-  new Messages(
     id: "2",
     isMe: true,
     timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "2",
-    text:
-        "test my messages length test my messages lengthtest my messages lengthtest my messages lengthtest my messages length",
+    name: "ahmed",
+    imageUrl:  "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
+    isImage: true,
+    text: "hello",
   ),
-  new Messages(
-    id: "4",
-    isMe: false,
-    timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "4",
-    text:
-        "test my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages length",
-  ),
-  new Messages(
-    id: "6",
-    isMe: true,
-    timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "6",
-    text:
-        "test my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages length",
-  ),
-  new Messages(
-    id: "8",
-    isMe: false,
-    timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "7",
-    text:
-        "test my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages length",
-  ),
-  new Messages(
-    id: "2",
-    isMe: true,
-    timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "2",
-    text:
-        "test my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages length",
-  ),
-  new Messages(
-    id: "4",
-    isMe: false,
-    timeStamp: "2018-09-12-13:00:00.000",
-    idFrom: "4",
-    text:
-        "test my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages lengthtest my messages length",
-  ),
+
 ];

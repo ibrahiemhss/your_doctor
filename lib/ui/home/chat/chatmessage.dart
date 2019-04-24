@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:your_doctor/data/chat/message_data.dart';
-
-const String _name = "Anonymous";
+import 'package:your_doctor/util/constant.dart';
 
 class ChatMessage extends StatelessWidget {
   final String text;
   final bool isMe;
   final String id;
+  final String name;
+  final String imageUrl;
+  final bool isImage;
   final String date;
 
 // constructor to get text from textfield
@@ -16,12 +16,16 @@ class ChatMessage extends StatelessWidget {
       {@required this.text,
       @required this.isMe,
       @required this.id,
+      @required this.name,
+      @required this.isImage,
+      @required this.imageUrl,
       @required this.date});
 
   @override
   Widget build(BuildContext context) {
-    return isMe
-        ? new Container(
+    return
+//---------------------------if id current user---------------------------------
+      isMe ? new Container(
             margin: const EdgeInsets.symmetric(vertical: 10.0),
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -33,14 +37,83 @@ class ChatMessage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      new Text(_name,
-                          style: Theme.of(context).textTheme.subhead,
+                      new Text(name,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700, // light
+                              color: Colors.white70),
                           textAlign: TextAlign.left),
-                      new Container(
-                        constraints: new BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width / 1.5),
-                        child: Text(text, textAlign: TextAlign.left),
-                      )
+
+//-----------------------------if is Image not text-----------------------------
+
+                      isImage
+                          // Image
+                          ? Container(
+                              child: Material(
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) => Container(
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  ThemeColors.ShadowColor),
+                                        ),
+                                        width: 200.0,
+                                        height: 200.0,
+                                        padding: EdgeInsets.all(70.0),
+                                        decoration: BoxDecoration(
+                                          color: ThemeColors.ShadowColor,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                  errorWidget: (context, url, error) =>
+                                      Material(
+                                        child: Image.asset(
+                                          'images/img_not_available.jpeg',
+                                          width: 200.0,
+                                          height: 200.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        clipBehavior: Clip.hardEdge,
+                                      ),
+                                  imageUrl: imageUrl,
+                                  width: 200.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                                clipBehavior: Clip.hardEdge,
+                              ),
+                              margin:
+                                  EdgeInsets.only(bottom: 10.0, right: 10.0),
+                            )
+
+//---------------------------els if text----------------------------------------
+
+                          : new Container(
+                              decoration: new BoxDecoration(
+                                  color: ThemeColors.PrimaryColor60,
+                                  borderRadius: new BorderRadius.only(
+                                      topLeft: const Radius.circular(20.0),
+                                      bottomRight: const Radius.circular(20.0),
+                                      bottomLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(2.0))),
+                              constraints: new BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width / 1.5),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(text,
+                                    style: TextStyle(color: Colors.white),
+                                    textAlign: TextAlign.center),
+                              ),
+                            ),
+                      Text(date, style: TextStyle(color: Colors.white))
                     ],
                   ),
                 ),
@@ -54,6 +127,9 @@ class ChatMessage extends StatelessWidget {
                 ),
               ],
             ))
+
+//------------------------------if is not current user -------------------------
+
         : new Container(
             margin: const EdgeInsets.symmetric(vertical: 10.0),
             child: new Row(
@@ -72,17 +148,88 @@ class ChatMessage extends StatelessWidget {
                   child: new Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       new Text(
-                        _name,
-                        style: Theme.of(context).textTheme.subhead,
+                        name,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700, // light
+                            color: Colors.white70),
                         textAlign: TextAlign.right,
                       ),
-                      new Container(
-                        constraints: new BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width / 1.5),
-                        child: Text(text),
-                      )
+
+//-----------------------------if is Image not text-----------------------------
+
+                      isImage
+                          // Image
+                          ? Container(
+                              child: Material(
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) => Container(
+                                        child: CircularProgressIndicator(
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  ThemeColors.ShadowColor),
+                                        ),
+                                        width: 200.0,
+                                        height: 200.0,
+                                        padding: EdgeInsets.all(70.0),
+                                        decoration: BoxDecoration(
+                                          color: ThemeColors.ShadowColor,
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                  errorWidget: (context, url, error) =>
+                                      Material(
+                                        child: Image.asset(
+                                          'images/img_not_available.jpeg',
+                                          width: 200.0,
+                                          height: 200.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                        clipBehavior: Clip.hardEdge,
+                                      ),
+                                  imageUrl: imageUrl,
+                                  width: 200.0,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                                clipBehavior: Clip.hardEdge,
+                              ),
+                              margin:
+                                  EdgeInsets.only(bottom: 10.0, right: 10.0),
+                            )
+
+                          // Sticker
+//---------------------------els if text----------------------------------------
+
+                          : new Container(
+                              decoration: new BoxDecoration(
+                                  color: ThemeColors.PrimaryColor60,
+                                  borderRadius: new BorderRadius.only(
+                                      topLeft: const Radius.circular(2.0),
+                                      bottomRight: const Radius.circular(20.0),
+                                      bottomLeft: const Radius.circular(20.0),
+                                      topRight: const Radius.circular(20.0))),
+                              constraints: new BoxConstraints(
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width / 1.5),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(text,
+                                    style: TextStyle(color: Colors.white),
+                                    textAlign: TextAlign.center),
+                              ),
+                            ),
+                      Text(date, style: TextStyle(color: Colors.white))
                     ],
                   ),
                 ),

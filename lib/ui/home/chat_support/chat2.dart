@@ -179,7 +179,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   }
 
   Widget buildItem(int index, List<Messages> document) {
-    if (document[index].idFrom == id) {
+    if (document[index] == id) {
       // Right (my message)
       return Row(
         children: <Widget>[
@@ -386,7 +386,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   bool isLastMessageLeft(int index) {
     if ((index > 0 &&
             listMessage != null &&
-            listMessage[index - 1].idFrom == id) ||
+            listMessage[index - 1] == id) ||
         index == 0) {
       return true;
     } else {
@@ -397,7 +397,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   bool isLastMessageRight(int index) {
     if ((index > 0 &&
             listMessage != null &&
-            listMessage[index - 1].idFrom != id) ||
+            listMessage[index - 1] != id) ||
         index == 0) {
       return true;
     } else {

@@ -8,21 +8,24 @@ part 'message_data.g.dart';
 class Messages {
   /// id is unique ID of message
   String id;
-
-  /// to whoe sent this message
+  final String name;
+  final String imageUrl;
   final bool isMe;
-  final String idFrom;
-
-  /// text is content of message
-  ///
+  final bool isImage;
   final String timeStamp;
-
   final String text;
 
   /// _uuid is unique ID generator
   static var _uuid = Uuid();
 
-  Messages({this.text, this.isMe, this.timeStamp, this.id, this.idFrom}) {
+  Messages(
+      {this.name,
+      this.text,
+      this.isImage,
+      this.imageUrl,
+      this.isMe,
+      this.timeStamp,
+      this.id}) {
     if (id == null) {
       id = _uuid.v4();
     }
