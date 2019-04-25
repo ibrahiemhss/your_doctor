@@ -18,8 +18,9 @@ class _ProfilePageState extends State<ProfilePage>
     with TickerProviderStateMixin {
   String name;
   String email;
-  String phone;
+  int phone;
   String imgUrl;
+  int id;
 
   bool isLoaded = true;
 
@@ -45,7 +46,10 @@ class _ProfilePageState extends State<ProfilePage>
           email = sharedUserValue.email;
           phone = sharedUserValue.phone;
           imgUrl = sharedUserValue.imgUrl;
+          id = sharedUserValue.id;
           isLoaded = true;
+          //isLogedIn = true;
+
         });
       } else {
         setState(() {
@@ -60,6 +64,7 @@ class _ProfilePageState extends State<ProfilePage>
   void initState() {
     super.initState();
     _checkIsLogin();
+
   }
 
   @override

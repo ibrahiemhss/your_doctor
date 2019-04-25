@@ -7,26 +7,23 @@ part of 'user_data.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => new User(
-    id: json['id'] as String,
+    id: json['id'] as int,
     name: json['name'] as String,
     email: json['email'] as String,
     imgUrl: json['image_url'] as String,
-    phone: json['phone'] as String,
+    phone: json['phone'] as int,
     token: json['token'] as String,
     lang: json['lang'] as String,
     place: json['place'] as String,
-    password: json['password'] as String,
-    old_password: json['old_password'] as String,
-    new_password: json['new_password'] as String);
-
+    password: json['password'] as String);
 abstract class _$UserSerializerMixin {
-  String get id;
+  int get id;
 
   String get name;
 
   String get email;
 
-  String get phone;
+  int get phone;
 
   String get imgUrl;
 

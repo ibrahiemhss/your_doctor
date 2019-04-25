@@ -31,9 +31,10 @@ class ProdRegisterRepository implements RegisterUserRepository {
     };
     ApiUserRequest apiRequest = new ApiUserRequest();
     User user = new User(
+      id:1,
         name: name,
         email: emailId,
-        phone: phone,
+        phone: int.parse(phone),
         token: token,
         password: password);
 

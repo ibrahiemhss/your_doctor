@@ -79,7 +79,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
     super.initState();
     focusNode.addListener(onFocusChange);
     _isLoading = true;
-    _messagePresenter.loadGetMessage("1");
+    _messagePresenter.loadGetMessage(1,2);
     _messagesStreamController = new StreamController();
 
     isLoading = false;

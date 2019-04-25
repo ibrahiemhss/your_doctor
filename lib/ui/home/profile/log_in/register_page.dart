@@ -392,7 +392,7 @@ class _RegisterPageState extends State<RegisterPage>
           nameController.text,
           emailController.text,
           "imageUrl",
-          phoneController.text,
+          int.parse(phoneController.text),
           passwordController.text,
           "place",
           tokenValue,

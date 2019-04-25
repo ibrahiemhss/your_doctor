@@ -5,10 +5,10 @@ part 'user_data.g.dart';
 
 @JsonSerializable()
 class User extends Object with _$UserSerializerMixin {
-  String id;
+  int id;
   String name;
   String email;
-  String phone;
+  int phone;
   String token;
   String lang;
   String imgUrl;

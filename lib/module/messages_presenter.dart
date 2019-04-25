@@ -20,16 +20,16 @@ class MessagePresenter {
     _sendRepository = new Injector().senMessageRepsitory;
   }
 
-  void loadSendMessage(String id, String to, String text) {
+  void loadSendMessage(int id, int otherId,String text, String isImage, String image) {
     _sendRepository
-        .sendMessage(id, to, text)
+        .sendMessage(id, otherId, text,isImage,isImage)
         .then((c) => _view.onLoadSendingMessageCompleted(c))
         .catchError((onError) => _view.onLoadMessagesError());
   }
 
-  void loadGetMessage(String id) {
+  void loadGetMessage(int id,int otherId) {
     _getMessagesRepository
-        .getMessages(id)
+        .getMessages(id,otherId)
         .then((c) => _view.onLoadMessagesCompleted(c))
         .catchError((onError) => _view.onLoadMessagesError());
   }

@@ -33,13 +33,13 @@ class _ChatScreenState extends State<ChatScreen2> implements MessageContract {
   }
 
   Future<Null> _handleRefresh() async {
-    _messagePresenter.loadGetMessage("1");
+    _messagePresenter.loadGetMessage(1,2);
   }
 
   @override
   void initState() {
     _messagesController = new StreamController();
-    _messagePresenter.loadGetMessage("1");
+    _messagePresenter.loadGetMessage(1,2);
     super.initState();
   }
 

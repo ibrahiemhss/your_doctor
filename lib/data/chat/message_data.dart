@@ -7,7 +7,10 @@ part 'message_data.g.dart';
 /// Message is class defining message data (id and text)
 class Messages {
   /// id is unique ID of message
-  String id;
+  int id;
+  int user_id;
+  int otherId;
+
   final String name;
   final String imageUrl;
   final bool isMe;
@@ -16,19 +19,19 @@ class Messages {
   final String text;
 
   /// _uuid is unique ID generator
-  static var _uuid = Uuid();
+  static int _uuid = int.parse(Uuid().toString());
 
   Messages(
-      {this.name,
+      { this.id,
+        this.user_id,
+        this.otherId,
+        this.name,
       this.text,
       this.isImage,
       this.imageUrl,
       this.isMe,
-      this.timeStamp,
-      this.id}) {
-    if (id == null) {
-      id = _uuid.v4();
-    }
+      this.timeStamp}) {
+
   }
 
   /// Class constructor
@@ -39,9 +42,9 @@ class Messages {
 }
 
 abstract class GetMessagesRepository {
-  Future<List<Messages>> getMessages(String id);
+  Future<List<Messages>> getMessages(int id,int otherId);
 }
 
 abstract class SendingMessageRepository {
-  Future<EventMessageObject> sendMessage(String id, String to, String text);
+  Future<EventMessageObject> sendMessage(int id,int otherId, String text, String isImage,String image);
 }

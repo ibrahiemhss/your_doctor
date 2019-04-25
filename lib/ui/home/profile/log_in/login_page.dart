@@ -282,6 +282,7 @@ class LoginPageState extends State<LoginPage> implements LogInContract {
           {
             setState(() {
               AppSharedPreferences.setUserLoggedIn(true);
+
               // _callback.onLogIn(true);
               AppSharedPreferences.setUserProfile(data.object);
               globalKey.currentState.showSnackBar(new SnackBar(

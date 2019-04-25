@@ -9,10 +9,11 @@ class APIConstants {
   // static const String API_BASE_URL = "https://hafinse.000webhostapp.com";
   static const String API_BASE_URL = "https://mytestapps.000webhostapp.com";
   static const String API_LOGIN_URL = "${API_BASE_URL}/login/loginUser.php";
-  static const String Api_REGISTER_URL =
-      "${API_BASE_URL}/login/registerUser.php";
-  static const String Api_SEND_MESSAGE_URL =
-      "${API_BASE_URL}/FCM/sendMessage.php";
+  static const String Api_REGISTER_URL = "${API_BASE_URL}/login/registerUser.php";
+  static const String Api_SEND_MESSAGE_URL = "${API_BASE_URL}/FCM/sendMessage.php";
+  static const String Api_GET_MESSAGES_URL = "${API_BASE_URL}/login/chat_page.php";
+  static const String Api_GET_ALL_DOCTORS_URL = "${API_BASE_URL}/login/getAllUsers.php";
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -25,6 +26,8 @@ class APIOperations {
 //------query parameters And Response JSON Messages----------------------------
 
   static const String ERROR = "error";
+  static const String ERROR_MESSAGE = "error_msg";
+
   static const String TRUE = "true";
   static const bool FALSE = false;
   static const String SUCCESS = "success";
@@ -36,17 +39,23 @@ class APIOperations {
 
   static const String ID = "id";
 
+  //for data in register and log in
   static const String EMAIL = "email";
   static const String NAME = "name";
   static const String PHONE = "phone";
   static const String PASSWORD = "password";
   static const String IMAGE_URL = "image_url";
-
   static const String TOKEN = "token";
   static const String LANG = "lang";
   static const String PLACE = "place";
-  static const String AREA = "area";
-  static const String BUILDING = "building";
+
+  //for data in chat
+
+  static const String OTHER_ID = "other_id";
+  static const String USER_ID = "user_id";
+  static const String MESSAGE = "message";
+  static const String IS_IMAGE = "is_image";
+  static const String IMAGE = "image";
 
   static const String USER = "user";
 }

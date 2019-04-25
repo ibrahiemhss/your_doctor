@@ -12,8 +12,8 @@ class MockDoctorDetailsRepository implements DoctorDetailRepository {
 
 var data = new Doctors(
   id: "1",
-  dr_name: "ahmed",
+  name: "ahmed",
   specialty: "Bons",
-  doctor_img:
+  img:
       "https:\/\/assets.myntassets.com\/h_1440,q_100,w_1080/v1\/assets\/images\/1547908\/2016\/10\/21\/11477039060469-Nike-Men-Sports-Shoes-951477039060284-5.jpg",
 );

@@ -185,7 +185,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     SearchPage(),
     MeetingsPage(),
     ProfilePage(),
-    ChatScreentest(),
+    Text("comming soon"),
     // Chat(peerId: "1", peerAvatar: "ibrahim",)
   ];
 

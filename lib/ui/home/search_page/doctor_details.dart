@@ -1,41 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
+import 'package:your_doctor/data/user/user_data.dart';
 import 'package:your_doctor/module/doctors_presenter.dart';
-import 'package:your_doctor/ui/home/search_page/latest_doctors_widget.dart';
-import 'package:your_doctor/ui/home/search_page/search_by_widget.dart';
+import 'package:your_doctor/ui/home/chat/chat_screen.dart';
+import 'package:your_doctor/util/app_shared_preferences.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class DoctorDetailWidget extends StatefulWidget {
-  final String id;
-
-  DoctorDetailWidget({@required this.id});
+  final String dr_id;
+  final String dr_name;
+  final String dr_image;
+  DoctorDetailWidget({@required this.dr_id,@required this.dr_name,@required this.dr_image});
 
   @override
   _DoctorDetailWidgetState createState() =>
-      new _DoctorDetailWidgetState(id: id);
+      new _DoctorDetailWidgetState(dr_id: dr_id, dr_name: dr_name, dr_image: dr_image);
 }
 
 class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
-    with TickerProviderStateMixin
-    implements DoctorsContract {
+    with TickerProviderStateMixin {
   TextEditingController searchController = new TextEditingController(text: "");
 
-  final String id;
-  Doctors _doctors;
-  bool _isLoading;
+  final String dr_id;
+  final String dr_name;
+  final String dr_image;
+  int myId;
+  String myName;
+  String myImage;
 
-  DoctorsPresenter _doctorsPresenter;
-
-  _DoctorDetailWidgetState({@required this.id}) {
-    _doctorsPresenter = new DoctorsPresenter(this);
-  }
+  _DoctorDetailWidgetState({@required this.dr_id,@required this.dr_name,@required this.dr_image});
 
   @override
   void initState() {
     super.initState();
-    _isLoading = true;
-    _doctorsPresenter.loadDoctorDetails(id);
+    _getUserInfo();
   }
 
   @override
@@ -57,7 +56,7 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
 //------------------------------------------------------------------------------
                       _itemsDivider(context),
 //------------------------------------------------------------------------------
-                      //_chatContainer(),
+                      _chatContainer(),
 //------------------------------------------------------------------------------
                     ],
                   ),
@@ -67,6 +66,23 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
     //new Text("name : $name\nemail : $email\nphone : $phone"));
   }
 
+
+  //==============================================================================
+
+  Future<Null> _getUserInfo() async {
+    User sharedUserValue = await AppSharedPreferences.getUserProfile();
+    if (sharedUserValue != null) {
+      setState(() {
+        myId = sharedUserValue.id;
+        myName = sharedUserValue.name;
+        myImage = sharedUserValue.imgUrl;
+
+
+      });
+
+    } //your home page is loaded
+
+  }
 ////////////////////////////////////////////////////////////////////////////////
   _itemsDivider(BuildContext context) {
     return Container(
@@ -79,24 +95,19 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
 ////////////////////////////////////////////////////////////////////////////////
   Widget _doctorDetailsContainer() {
     return new Container(
-      child: _isLoading
-          ? new Center(
-              child: new CircularProgressIndicator(
-                valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
-              ),
-            )
-          : Row(
+      child: Row(
               children: <Widget>[
+                Text(dr_name),
                 CircleAvatar(
-                    backgroundImage: new NetworkImage(_doctors.doctor_img)),
+                    backgroundImage: new NetworkImage(
+          "http://res.cloudinary.com/kennyy/image/upload/v1531317427/avatar_z1rc6f.png")),
               ],
             ),
 
-      margin: EdgeInsets.only(
+   /*   margin: EdgeInsets.only(
         top: 16.0,
         left: 16.0,
-        right: 16.0,
-      ),
+        right: 16.0,),*/
 
       //  margin: EdgeInsets.only(bottom: 2.0)
     );
@@ -125,10 +136,10 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
 
 ////////////////////////////////////////////////////////////////////////////////
   void _goToChat() {
-    // Navigator.push(
-    //  context,
-    // new MaterialPageRoute(builder: (context) => new HomeChatScreen()),
-    // );
+     Navigator.push(
+      context,
+     new MaterialPageRoute(builder: (context) => new ChatScreentest(myId:myId,otherId: int.parse(dr_id), myName: myName,myImage:myImage,)),
+     );
   }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -161,23 +172,5 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
     );
   }
 
-  @override
-  void onLoadDoctorDetialsCompleted(Doctors item) {
-    // TODO: implement onLoadDoctorDetialsCompleted
 
-    setState(() {
-      _doctors = item;
-      _isLoading = false;
-    });
-  }
-
-  @override
-  void onLoadDoctorsCompleted(List<Doctors> items) {
-    // TODO: implement onLoadDoctorsCompleted
-  }
-
-  @override
-  void onLoadDoctorsError() {
-    // TODO: implement onLoadDoctorsError
-  }
 }

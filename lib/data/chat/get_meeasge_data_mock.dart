@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:your_doctor/data/chat/message_data.dart';
 
-class ProdMessagesRepository implements GetMessagesRepository {
+class MockMessagesRepository implements GetMessagesRepository {
   @override
-  Future<List<Messages>> getMessages(String id) {
+  Future<List<Messages>> getMessages(int id,int otherId) {
     // TODO: implement getMessages
     return new Future.value(data);
   }
@@ -12,7 +12,7 @@ class ProdMessagesRepository implements GetMessagesRepository {
 
 var data = <Messages>[
   new Messages(
-    id: "2",
+    id: 3,
     isMe: true,
     timeStamp: "2018-09-12-13:00:00.000",
     name: "ahmed",
@@ -20,7 +20,7 @@ var data = <Messages>[
     text: "hello",
   ),
   new Messages(
-    id: "4",
+    id: 2,
     isMe: false,
     timeStamp: "2018-09-12-13:00:00.000",
     name: "hameed",
@@ -28,7 +28,7 @@ var data = <Messages>[
     text: "hello",
   ),
   new Messages(
-    id: "6",
+    id: 3,
     isMe: true,
     timeStamp: "2018-09-12-13:00:00.000",
     name: "ahmed",
@@ -36,7 +36,7 @@ var data = <Messages>[
     text: "how are y6ou",
   ),
   new Messages(
-    id: "2",
+    id:3,
     isMe: true,
     timeStamp: "2018-09-12-13:00:00.000",
     name: "ahmed",

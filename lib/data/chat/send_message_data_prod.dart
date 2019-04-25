@@ -14,11 +14,15 @@ import 'package:your_doctor/util/constant.dart';
 class MockSendMessageRepository implements SendingMessageRepository {
   @override
   Future<EventMessageObject> sendMessage(
-      String id, String to, String text) async {
+      int id, int otherId,String text, String isImage, String image) async {
     // TODO: implement sendMessage
     var queryParameters = {
-      APIOperations.NAME: to,
-      APIOperations.MESSAGE_BODY: text,
+      APIOperations.USER_ID: id.toString(),
+      APIOperations.OTHER_ID: otherId,
+      APIOperations.MESSAGE: text,
+      APIOperations.IS_IMAGE: isImage,
+      APIOperations.IMAGE: otherId,
+
     };
     ApiMessageRequest apiRequest = new ApiMessageRequest();
     Messages messages = new Messages(id: id, text: text);

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:your_doctor/data/articles/articles_data.dart';
 import 'package:your_doctor/data/doctors/doctors_data.dart';
-import 'package:your_doctor/module/articles_presenter.dart';
 import 'package:your_doctor/module/doctors_presenter.dart';
 import 'package:your_doctor/ui/home/search_page/doctor_details.dart';
 import 'package:your_doctor/util/constant.dart';
@@ -38,7 +36,7 @@ class _DoctorsWidgetState extends State<DoctorsWidget>
   void initState() {
     super.initState();
     _isLoading = true;
-    _doctorsPresenter.loadSelctedDoctors("1");
+    _doctorsPresenter.loadAllDoctors();
   }
 
   @override
@@ -99,7 +97,7 @@ class _DoctorsWidgetState extends State<DoctorsWidget>
               // final MaterialColor color = _colors[i % _colors.length];
               return InkWell(
                   onTap: () {
-                    _goToDetailsDoctorsWidget(lastDoctors.id);
+                    _goToDetailsDoctorsWidget(lastDoctors.id,lastDoctors.name,lastDoctors.img);
                   },
                   child: Padding(
                     padding:
@@ -117,12 +115,14 @@ class _DoctorsWidgetState extends State<DoctorsWidget>
                                 width: _container_item_height,
                                 color: Colors.transparent,
                                 child: CircleAvatar(
-                                    backgroundImage: new NetworkImage(
-                                        lastDoctors.doctor_img)),
+                                  backgroundImage: new NetworkImage(
+                                      //      lastDoctors.doctor_img)
+                                      "http://res.cloudinary.com/kennyy/image/upload/v1531317427/avatar_z1rc6f.png"),
+                                ),
                               ),
                             ),
                             Text(
-                              lastDoctors.dr_name,
+                              lastDoctors.name,
                               style: TextStyle(color: Colors.indigo[900]),
                             ),
                           ]),
@@ -137,12 +137,12 @@ class _DoctorsWidgetState extends State<DoctorsWidget>
   }
 
 //------------------------------------------------------------------------------
-  void _goToDetailsDoctorsWidget(String id) {
+  void _goToDetailsDoctorsWidget(String id,String name,String image) {
     Navigator.push(
       context,
       new MaterialPageRoute(
           builder: (context) => new DoctorDetailWidget(
-                id: id,
+                dr_id: id, dr_name: name, dr_image: image,
               )),
     );
   }
