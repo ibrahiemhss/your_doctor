@@ -183,7 +183,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
       // Right (my message)
       return Row(
         children: <Widget>[
-          document[index].isMe == 0
+          document[index].id == 0
               // Text
               ? Container(
                   child: Text(
@@ -199,7 +199,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                       bottom: isLastMessageRight(index) ? 20.0 : 10.0,
                       right: 10.0),
                 )
-              : document[index].isMe == 1
+              : document[index].id == 1
 
                   // Image
                   ? Container(
@@ -303,7 +303,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                             borderRadius: BorderRadius.circular(8.0)),
                         margin: EdgeInsets.only(left: 10.0),
                       )
-                    : document[index].isMe == 1
+                    : document[index].id == 1
                         ? Container(
                             child: Material(
                               child: CachedNetworkImage(

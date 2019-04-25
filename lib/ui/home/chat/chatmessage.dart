@@ -7,7 +7,7 @@ class ChatMessage extends StatelessWidget {
   final String text;
   final String name;
   final String imageUrl;
-  final bool isImage;
+  final String isImage;
   final String date;
 
   ChatMessage(
@@ -46,7 +46,7 @@ class ChatMessage extends StatelessWidget {
 
 //-----------------------------if is Image not text-----------------------------
 
-                    isImage
+                    isImage=="true"
                     // Image
                         ? Container(
                       child: Material(
@@ -161,7 +161,7 @@ class ChatMessage extends StatelessWidget {
 
 //-----------------------------if is Image not text-----------------------------
 
-                    isImage
+                    isImage=="true"
                     // Image
                         ? Container(
                       child: Material(

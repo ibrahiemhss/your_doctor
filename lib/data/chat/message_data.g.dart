@@ -12,7 +12,7 @@ Messages _$UserFromJson(Map<String, dynamic> json) =>
         user_id: json['user_id'] as int,
         otherId: json['other_id'] as int,
         text: json['content'] as String,
-        isImage: json['is_image'] as bool,
+        isImage: json['is_image'] as String,
         imageUrl: json['image'] as String);
 
 abstract class _$UserSerializerMixin {
@@ -24,6 +24,5 @@ abstract class _$UserSerializerMixin {
   String get imageUrl;
 
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
-    'id': id, 'user_id': otherId,'other_id': id, 'content': text,'is_image': isImage, 'image': imageUrl};
+
 }

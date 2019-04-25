@@ -71,7 +71,7 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
 //==============================================================================
 
   void _handleSubmit(
-      [String text, int id, String imageUrl, bool isImg, String name, String date]) {
+      [String text, int id, String imageUrl, String isImg, String name, String date]) {
     _chatController.clear();
     ChatMessage message = new ChatMessage(
         id: id,
@@ -151,55 +151,50 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
 
 
 //==============================================================================
-
-  Widget _chatEnvironment() {
+ // _handleSubmit(_chatController.text, myId, "",isImage, "ibrahim", "this/// is/// date");
+  Widget buildInput() {
     return Container(
       child: Row(
         children: <Widget>[
-
-//------------------- Button send image-----------------------------------------
+          // Button send image
           Material(
             child: new Container(
               margin: new EdgeInsets.symmetric(horizontal: 1.0),
               child: new IconButton(
                 icon: new Icon(Icons.image),
                 onPressed: getImage,
-                color: ThemeColors.ShadowColor,
+                color: Colors.yellow,
               ),
             ),
             color: Colors.white,
           ),
-
-//------------------- Button send IMOJE-----------------------------------------
-
           Material(
             child: new Container(
               margin: new EdgeInsets.symmetric(horizontal: 1.0),
               child: new IconButton(
                 icon: new Icon(Icons.face),
-                // onPressed: getSticker,
-                color: ThemeColors.ShadowColor,
+                //onPressed: getSticker,
+                //color: primaryColor,
               ),
             ),
             color: Colors.white,
           ),
 
-//------------------- Edit text-------------------------------------------------
-
-             Container(
+          // Edit text
+          Flexible(
+            child: Container(
               child: TextField(
-                style:
-                TextStyle(color: ThemeColors.PrimaryColor, fontSize: 15.0),
+                style: TextStyle(color: Colors.grey, fontSize: 15.0),
                 controller: _chatController,
-                onSubmitted: _handleSubmit,
                 decoration: InputDecoration.collapsed(
                   hintText: 'Type your message...',
-                  hintStyle: TextStyle(color: ThemeColors.ShadowColor),
+                  hintStyle: TextStyle(
+                      color:      Colors.black,),
                 ),
                 focusNode: focusNode,
               ),
             ),
-
+          ),
 
           // Button send message
           Material(
@@ -207,26 +202,23 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
               margin: new EdgeInsets.symmetric(horizontal: 8.0),
               child: new IconButton(
                 icon: new Icon(Icons.send),
-                onPressed: () {
-                  _handleSubmit(_chatController.text, myId, "",
-                      isImage, "ibrahim", "this/// is/// date");
-                },
-                color: ThemeColors.PrimaryColor,
+                onPressed: () =>   _handleSubmit(_chatController.text, myId, "","false", myName, "this/// is/// date")
+                ,
+                color: Colors.deepOrange,
               ),
             ),
             color: Colors.white,
           ),
         ],
       ),
-      //width: double.infinity,
+      width: double.infinity,
       height: 50.0,
       decoration: new BoxDecoration(
-          border: new Border(
-              top: new BorderSide(color: ThemeColors.PrimaryColor, width: 0.5)),
+          border:
+          new Border(top: new BorderSide(color: Colors.grey, width: 0.5)),
           color: Colors.white),
     );
   }
-
 
 //==============================================================================
 
@@ -257,7 +249,7 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
             ),
             child:
 //------------------------------------------------------------------------------
-            _chatEnvironment(),
+            buildInput(),
 //------------------------------------------------------------------------------
 
           )
@@ -309,9 +301,14 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
     setState(() {
       for (var i = 0; i < items.length; i++) {
 
+        print("value=================================myId is $myId");
+        print("value=================================otherId is $otherId");
+        print("value=================================contents is ${items[i].text}");
+        print("value=================================id is ${items[i].id}");
+        print("value=================================contents is ${items[i].text}");
+
         _handleSubmit(
-            items[i].text, items[i].id, items[i].imageUrl, items[i].isImage,
-            items[i].name, items[i].timeStamp);
+            items[i].text, items[i].id, items[i].imageUrl, items[i].isImage);
       }
       isLoading = false;
     });

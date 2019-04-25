@@ -20,25 +20,37 @@ class ProdMessagesRepository implements GetMessagesRepository {
     var response = await http.post(Uri.encodeFull(APIConstants.Api_GET_MESSAGES_URL),
         body: queryParameters, headers: {"Accept": "application/json"});
 
-    List data = new List();
 
-    try{
-      var responseBody = json.decode(response.body);
-      data = responseBody["users"];
-      print("Decoded 2: $responseBody");
-    } catch(e) {
-      print("Error: $e");
-    }
 
     final statusCode = response.statusCode;
-    if (statusCode != 200 || data == null) {
+    if (statusCode != 200 ) {
       throw new FetchDataException(
           "An error ocurred : [Status Code : $statusCode]");
     }else{
-      return (data as List)
-          .map((c) => new Messages.fromJson(c))
-          .toList();
+      List data = new List();
+      var responseBody;
+      try{
+        responseBody = json.decode(response.body);
+
+        data = responseBody["chat"];
+        print("Decoded 2: [$responseBody]");
+
+      //  print("Decoded 2=============================[${(responseBody["chat"] as List).map((c) => new Messages.fromJson(c)).toString()}]");
+        return (responseBody["chat"]  as List)
+            .map((c) => new Messages.fromJson(c))
+            .toList();
+
+      } catch(e) {
+        print("Decoded 2 Error: $e");
+
+        print("Decoded 2=============================[${(responseBody["chat"] as List).map((c) => new Messages.fromJson(c)).toString()}]");
+        print("Decoded 2: [$responseBody]");
+
+      }
     }
 
   }
+
+
+
 }
