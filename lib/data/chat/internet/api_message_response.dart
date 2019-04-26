@@ -6,11 +6,11 @@ part 'api_message_response.g.dart';
 
 @JsonSerializable()
 class ApiMessageResponse extends Object with _$ApiResponseSerializerMixin {
-  String message;
-  Messages messageBody;
+  int message;
+  //Messages messageBody;
 
-  ApiMessageResponse({this.message, this.messageBody});
+  ApiMessageResponse({this.message});
 
   factory ApiMessageResponse.fromJson(Map<String, dynamic> json) =>
-      _$ApiResponseFromJson(json);
+      _$ApiMessageResponseFromJson(json);
 }

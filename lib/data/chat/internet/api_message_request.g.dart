@@ -20,7 +20,7 @@ abstract class _$ApiRequestSerializerMixin {
   Messages messageBody;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        APIOperations.PHONE: messageBody.id,
+     //   APIOperations.PHONE: messageBody.id,
         APIOperations.PASSWORD: messageBody.text,
       };
 }

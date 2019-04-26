@@ -4,7 +4,7 @@ import 'package:your_doctor/data/chat/message_data.dart';
 
 class MockMessagesRepository implements GetMessagesRepository {
   @override
-  Future<List<Messages>> getMessages(int id,int otherId) {
+  Future<List<Messages>> getMessages(String user_id,String otherId) {
     // TODO: implement getMessages
     return new Future.value(data);
   }
@@ -12,12 +12,12 @@ class MockMessagesRepository implements GetMessagesRepository {
 
 var data = <Messages>[
   new Messages(
-    id: 3,
-    isImage: "false",
+    user_id: "1",
+    isImage: "no",
     text: "hello",
   ),
   new Messages(
-    id: 2,
+    user_id: "2",
     isImage: "false",
     text: "hello",
   ),

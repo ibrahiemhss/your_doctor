@@ -6,23 +6,36 @@ part of 'message_data.dart';
 // Generator: JsonSerializableGenerator
 // **************************************************************************
 
-Messages _$UserFromJson(Map<String, dynamic> json) =>
+
+/*
+Messages _$MessagesFromJson(Map<String, dynamic> json) =>
     new Messages(
-        id: json['id'] as int,
-        user_id: json['user_id'] as int,
-        otherId: json['other_id'] as int,
-        text: json['content'] as String,
-        isImage: json['is_image'] as String,
-        imageUrl: json['image'] as String);
+    user_id: json['user_id'] as String,
+    otherId: json['other_id'] as String,
+    text: json['content'] as String,
+    isImage: json['is_image'] as String,
+    imageUrl: json['image'] as String,
+        date: json['date'] as String);
 
-abstract class _$UserSerializerMixin {
-  int get id;
-  int get user_id;
-  int get otherId;
+abstract class _$MessageSerializerMixin {
+  String get user_id;
+  String get otherId;
   String get text;
-  bool get isImage;
+  String get isImage;
   String get imageUrl;
+  String get date;
+
+
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'user_id': user_id,
+    'other_id': otherId,
+    'content': text,
+    'is_image': isImage,
+    'image': imageUrl,
+    'date' :date
+  };
 
 
 
-}
+}*/
+

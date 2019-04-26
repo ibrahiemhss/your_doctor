@@ -84,6 +84,7 @@ class Todo {
 //==============================================================================
 class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   int pagId;
+  bool isChateOpened = false;
   bool isLogedIn = false;
   bool fromBack = false;
   String name;
@@ -101,6 +102,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   void initState() {
     super.initState();
 
+    _getChatOpened();
     if (fromBack) {
       _currentIndex = pagId;
       userName = name;
@@ -108,33 +110,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       userPhone = phone;
     }
     _getLogInStatus();
-    var android = new AndroidInitializationSettings('mipmap/ic_launcher');
-    var ios = new IOSInitializationSettings();
-    var platform = new InitializationSettings(android, ios);
-    flutterLocalNotificationsPlugin.initialize(platform);
 
-    firebaseMessaging.configure(
-      onLaunch: (Map<String, dynamic> msg) {
-        print(" onLaunch called ${(msg.containsKey("title"))}");
-      },
-      onResume: (Map<String, dynamic> msg) {
-        print(" onResume called ${(msg)}");
-      },
-      onMessage: (Map<String, dynamic> msg) {
-        showNotification(msg);
-        print(
-            " onMessage called ============================================>\n"
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>\n "
-            "==================================================================>${(msg['data']['message'])}");
-      },
-    );
     firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(sound: true, alert: true, badge: true));
     firebaseMessaging.onIosSettingsRegistered
@@ -188,6 +164,40 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     Text("comming soon"),
     // Chat(peerId: "1", peerAvatar: "ibrahim",)
   ];
+
+  Future<bool> _getChatOpened() async {
+    if( AppSharedPreferences.isChatOpen()==false){
+      var android = new AndroidInitializationSettings('mipmap/ic_launcher');
+      var ios = new IOSInitializationSettings();
+      var platform = new InitializationSettings(android, ios);
+      flutterLocalNotificationsPlugin.initialize(platform);
+
+      firebaseMessaging.configure(
+        onLaunch: (Map<String, dynamic> msg) {
+          print(" onLaunch called ${(msg.containsKey("title"))}");
+        },
+        onResume: (Map<String, dynamic> msg) {
+          print(" onResume called ${(msg)}");
+        },
+        onMessage: (Map<String, dynamic> msg) {
+          showNotification(msg);
+          print(
+              " onMessage called ============================================>\n"
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>${(msg['data']['message'])}");
+        },
+      );
+    }
+
+  }
+
 
   Future<bool> _getLogInStatus() async {
     if (await AppSharedPreferences.isUserLoggedIn() == true) {

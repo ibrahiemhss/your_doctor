@@ -2,7 +2,7 @@ import 'package:your_doctor/util/constant.dart';
 
 class EventMessageObject {
   int id;
-  String messageResponse;
+  int messageResponse;
   Object object;
 
   EventMessageObject(

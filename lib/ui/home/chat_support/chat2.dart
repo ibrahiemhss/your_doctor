@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:io';
 import 'package:intl/intl.dart';
@@ -79,7 +80,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
     super.initState();
     focusNode.addListener(onFocusChange);
     _isLoading = true;
-    _messagePresenter.loadGetMessage(1,2);
+    _messagePresenter.loadGetMessage("1","2");
     _messagesStreamController = new StreamController();
 
     isLoading = false;
@@ -153,7 +154,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
     if (content.trim() != '') {
       textEditingController.clear();
 
-      /* var documentReference = Firestore.instance
+/*
+ var documentReference = Firestore.instance
           .collection('messages')
           .document(groupChatId)
           .collection(groupChatId)
@@ -171,6 +173,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
           },
         );
       });*/
+
       listScrollController.animateTo(0.0,
           duration: Duration(milliseconds: 300), curve: Curves.easeOut);
     } else {
@@ -183,7 +186,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
       // Right (my message)
       return Row(
         children: <Widget>[
-          document[index].id == 0
+          document[index].user_id == 0
               // Text
               ? Container(
                   child: Text(
@@ -199,7 +202,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                       bottom: isLastMessageRight(index) ? 20.0 : 10.0,
                       right: 10.0),
                 )
-              : document[index].id == 1
+              : document[index].user_id == 1
 
                   // Image
                   ? Container(
@@ -303,7 +306,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                             borderRadius: BorderRadius.circular(8.0)),
                         margin: EdgeInsets.only(left: 10.0),
                       )
-                    : document[index].id == 1
+                    : document[index].user_id == 1
                         ? Container(
                             child: Material(
                               child: CachedNetworkImage(
@@ -689,7 +692,10 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   }
 
   @override
-  void onLoadSendingMessageCompleted(EventMessageObject item) {
-    // TODO: implement onLoadSendingMessageCompleted
+  void onLoadSendingMessageCompleted(EventMessageObject data, String text,
+      String sendId, String recieveId, String image, String isImage) {
+
+
   }
 }
+

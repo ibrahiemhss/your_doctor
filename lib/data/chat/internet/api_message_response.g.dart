@@ -6,21 +6,15 @@ part of 'api_message_response.dart';
 // Generator: JsonSerializableGenerator
 // **************************************************************************
 
-ApiMessageResponse _$ApiResponseFromJson(Map<String, dynamic> json) =>
+ApiMessageResponse _$ApiMessageResponseFromJson(Map<String, dynamic> json) =>
     new ApiMessageResponse(
-        message: json[APIOperations.SUCCESS_MESSAGE] as String,
-        messageBody: json[APIOperations.USER] == null
-            ? null
-            : new Messages.fromJson(
-                json[APIOperations.USER] as Map<String, dynamic>));
+        message: json[APIOperations.FCM_SUCCESS] as int);
 
 abstract class _$ApiResponseSerializerMixin {
-  String get message;
+  int get message;
 
-  Messages get messageBody;
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{
+        APIOperations.FCM_SUCCESS: message};
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
-        APIOperations.SUCCESS_MESSAGE: message,
-        APIOperations.USER: messageBody
-      };
 }

@@ -7,12 +7,12 @@ class APIConstants {
   static const String OCTET_STREAM_ENCODING = "application/octet-stream";
 
   // static const String API_BASE_URL = "https://hafinse.000webhostapp.com";
-  static const String API_BASE_URL = "https://mytestapps.000webhostapp.com";
-  static const String API_LOGIN_URL = "${API_BASE_URL}/login/loginUser.php";
-  static const String Api_REGISTER_URL = "${API_BASE_URL}/login/registerUser.php";
-  static const String Api_SEND_MESSAGE_URL = "${API_BASE_URL}/FCM/sendMessage.php";
-  static const String Api_GET_MESSAGES_URL = "${API_BASE_URL}/login/chat_page.php";
-  static const String Api_GET_ALL_DOCTORS_URL = "${API_BASE_URL}/login/getAllUsers.php";
+  static const  API_BASE_URL = "https://mytestapps.000webhostapp.com";
+  static const  API_LOGIN_URL = "${API_BASE_URL}/login/loginUser.php";
+  static const  Api_REGISTER_URL = "${API_BASE_URL}/login/registerUser.php";
+  static const  Api_SEND_MESSAGE_URL = "${API_BASE_URL}/FCM/sendMessage.php";
+  static const Api_GET_MESSAGES_URL = "${API_BASE_URL}/FCM/chat.php";
+  static const  Api_GET_ALL_DOCTORS_URL = "${API_BASE_URL}/login/getAllUsers.php";
 
 }
 
@@ -27,6 +27,9 @@ class APIOperations {
 
   static const String ERROR = "error";
   static const String ERROR_MESSAGE = "error_msg";
+  static const String FCM_SUCCESS = "success";
+  static const String FCM_FAILURE = "failure";
+
 
   static const String TRUE = "true";
   static const bool FALSE = false;
@@ -53,6 +56,7 @@ class APIOperations {
 
   static const String OTHER_ID = "other_id";
   static const String USER_ID = "user_id";
+  static const String RECIEVE_ID = "recieve_id";
   static const String MESSAGE = "message";
   static const String IS_IMAGE = "is_image";
   static const String IMAGE = "image";
@@ -108,8 +112,16 @@ class APIResponseCode {
 class SharedPreferenceKeys {
   static const String IS_USER_LOGGED_IN = "IS_USER_LOGGED_IN";
   static const String USER = "USER";
+  static const String IS_CHAT_OPENED = "IS_OPENED";
+
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
+class EventFCM {
+  static const String SEND_SUCCESSFUL = "SUCCESS NOTIFY";
+  static const String SEND_FAILED = "FAILED TO SEND NOTIFY";
+}
 ///////////////////////////////////////////////////////////////////////////////
 class ProgressDialogTitles {
   static const String IN_PROGRESS = "جاري ...";

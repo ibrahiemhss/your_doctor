@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:your_doctor/util/constant.dart';
 class ChatMessage extends StatelessWidget {
-  final int id;
-  final int formId;
+  final String userIdSent;
+  final String formId;
   final String text;
   final String name;
   final String imageUrl;
@@ -12,7 +12,7 @@ class ChatMessage extends StatelessWidget {
 
   ChatMessage(
       {
-        @required this.id,
+        @required this.userIdSent,
         @required this.formId,
         @required this.text,
         @required this.name,
@@ -22,10 +22,12 @@ class ChatMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     // TODO: implement build
     return
 //---------------------------if id current user---------------------------------
-      formId==id ? new Container(
+      userIdSent==formId ? new Container(
           margin: const EdgeInsets.symmetric(vertical: 10.0),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -46,7 +48,7 @@ class ChatMessage extends StatelessWidget {
 
 //-----------------------------if is Image not text-----------------------------
 
-                    isImage=="true"
+                    isImage=="y"
                     // Image
                         ? Container(
                       child: Material(
@@ -161,7 +163,7 @@ class ChatMessage extends StatelessWidget {
 
 //-----------------------------if is Image not text-----------------------------
 
-                    isImage=="true"
+                    isImage=="y"
                     // Image
                         ? Container(
                       child: Material(

@@ -14,25 +14,29 @@ import 'package:your_doctor/util/constant.dart';
 class MockSendMessageRepository implements SendingMessageRepository {
   @override
   Future<EventMessageObject> sendMessage(
-      int id, int otherId,String text, String isImage, String image) async {
+      String text,String sendId, String recieveId,  String image,String isImage) async {
     // TODO: implement sendMessage
     var queryParameters = {
-      APIOperations.USER_ID: id.toString(),
-      APIOperations.OTHER_ID: otherId,
+      APIOperations.USER_ID: sendId,
+      APIOperations.RECIEVE_ID: recieveId,
       APIOperations.MESSAGE: text,
       APIOperations.IS_IMAGE: isImage,
-      APIOperations.IMAGE: otherId,
+      APIOperations.IMAGE: image,
 
     };
     ApiMessageRequest apiRequest = new ApiMessageRequest();
-    Messages messages = new Messages(id: id, text: text);
+    Messages messages = new Messages(user_id: sendId,otherId: recieveId,text: text,imageUrl: image,isImage: isImage);
+    print("test sending IDs 3.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $sendId And reciever Id is $recieveId");
+
+        //id: id,
+      //  text: text);
 
     apiRequest.operation = APIOperations.SEND_MESSAGE;
     apiRequest.message = messages;
 
     try {
       final encoding = APIConstants.OCTET_STREAM_ENCODING;
-      final response = await http.post(APIConstants.API_LOGIN_URL,
+      final response = await http.post(APIConstants.Api_SEND_MESSAGE_URL,
           body: queryParameters, encoding: Encoding.getByName(encoding));
       if (response != null) {
         if (response.statusCode == APIResponseCode.SC_OK &&
@@ -40,7 +44,7 @@ class MockSendMessageRepository implements SendingMessageRepository {
           final responseJson = json.decode(response.body);
           ApiMessageResponse apiResponse =
               ApiMessageResponse.fromJson(responseJson);
-          if (apiResponse.message == APIOperations.SUCCESS) {
+          if (apiResponse.message ==1) {
             return new EventMessageObject(
                 id: EventMessageConstants.SEND_SUCCESSFUL,
                 messageResponse: apiResponse.message,
@@ -59,7 +63,7 @@ class MockSendMessageRepository implements SendingMessageRepository {
       }
     } catch (Exception) {
       print(
-          "errorIn LogIn =========>============>=========>is => ${Exception.toString()}");
+          "errorIn SendMessage =========>============>=========>is => ${Exception.toString()}");
 
       return EventMessageObject();
     }

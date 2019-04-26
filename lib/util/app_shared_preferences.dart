@@ -32,6 +32,24 @@ class AppSharedPreferences {
   }
 
 ///////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////
+  static Future<bool> isChatOpen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(SharedPreferenceKeys.IS_CHAT_OPENED);
+  }
+
+///////////////////////////////////////////////////////////////////////////////
+
+  static Future<void> setChatOpen(bool isOpened) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setBool(SharedPreferenceKeys.IS_CHAT_OPENED, isOpened);
+  }
+
+///////////////////////////////////////////////////////////////////////////////
+
+
   static Future<User> getUserProfile() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return User.fromJson(

@@ -25,7 +25,7 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
   final String dr_id;
   final String dr_name;
   final String dr_image;
-  int myId;
+  String myId;
   String myName;
   String myImage;
 
@@ -73,7 +73,7 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
     User sharedUserValue = await AppSharedPreferences.getUserProfile();
     if (sharedUserValue != null) {
       setState(() {
-        myId = sharedUserValue.id;
+        myId = sharedUserValue.id.toString();
         myName = sharedUserValue.name;
         myImage = sharedUserValue.imgUrl;
 
@@ -138,7 +138,7 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
   void _goToChat() {
      Navigator.push(
       context,
-     new MaterialPageRoute(builder: (context) => new ChatScreentest(myId:myId,otherId: int.parse(dr_id), myName: myName,myImage:myImage,)),
+     new MaterialPageRoute(builder: (context) => new ChatScreentest(myId:myId,otherId: dr_id, myName: myName,myImage:myImage,)),
      );
   }
 

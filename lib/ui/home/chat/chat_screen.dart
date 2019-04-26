@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:your_doctor/data/chat/base/event_chat_object.dart';
 import 'package:your_doctor/data/chat/message_data.dart';
 import 'package:your_doctor/data/user/user_data.dart';
@@ -12,8 +16,8 @@ import 'package:your_doctor/util/constant.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ChatScreentest extends StatefulWidget {
-  final int myId;
-  final int otherId;
+  final String myId;
+  final String otherId;
   final String myName;
   final String myImage;
   ChatScreentest({@required this.myId,@required this.otherId,@required this.myName,@required this.myImage});
@@ -21,21 +25,22 @@ class ChatScreentest extends StatefulWidget {
   State createState() => new ChatScreenState(myId:myId,otherId: otherId, myName: myName,myImage: myImage);
 }
 
-class ChatScreenState extends State<ChatScreentest> implements MessageContract {
+class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixin implements MessageContract {
   ChatScreenState(
       {@required this.myId, @required this.otherId, @required this.myName, @required this.myImage}) {
     _messagePresenter = new MessagePresenter(this);
   }
+  final globalKey = new GlobalKey<ScaffoldState>();
 
-  final int myId;
-  final int otherId;
+  final String myId;
+  final String otherId;
   final String myName;
   final String myImage;
 
-
   File imageFile;
-  bool isLoading;
-  bool isImage;
+  bool isLoading=true;
+  bool isLoadingSendMessage=false;
+
   bool isShowSticker;
   final FocusNode focusNode = new FocusNode();
   final TextEditingController _chatController = new TextEditingController();
@@ -44,18 +49,49 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
   List<Messages> listMessage = [];
   MessagePresenter _messagePresenter;
   bool isMyMessage;
+  FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
 
   @override
   void initState() {
     super.initState();
+
+
+        AppSharedPreferences.setChatOpen(true);
+
     focusNode.addListener(onFocusChange);
-    isImage = false;
     isLoading = true;
 
+    print("test sending IDs 1.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $myId And reciever Id is $otherId");
+
+    getMessage();
     _messagePresenter.loadGetMessage(myId, otherId);
     _messagesStreamController = new StreamController();
   }
 
+
+//==============================================================================
+  void getMessage() {
+
+    firebaseMessaging.configure(
+      onLaunch: (Map<String, dynamic> msg) {
+        print(" onLaunch called ${(msg.containsKey("title"))}");
+      },
+      onResume: (Map<String, dynamic> msg) {
+        print(" onResume called ${(msg)}");
+      },
+      onMessage: (Map<String, dynamic> msg) {
+
+        _handleSubmit(
+            msg['data']['message'],
+            msg['data']['user_id'],
+            msg['data']['image'],
+            msg['data']['is_image'],
+            "other",
+            DateTime.now().timeZoneName
+        );
+        },
+    );
+  }
 //==============================================================================
 
   void onFocusChange() {
@@ -67,17 +103,26 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
     }
   }
 
+  @override
+  void dispose() {
+    print("dispose was called");
+    AppSharedPreferences.setChatOpen(false);
+    _chatController.dispose();
+    super.dispose();
+  }
 
 //==============================================================================
-
   void _handleSubmit(
-      [String text, int id, String imageUrl, String isImg, String name, String date]) {
+
+      [String text, String senderId ,String imageUrl, String isImg, String name, String date]) {
+    print("test sending IDs 4.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $senderId And reciever Id is $myId");
+
     _chatController.clear();
     ChatMessage message = new ChatMessage(
-        id: id,
+        userIdSent: senderId,
         formId: myId,
         text: text,
-        date: date,
+        date: DateTime.now().timeZoneName,
         name: name,
         isImage: isImg,
         imageUrl: imageUrl);
@@ -120,30 +165,15 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
     });*/
   }
 
-  void onSendMessage(String content, int type) {
+  void _onSendMessage(String content, imageUrl,isImg) {
     // type: 0 = text, 1 = image, 2 = sticker
     if (content.trim() != '') {
       _chatController.clear();
 
-      /* var documentReference = Firestore.instance
-          .collection('messages')
-          .document(groupChatId)
-          .collection(groupChatId)
-          .document(DateTime.now().millisecondsSinceEpoch.toString());
-
-      Firestore.instance.runTransaction((transaction) async {
-        await transaction.set(
-          documentReference,
-          {
-            'idFrom': id,
-            'idTo': peerId,
-            'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
-            'content': content,
-            'type': type
-          },
-        );
-      });*/
-      // _messagesStreamController.animateTo(0.0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+      _messagePresenter.loadSendMessage(content, myId,otherId, imageUrl, isImg);
+    setState(() {
+      isLoadingSendMessage=true;
+    });
     } else {
       Fluttertoast.showToast(msg: 'Nothing to send');
     }
@@ -202,13 +232,21 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
               margin: new EdgeInsets.symmetric(horizontal: 8.0),
               child: new IconButton(
                 icon: new Icon(Icons.send),
-                onPressed: () =>   _handleSubmit(_chatController.text, myId, "","false", myName, "this/// is/// date")
+                onPressed: () =>   _onSendMessage(_chatController.text,"","n")
                 ,
                 color: Colors.deepOrange,
               ),
             ),
             color: Colors.white,
           ),
+
+          isLoadingSendMessage
+                  ? new Center(
+                child: new CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+                ),
+              )
+                  :Container()
         ],
       ),
       width: double.infinity,
@@ -220,13 +258,18 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
     );
   }
 
-//==============================================================================
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBar(),
-    body:  Container(
+    body:  isLoading
+        ? new Center(
+      child: new CircularProgressIndicator(
+        valueColor: new AlwaysStoppedAnimation<Color>(Colors.indigo),
+      ),
+    )
+        :  Container(
       decoration: ThemeColors.Canvas,
       child: new Column(
         children: <Widget>[
@@ -254,6 +297,7 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
 
           )
         ],
+
       ),
     ));
   }
@@ -292,8 +336,59 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
   }
 
   @override
-  void onLoadSendingMessageCompleted(EventMessageObject item) {
-    // TODO: implement onLoadSendingMessageCompleted
+  void onLoadSendingMessageCompleted(EventMessageObject data, String text,
+      String sendId, String recieveId, String image, String isImage) {
+
+
+    setState(() {
+      print("test sending IDs 5.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $sendId And reciever Id is $recieveId  and myId is $myId");
+
+      isLoadingSendMessage = false;
+      _handleSubmit(text, sendId, image, isImage, myName, DateTime.now().timeZoneName);
+
+     /* switch (data.id) {
+        case EventMessageConstants.SEND_SUCCESSFUL:
+          {
+            setState(() {
+              AppSharedPreferences.setUserLoggedIn(true);
+
+              // _callback.onLogIn(true);
+              AppSharedPreferences.setUserProfile(data.object);
+              var sendFCM;
+              if(data.messageResponse==1){
+                sendFCM=EventFCM.SEND_SUCCESSFUL;
+              }else{
+                sendFCM=EventFCM.SEND_FAILED;
+
+              }
+              globalKey.currentState.showSnackBar(new SnackBar(
+                content: new Text(sendFCM),
+              ));
+
+            });
+          }
+          break;
+        case EventMessageConstants.SEND_UN_SUCCESSFUL:
+          {
+            setState(() {
+              globalKey.currentState.showSnackBar(new SnackBar(
+                content: new Text(EventFCM.SEND_FAILED),
+              ));
+            });
+          }
+          break;
+        case EventMessageConstants.NO_INTERNET_CONNECTION:
+          {
+            setState(() {
+              globalKey.currentState.showSnackBar(new SnackBar(
+                content: new Text(SnackBarText.NO_INTERNET_CONNECTION),
+              ));
+
+            });
+          }
+          break;
+      }*/
+    });
   }
 
   @override
@@ -304,13 +399,20 @@ class ChatScreenState extends State<ChatScreentest> implements MessageContract {
         print("value=================================myId is $myId");
         print("value=================================otherId is $otherId");
         print("value=================================contents is ${items[i].text}");
-        print("value=================================id is ${items[i].id}");
         print("value=================================contents is ${items[i].text}");
 
         _handleSubmit(
-            items[i].text, items[i].id, items[i].imageUrl, items[i].isImage);
+            items[i].text,
+            items[i].user_id,
+            items[i].imageUrl,
+            items[i].imageUrl,
+               myName,
+            items[i].date);
       }
+   print("done================================list message size is ${items.length}");
       isLoading = false;
+
     });
   }
+
 }

@@ -33,13 +33,13 @@ class _ChatScreenState extends State<ChatScreen2> implements MessageContract {
   }
 
   Future<Null> _handleRefresh() async {
-    _messagePresenter.loadGetMessage(1,2);
+    _messagePresenter.loadGetMessage("1","2");
   }
 
   @override
   void initState() {
     _messagesController = new StreamController();
-    _messagePresenter.loadGetMessage(1,2);
+    _messagePresenter.loadGetMessage("1","2");
     super.initState();
   }
 
@@ -122,7 +122,9 @@ class _ChatScreenState extends State<ChatScreen2> implements MessageContract {
   }
 
   @override
-  void onLoadSendingMessageCompleted(EventMessageObject item) {
-    // TODO: implement onLoadSendingMessageCompleted
+  void onLoadSendingMessageCompleted(EventMessageObject data, String text,
+      String sendId, String recieveId, String image, String isImage) {
+
+
   }
 }
