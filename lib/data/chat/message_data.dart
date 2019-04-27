@@ -8,7 +8,8 @@ part 'message_data.g.dart';
 class Messages {
   /// id is unique ID of message
   final int msg_id;
-  final String user_name;
+  final String sender_name;
+  final String reciver_name;
   final String msg_from;
   final String msg_to;
   final String isImage;
@@ -19,8 +20,10 @@ class Messages {
 
   Messages(
       {this.msg_id,
-        this.user_name,
-      this.msg_from,
+        this.sender_name,
+        this.reciver_name,
+
+        this.msg_from,
       this.msg_to,
       this.msg_content,
       this.isImage,
@@ -29,7 +32,9 @@ class Messages {
   factory Messages.fromJson(Map<String, dynamic> json) {
     return new Messages(
       msg_id: json['msg_id'] as int,
-      user_name: json['user_name'] as String,
+      sender_name: json['sender_name'] as String,
+      reciver_name: json['reciver_name'] as String,
+
       msg_from: json['msg_from'] as String,
       msg_to: json['msg_to'] as String,
       msg_content: json['msg_content'] as String,
@@ -40,7 +45,9 @@ class Messages {
 
   Messages.fromMap(Map<String, dynamic> map)
       : msg_id = map['msg_id'],
-        user_name = map['user_name'],
+        sender_name = map['sender_name'],
+        reciver_name = map['reciver_name'],
+
       msg_from = map['msg_from'],
         msg_to = map['msg_to'],
         msg_content = map['msg_content'],
@@ -59,6 +66,6 @@ abstract class GetMessagesRepository {
 
 abstract class SendingMessageRepository {
   Future<EventMessageObject> sendMessage(String msg_from, String msg_to,
-      String msg_uder_name,String msg_content,String msg_pic_file,  String isImage,String msg_created_at);
+      String sender_name, String reciver_name,String msg_content,String msg_pic_file,  String isImage,String msg_created_at);
 }
 

@@ -115,6 +115,7 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
   void _handleSubmit(
   [String msg_from, String user_name , String msg_content, String isImage, String msg_created_at]) {
 
+    print("from====$msg_from my id ====$myId");
     _chatController.clear();
     ChatMessage message = new ChatMessage(
         user_msg_id: msg_from,
@@ -168,10 +169,18 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
       _chatController.clear();
 
     setState(() {
-      _messagePresenter.loadSendMessage(myId, dr_Id,
-           myName, msg_content, "not asocaited yet",   isImage, msg_created_at);
-      isLoadingSendMessage=true;
-    });
+
+             _messagePresenter.loadSendMessage(
+                myId,
+                dr_Id,
+                myName,
+                "",
+                msg_content,
+                "not asocaited yet",
+                isImage,
+                msg_created_at);
+            isLoadingSendMessage = true;
+          });
     } else {
       Fluttertoast.showToast(msg: 'Nothing to send');
     }
@@ -344,7 +353,7 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
       print("test msg_from IDs 5.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= msg_from id ism $msg_from And msg_to Id is $msg_to  and myId is $myId");
 
       isLoadingSendMessage = false;
-      _handleSubmit(msg_content, msg_from, isImage, myName, msg_created_at);
+      _handleSubmit(msg_from, myName, msg_content, isImage, msg_created_at);
 
      /* switch (data.id) {
         case EventMessageConstants.SEND_SUCCESSFUL:
@@ -394,21 +403,34 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
   @override
   void onLoadMessagesCompleted(List<Messages> items) {
     setState(() {
-      for (var i = 0; i < items.length; i++) {
-
-        print("value=================================myId is $myId");
-        print("value=================================otherId is $dr_Id");
-        print("value=================================contents is ${items[i].msg_content}");
-
-        _handleSubmit(
-            items[i].msg_from,
-            items[i].user_name,
-            items[i].msg_content,
-            items[i].isImage,
-            items[i].msg_created_at);
-      }
-   print("done================================list message size is ${items.length}");
       isLoading = false;
+
+      if(items.length>=0){
+        for (var i = 0; i < items.length; i++) {
+
+          print("value=================================msg_from is ${items[i].msg_from}");
+          print("value=================================user_name is ${items[i].sender_name}");
+          print("value=================================msg_content is ${items[i].msg_content}");
+          print("value=================================isImage is ${items[i].isImage}");
+          print("value=================================msg_created_at is ${items[i].msg_created_at}");
+
+          String user_id;
+          if(items[i].msg_from==myId){
+            user_id=items[i].msg_from;
+          }else{
+            user_id=items[i].msg_to;
+
+          }
+          _handleSubmit(
+              items[i].msg_from,
+              items[i].sender_name,
+              items[i].msg_content,
+              items[i].isImage,
+              items[i].msg_created_at);
+        }
+      }
+
+   print("done================================list message size is ${items.length}");
 
     });
   }

@@ -23,20 +23,20 @@ class MessagePresenter {
  // [String text, int id, String imageUrl, String isImg, String name) {
 
   void loadSendMessage(String msg_from, String msg_to,
-      String msg_uder_name,String msg_content,String msg_pic_file,  String isImage,String msg_created_at) {
+  String sender_name, String reciver_name,String msg_content,String msg_pic_file,  String isImage,String msg_created_at) {
 
     print("test msg_from IDs 2.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= msg_from id ism $msg_from And msg_to Id is $msg_to");
 
     _sendRepository
         .sendMessage( msg_from,  msg_to,
-         msg_uder_name, msg_content, msg_pic_file,   isImage, msg_created_at)
+        sender_name,reciver_name, msg_content, msg_pic_file,   isImage, msg_created_at)
         .then((c) => _view.onLoadSendingMessageCompleted(c,msg_content, msg_from, msg_to,isImage,msg_created_at))
         .catchError((onError) => _view.onLoadMessagesError());
   }
 
-  void loadGetMessage(String id,String otherId) {
+  void loadGetMessage(String msg_from, String msg_to) {
     _getMessagesRepository
-        .getMessages(id,otherId)
+        .getMessages(msg_from,msg_to)
         .then((c) => _view.onLoadMessagesCompleted(c))
         .catchError((onError) => _view.onLoadMessagesError());
   }
