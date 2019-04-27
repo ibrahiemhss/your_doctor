@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:io';
 import 'package:intl/intl.dart';
@@ -80,7 +79,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
     super.initState();
     focusNode.addListener(onFocusChange);
     _isLoading = true;
-    _messagePresenter.loadGetMessage("1","2");
+    _messagePresenter.loadGetMessage("1", "2");
     _messagesStreamController = new StreamController();
 
     isLoading = false;
@@ -186,11 +185,11 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
       // Right (my message)
       return Row(
         children: <Widget>[
-          document[index].user_id == 0
+          document[index].msg_from == 0
               // Text
               ? Container(
                   child: Text(
-                    document[index].text,
+                    document[index].msg_content,
                     style: TextStyle(color: primaryColor),
                   ),
                   padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
@@ -202,7 +201,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                       bottom: isLastMessageRight(index) ? 20.0 : 10.0,
                       right: 10.0),
                 )
-              : document[index].user_id == 1
+              : document[index].msg_from == 1
 
                   // Image
                   ? Container(
@@ -235,7 +234,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                                 ),
                                 clipBehavior: Clip.hardEdge,
                               ),
-                          imageUrl: document[index].text,
+                          imageUrl: document[index].msg_content,
                           width: 200.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -250,7 +249,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                   // Sticker
                   : Container(
                       child: new Image.asset(
-                        'images/${document[index].text}.gif',
+                        'images/${document[index].msg_content}.gif',
                         width: 100.0,
                         height: 100.0,
                         fit: BoxFit.cover,
@@ -293,10 +292,10 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                         clipBehavior: Clip.hardEdge,
                       )
                     : Container(width: 35.0),
-                document[index].text == 0
+                document[index].msg_from == 0
                     ? Container(
                         child: Text(
-                          document[index].text,
+                          document[index].msg_content,
                           style: TextStyle(color: Colors.white),
                         ),
                         padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 10.0),
@@ -306,7 +305,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                             borderRadius: BorderRadius.circular(8.0)),
                         margin: EdgeInsets.only(left: 10.0),
                       )
-                    : document[index].user_id == 1
+                    : document[index].msg_from == 1
                         ? Container(
                             child: Material(
                               child: CachedNetworkImage(
@@ -338,7 +337,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                                       ),
                                       clipBehavior: Clip.hardEdge,
                                     ),
-                                imageUrl: document[index].text,
+                                imageUrl: document[index].msg_content,
                                 width: 200.0,
                                 height: 200.0,
                                 fit: BoxFit.cover,
@@ -351,7 +350,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                           )
                         : Container(
                             child: new Image.asset(
-                              'images/${document[index].text}.gif',
+                              'images/${document[index].msg_from}.gif',
                               width: 100.0,
                               height: 100.0,
                               fit: BoxFit.cover,
@@ -369,7 +368,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                     child: Text(
                       DateFormat('yyyy-MM-dd hh:mm').format(
                           DateTime.fromMillisecondsSinceEpoch(
-                              int.parse(document[index].text))),
+                              int.parse(document[index].msg_content))),
                       style: TextStyle(
                           color: greyColor,
                           fontSize: 12.0,
@@ -387,9 +386,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   }
 
   bool isLastMessageLeft(int index) {
-    if ((index > 0 &&
-            listMessage != null &&
-            listMessage[index - 1] == id) ||
+    if ((index > 0 && listMessage != null && listMessage[index - 1] == id) ||
         index == 0) {
       return true;
     } else {
@@ -398,9 +395,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   }
 
   bool isLastMessageRight(int index) {
-    if ((index > 0 &&
-            listMessage != null &&
-            listMessage[index - 1] != id) ||
+    if ((index > 0 && listMessage != null && listMessage[index - 1] != id) ||
         index == 0) {
       return true;
     } else {
@@ -690,12 +685,9 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   void onLoadMessagesError() {
     // TODO: implement onLoadMessagesError
   }
-
   @override
-  void onLoadSendingMessageCompleted(EventMessageObject data, String text,
-      String sendId, String recieveId, String image, String isImage) {
-
+  void onLoadSendingMessageCompleted(EventMessageObject data,
+      String msg_content,String msg_from, String msg_to,String isImage,String msg_created_at) {
 
   }
 }
-

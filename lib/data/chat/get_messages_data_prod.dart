@@ -12,7 +12,7 @@ class ProdMessagesRepository implements GetMessagesRepository {
   Future<List<Messages>> getMessages(String user_id,String otherId) async {
     var response = await http.post(Uri.encodeFull(APIConstants.Api_GET_MESSAGES_URL), body: {
       APIOperations.USER_ID: '$user_id',
-      APIOperations.OTHER_ID: '$otherId',
+      APIOperations.MSG_TO: '$otherId',
     }, headers: {
       "Accept": "application/json"
     });

@@ -2,22 +2,20 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:your_doctor/util/constant.dart';
 class ChatMessage extends StatelessWidget {
-  final String userIdSent;
-  final String formId;
-  final String text;
+  final String user_msg_id;
+  final String my_id;
+  final String msg_content;
   final String name;
-  final String imageUrl;
   final String isImage;
   final String date;
 
   ChatMessage(
       {
-        @required this.userIdSent,
-        @required this.formId,
-        @required this.text,
+        @required this.user_msg_id,
+        @required this.my_id,
+        @required this.msg_content,
         @required this.name,
         @required this.isImage,
-        @required this.imageUrl,
         @required this.date});
 
   @override
@@ -27,10 +25,10 @@ class ChatMessage extends StatelessWidget {
     // TODO: implement build
     return
 //---------------------------if id current user---------------------------------
-    
 
-    
-      formId==userIdSent ?
+
+
+      my_id==user_msg_id ?
       new Container(
           margin: const EdgeInsets.symmetric(vertical: 10.0),
           child: new Row(
@@ -86,7 +84,7 @@ class ChatMessage extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.hardEdge,
                               ),
-                          imageUrl: imageUrl,
+                          imageUrl: msg_content,
                           width: 200.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -114,7 +112,7 @@ class ChatMessage extends StatelessWidget {
                           MediaQuery.of(context).size.width / 1.5),
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: Text(text,
+                        child: Text(msg_content,
                             style: TextStyle(color: Colors.white),
                             textAlign: TextAlign.center),
                       ),
@@ -201,7 +199,7 @@ class ChatMessage extends StatelessWidget {
                                 ),
                                 clipBehavior: Clip.hardEdge,
                               ),
-                          imageUrl: imageUrl,
+                          imageUrl: msg_content,
                           width: 200.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -230,7 +228,7 @@ class ChatMessage extends StatelessWidget {
                           MediaQuery.of(context).size.width / 1.5),
                       child: Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: Text(text,
+                        child: Text(msg_content,
                             style: TextStyle(color: Colors.white),
                             textAlign: TextAlign.center),
                       ),

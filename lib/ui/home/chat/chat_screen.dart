@@ -17,23 +17,23 @@ import 'package:image_picker/image_picker.dart';
 
 class ChatScreentest extends StatefulWidget {
   final String myId;
-  final String otherId;
+  final String dr_Id;
   final String myName;
   final String myImage;
-  ChatScreentest({@required this.myId,@required this.otherId,@required this.myName,@required this.myImage});
+  ChatScreentest({@required this.myId,@required this.dr_Id,@required this.myName,@required this.myImage});
   @override
-  State createState() => new ChatScreenState(myId:myId,otherId: otherId, myName: myName,myImage: myImage);
+  State createState() => new ChatScreenState(myId:myId,dr_Id: dr_Id, myName: myName,myImage: myImage);
 }
 
 class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixin implements MessageContract {
   ChatScreenState(
-      {@required this.myId, @required this.otherId, @required this.myName, @required this.myImage}) {
+      {@required this.myId, @required this.dr_Id, @required this.myName, @required this.myImage}) {
     _messagePresenter = new MessagePresenter(this);
   }
   final globalKey = new GlobalKey<ScaffoldState>();
 
   final String myId;
-  final String otherId;
+  final String dr_Id;
   final String myName;
   final String myImage;
 
@@ -61,10 +61,10 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
     focusNode.addListener(onFocusChange);
     isLoading = true;
 
-    print("test sending IDs 1.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $myId And reciever Id is $otherId");
+    print("test sending IDs 1.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $myId And reciever Id is $dr_Id");
 
     getMessage();
-    _messagePresenter.loadGetMessage(myId, otherId);
+    _messagePresenter.loadGetMessage(myId, dr_Id);
     _messagesStreamController = new StreamController();
   }
 
@@ -81,15 +81,14 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
 
       },
       onMessage: (Map<String, dynamic> msg) {
+       // [String msg_from, String user_name , String msg_content, String isImage, String msg_created_at]) {
 
         _handleSubmit(
-            msg['data']['message'],
-            msg['data']['user_id'],
-            msg['data']['image'],
+            msg['data']['msg_from'],
+            msg['data']['user_name'],
+            msg['data']['msg_content'],
             msg['data']['is_image'],
-            "other",
-            DateTime.now().timeZoneName
-        );
+            msg['data']['msg_created_at']);
         },
     );
   }
@@ -114,19 +113,16 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
 
 //==============================================================================
   void _handleSubmit(
-
-      [String text, String senderId ,String imageUrl, String isImg, String name, String date]) {
-    print("test sending IDs 4.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $senderId And reciever Id is $myId");
+  [String msg_from, String user_name , String msg_content, String isImage, String msg_created_at]) {
 
     _chatController.clear();
     ChatMessage message = new ChatMessage(
-        userIdSent: senderId,
-        formId: myId,
-        text: text,
-        date: DateTime.now().timeZoneName,
-        name: name,
-        isImage: isImg,
-        imageUrl: imageUrl);
+        user_msg_id: msg_from,
+        my_id: myId,
+        msg_content: msg_content,
+        date:msg_created_at,
+        name: user_name,
+        isImage: isImage);
     setState(() {
       _messagesWidgets.insert(0, message);
     });
@@ -166,13 +162,14 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
     });*/
   }
 
-  void _onSendMessage(String content, imageUrl,isImg) {
+  void _onSendMessage(String msg_content,isImage,String msg_created_at) {
     // type: 0 = text, 1 = image, 2 = sticker
-    if (content.trim() != '') {
+    if (msg_content.trim() != '') {
       _chatController.clear();
 
     setState(() {
-      _messagePresenter.loadSendMessage(content, myId,otherId, imageUrl, isImg);
+      _messagePresenter.loadSendMessage(myId, dr_Id,
+           myName, msg_content, "not asocaited yet",   isImage, msg_created_at);
       isLoadingSendMessage=true;
     });
     } else {
@@ -233,7 +230,7 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
               margin: new EdgeInsets.symmetric(horizontal: 8.0),
               child: new IconButton(
                 icon: new Icon(Icons.send),
-                onPressed: () =>   _onSendMessage(_chatController.text,"","n")
+                onPressed: () =>   _onSendMessage(_chatController.text,"n",DateTime.now().timeZoneName)
                 ,
                 color: Colors.deepOrange,
               ),
@@ -337,17 +334,17 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
   }
 
   @override
-  void onLoadSendingMessageCompleted(EventMessageObject data, String text,
-      String sendId, String recieveId, String image, String isImage) {
+  void onLoadSendingMessageCompleted(EventMessageObject data,
+      String msg_content,String msg_from, String msg_to,String isImage,String msg_created_at) {
 
 
 
 
     setState(() {
-      print("test sending IDs 5.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $sendId And reciever Id is $recieveId  and myId is $myId");
+      print("test msg_from IDs 5.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= msg_from id ism $msg_from And msg_to Id is $msg_to  and myId is $myId");
 
       isLoadingSendMessage = false;
-      _handleSubmit(text, sendId, image, isImage, myName, DateTime.now().timeZoneName);
+      _handleSubmit(msg_content, msg_from, isImage, myName, msg_created_at);
 
      /* switch (data.id) {
         case EventMessageConstants.SEND_SUCCESSFUL:
@@ -400,17 +397,15 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
       for (var i = 0; i < items.length; i++) {
 
         print("value=================================myId is $myId");
-        print("value=================================otherId is $otherId");
-        print("value=================================contents is ${items[i].text}");
-        print("value=================================contents is ${items[i].text}");
+        print("value=================================otherId is $dr_Id");
+        print("value=================================contents is ${items[i].msg_content}");
 
         _handleSubmit(
-            items[i].text,
-            items[i].user_id,
-            items[i].imageUrl,
-            items[i].imageUrl,
-               myName,
-            items[i].date);
+            items[i].msg_from,
+            items[i].user_name,
+            items[i].msg_content,
+            items[i].isImage,
+            items[i].msg_created_at);
       }
    print("done================================list message size is ${items.length}");
       isLoading = false;

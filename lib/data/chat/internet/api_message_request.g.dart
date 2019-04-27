@@ -21,6 +21,6 @@ abstract class _$ApiRequestSerializerMixin {
 
   Map<String, dynamic> toJson() => <String, dynamic>{
      //   APIOperations.PHONE: messageBody.id,
-        APIOperations.PASSWORD: messageBody.text,
+        APIOperations.MSG_CONTENT: messageBody.msg_content,
       };
 }

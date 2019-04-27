@@ -138,7 +138,7 @@ class _DoctorDetailWidgetState extends State<DoctorDetailWidget>
   void _goToChat() {
      Navigator.push(
       context,
-     new MaterialPageRoute(builder: (context) => new ChatScreentest(myId:myId,otherId: dr_id, myName: myName,myImage:myImage,)),
+     new MaterialPageRoute(builder: (context) => new ChatScreentest(myId:myId,dr_Id: dr_id, myName: myName,myImage:myImage,)),
      );
   }
 

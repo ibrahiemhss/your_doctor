@@ -3,7 +3,8 @@ import 'package:your_doctor/data/chat/message_data.dart';
 import 'package:your_doctor/util/dependency_injection.dart';
 
 abstract class MessageContract {
-  void onLoadSendingMessageCompleted(EventMessageObject item,String text,String sendId, String recieveId,  String image,String isImage);
+  void onLoadSendingMessageCompleted(EventMessageObject item,
+      String msg_content,String msg_from, String msg_to,String isImage,String msg_created_at);
 
   void onLoadMessagesCompleted(List<Messages> items);
 
@@ -21,13 +22,15 @@ class MessagePresenter {
   }
  // [String text, int id, String imageUrl, String isImg, String name) {
 
-  void loadSendMessage(String text,String sendId, String recieveId,  String image,String isImage) {
+  void loadSendMessage(String msg_from, String msg_to,
+      String msg_uder_name,String msg_content,String msg_pic_file,  String isImage,String msg_created_at) {
 
-    print("test sending IDs 2.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $sendId And reciever Id is $recieveId");
+    print("test msg_from IDs 2.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= msg_from id ism $msg_from And msg_to Id is $msg_to");
 
     _sendRepository
-        .sendMessage(text, sendId, recieveId,image,isImage)
-        .then((c) => _view.onLoadSendingMessageCompleted(c,text, sendId, recieveId,image,isImage))
+        .sendMessage( msg_from,  msg_to,
+         msg_uder_name, msg_content, msg_pic_file,   isImage, msg_created_at)
+        .then((c) => _view.onLoadSendingMessageCompleted(c,msg_content, msg_from, msg_to,isImage,msg_created_at))
         .catchError((onError) => _view.onLoadMessagesError());
   }
 

@@ -47,19 +47,22 @@ class APIOperations {
   static const String NAME = "name";
   static const String PHONE = "phone";
   static const String PASSWORD = "password";
+
   static const String IMAGE_URL = "image_url";
   static const String TOKEN = "token";
   static const String LANG = "lang";
   static const String PLACE = "place";
 
-  //for data in chat
 
-  static const String OTHER_ID = "other_id";
+  //for data in chat
   static const String USER_ID = "user_id";
-  static const String RECIEVE_ID = "recieve_id";
-  static const String MESSAGE = "message";
-  static const String IS_IMAGE = "is_image";
-  static const String IMAGE = "image";
+  static const String MSG_TO = "msg_to";
+  static const String MSG_FROM = "msg_from";
+  static const String MSG_USER_NAME = "user_name";
+  static const String MSG_CONTENT = "msg_content";
+  static const String MSG_IS_IMAGE = "is_image";
+  static const String MSG_CREATED_AT = "msg_created_at";
+  static const String MSG_PIC = "pic";
 
   static const String USER = "user";
 }
