@@ -27,7 +27,11 @@ class ChatMessage extends StatelessWidget {
     // TODO: implement build
     return
 //---------------------------if id current user---------------------------------
-      userIdSent==formId ? new Container(
+    
+
+    
+      formId==userIdSent ?
+      new Container(
           margin: const EdgeInsets.symmetric(vertical: 10.0),
           child: new Row(
             mainAxisAlignment: MainAxisAlignment.end,

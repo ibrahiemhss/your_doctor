@@ -56,7 +56,7 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
     super.initState();
 
 
-        AppSharedPreferences.setChatOpen(true);
+      //  AppSharedPreferences.setChatOpen(true);
 
     focusNode.addListener(onFocusChange);
     isLoading = true;
@@ -78,6 +78,7 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
       },
       onResume: (Map<String, dynamic> msg) {
         print(" onResume called ${(msg)}");
+
       },
       onMessage: (Map<String, dynamic> msg) {
 
@@ -106,7 +107,7 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
   @override
   void dispose() {
     print("dispose was called");
-    AppSharedPreferences.setChatOpen(false);
+   // AppSharedPreferences.setChatOpen(false);
     _chatController.dispose();
     super.dispose();
   }
@@ -170,8 +171,8 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
     if (content.trim() != '') {
       _chatController.clear();
 
-      _messagePresenter.loadSendMessage(content, myId,otherId, imageUrl, isImg);
     setState(() {
+      _messagePresenter.loadSendMessage(content, myId,otherId, imageUrl, isImg);
       isLoadingSendMessage=true;
     });
     } else {
@@ -338,6 +339,8 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
   @override
   void onLoadSendingMessageCompleted(EventMessageObject data, String text,
       String sendId, String recieveId, String image, String isImage) {
+
+
 
 
     setState(() {

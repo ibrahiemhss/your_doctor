@@ -93,7 +93,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   String message;
   String title;
   static String tokenValue;
-
   FirebaseMessaging firebaseMessaging = new FirebaseMessaging();
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       new FlutterLocalNotificationsPlugin();
@@ -101,8 +100,38 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   @override
   void initState() {
     super.initState();
+   // AppSharedPreferences.setChatOpen(false);
 
-    _getChatOpened();
+   // if( AppSharedPreferences.isChatOpen()==false){
+      var android = new AndroidInitializationSettings('mipmap/ic_launcher');
+      var ios = new IOSInitializationSettings();
+      var platform = new InitializationSettings(android, ios);
+      flutterLocalNotificationsPlugin.initialize(platform);
+
+      firebaseMessaging.configure(
+        onLaunch: (Map<String, dynamic> msg) {
+          print(" onLaunch called ${(msg.containsKey("title"))}");
+        },
+        onResume: (Map<String, dynamic> msg) {
+          print(" onResume called ${(msg)}");
+        },
+        onMessage: (Map<String, dynamic> msg) {
+          showNotification(msg);
+          print(
+              " onMessage called ============================================>\n"
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>\n "
+                  "==================================================================>${(msg['data']['message'])}");
+        },
+      );
+  //  }
+
     if (fromBack) {
       _currentIndex = pagId;
       userName = name;
@@ -166,35 +195,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   ];
 
   Future<bool> _getChatOpened() async {
-    if( AppSharedPreferences.isChatOpen()==false){
-      var android = new AndroidInitializationSettings('mipmap/ic_launcher');
-      var ios = new IOSInitializationSettings();
-      var platform = new InitializationSettings(android, ios);
-      flutterLocalNotificationsPlugin.initialize(platform);
 
-      firebaseMessaging.configure(
-        onLaunch: (Map<String, dynamic> msg) {
-          print(" onLaunch called ${(msg.containsKey("title"))}");
-        },
-        onResume: (Map<String, dynamic> msg) {
-          print(" onResume called ${(msg)}");
-        },
-        onMessage: (Map<String, dynamic> msg) {
-          showNotification(msg);
-          print(
-              " onMessage called ============================================>\n"
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>${(msg['data']['message'])}");
-        },
-      );
-    }
 
   }
 
