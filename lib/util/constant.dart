@@ -56,14 +56,27 @@ class APIOperations {
 
   //for data in chat
   static const String USER_ID = "user_id";
-  static const String MSG_TO = "msg_to";
-  static const String MSG_FROM = "msg_from";
+
+ // if(isset($_POST['sender_id'])
+  static const String SENDER_ID = "sender_id";
+
+ // and isset($_POST['reciver_name'])
   static const String MSG_RECIEVER_NAME = "reciver_name";
+
+ // and isset($_POST['receiver_id'])and
+  static const String RECEVER_ID = "receiver_id";
+
+
   static const String MSG_SENDER_NAME = "sender_name";
 
+ // isset($_POST['msg_content'])
   static const String MSG_CONTENT = "msg_content";
+
+  // isset($_POST['is_image'])
   static const String MSG_IS_IMAGE = "is_image";
-  static const String MSG_CREATED_AT = "msg_created_at";
+
+  //and isset($_POST['created_at']))
+  static const String CREATED_AT = "created_at";
   static const String MSG_PIC = "pic";
 
   static const String USER = "user";

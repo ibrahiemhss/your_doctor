@@ -185,7 +185,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
       // Right (my message)
       return Row(
         children: <Widget>[
-          document[index].msg_from == 0
+          document[index].sender_id == 0
               // Text
               ? Container(
                   child: Text(
@@ -201,7 +201,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                       bottom: isLastMessageRight(index) ? 20.0 : 10.0,
                       right: 10.0),
                 )
-              : document[index].msg_from == 1
+              : document[index].sender_id == 1
 
                   // Image
                   ? Container(
@@ -292,7 +292,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                         clipBehavior: Clip.hardEdge,
                       )
                     : Container(width: 35.0),
-                document[index].msg_from == 0
+                document[index].sender_id == 0
                     ? Container(
                         child: Text(
                           document[index].msg_content,
@@ -305,7 +305,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                             borderRadius: BorderRadius.circular(8.0)),
                         margin: EdgeInsets.only(left: 10.0),
                       )
-                    : document[index].msg_from == 1
+                    : document[index].sender_id == 1
                         ? Container(
                             child: Material(
                               child: CachedNetworkImage(
@@ -350,7 +350,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                           )
                         : Container(
                             child: new Image.asset(
-                              'images/${document[index].msg_from}.gif',
+                              'images/${document[index].sender_id}.gif',
                               width: 100.0,
                               height: 100.0,
                               fit: BoxFit.cover,

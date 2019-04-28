@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class ChatMessage extends StatelessWidget {
-  final String user_msg_id;
+  final String sender_id;
   final String my_id;
   final String msg_content;
   final String name;
@@ -11,7 +11,7 @@ class ChatMessage extends StatelessWidget {
   final String date;
 
   ChatMessage(
-      {@required this.user_msg_id,
+      {@required this.sender_id,
       @required this.my_id,
       @required this.msg_content,
       @required this.name,
@@ -24,7 +24,7 @@ class ChatMessage extends StatelessWidget {
     return
 //---------------------------if id current user---------------------------------
 
-        my_id == user_msg_id
+        my_id == sender_id
             ? new Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: new Row(

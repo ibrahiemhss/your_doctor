@@ -100,37 +100,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
   @override
   void initState() {
     super.initState();
-   // AppSharedPreferences.setChatOpen(false);
-
-   // if( AppSharedPreferences.isChatOpen()==false){
-      var android = new AndroidInitializationSettings('mipmap/ic_launcher');
-      var ios = new IOSInitializationSettings();
-      var platform = new InitializationSettings(android, ios);
-      flutterLocalNotificationsPlugin.initialize(platform);
-
-      firebaseMessaging.configure(
-        onLaunch: (Map<String, dynamic> msg) {
-          print(" onLaunch called ${(msg.containsKey("title"))}");
-        },
-        onResume: (Map<String, dynamic> msg) {
-          print(" onResume called ${(msg)}");
-        },
-        onMessage: (Map<String, dynamic> msg) {
-          showNotification(msg);
-          print(
-              " onMessage called ============================================>\n"
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>\n "
-                  "==================================================================>${(msg['data']['message'])}");
-        },
-      );
-  //  }
 
     if (fromBack) {
       _currentIndex = pagId;
@@ -139,7 +108,28 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
       userPhone = phone;
     }
     _getLogInStatus();
+    var android = new AndroidInitializationSettings('mipmap/ic_launcher');
+    var ios = new IOSInitializationSettings();
+    var platform = new InitializationSettings(android, ios);
+    flutterLocalNotificationsPlugin.initialize(platform);
 
+
+
+
+
+    firebaseMessaging.configure(
+      onLaunch: (Map<String, dynamic> msg) {
+        print(" onLaunch called ${(msg.containsKey("title"))}");
+      },
+      onResume: (Map<String, dynamic> msg) {
+        print(" onResume called ${(msg)}");
+      },
+      onMessage: (Map<String, dynamic> msg) {
+        showNotification(msg);
+        print(" onMessage called ${(msg['data']['title'])}");
+
+      },
+    );
     firebaseMessaging.requestNotificationPermissions(
         const IosNotificationSettings(sound: true, alert: true, badge: true));
     firebaseMessaging.onIosSettingsRegistered
@@ -149,6 +139,7 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     firebaseMessaging.getToken().then((token) {
       update(token);
       print('token = $token');
+
     });
   }
 
@@ -161,9 +152,9 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     var iOS = new IOSNotificationDetails();
     var platform = new NotificationDetails(android, iOS);
     await flutterLocalNotificationsPlugin.show(
-        0, "your Doctor", msg['data']['message'], platform);
+        0, "رساله من",msg['data']['msg_content'], platform);
   }
-
+ 
   update(String token) {
     print(token);
     //DatabaseReference databaseReference = new FirebaseDatabase().reference();
@@ -171,7 +162,6 @@ class _ScreenOneState extends State<MainPage> implements MainScreenCallBack {
     tokenValue = token;
     setState(() {});
   }
-
   Future<User> user = AppSharedPreferences.getUserProfile();
   static String userName;
   static String userEmail;

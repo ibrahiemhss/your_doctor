@@ -55,6 +55,7 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
   void initState() {
     super.initState();
 
+    getMessage();
 
       //  AppSharedPreferences.setChatOpen(true);
 
@@ -63,7 +64,6 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
 
     print("test sending IDs 1.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= sender id ism $myId And reciever Id is $dr_Id");
 
-    getMessage();
     _messagePresenter.loadGetMessage(myId, dr_Id);
     _messagesStreamController = new StreamController();
   }
@@ -82,13 +82,14 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
       },
       onMessage: (Map<String, dynamic> msg) {
        // [String msg_from, String user_name , String msg_content, String isImage, String msg_created_at]) {
+        print(" onLaunch called ${ msg['data']['msg_from']}");
 
         _handleSubmit(
-            msg['data']['msg_from'],
-            msg['data']['user_name'],
+            msg['data']['sender_id'],
+            msg['data']['sender_name'],
             msg['data']['msg_content'],
             msg['data']['is_image'],
-            msg['data']['msg_created_at']);
+            msg['data']['created_at']);
         },
     );
   }
@@ -113,12 +114,12 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
 
 //==============================================================================
   void _handleSubmit(
-  [String msg_from, String user_name , String msg_content, String isImage, String msg_created_at]) {
+  [String sender_id, String user_name , String msg_content, String isImage, String msg_created_at]) {
 
-    print("from====$msg_from my id ====$myId");
+    print("sender id====$sender_id my id ====$myId");
     _chatController.clear();
     ChatMessage message = new ChatMessage(
-        user_msg_id: msg_from,
+        sender_id: sender_id,
         my_id: myId,
         msg_content: msg_content,
         date:msg_created_at,
@@ -344,16 +345,16 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
 
   @override
   void onLoadSendingMessageCompleted(EventMessageObject data,
-      String msg_content,String msg_from, String msg_to,String isImage,String msg_created_at) {
+      String msg_content,String sender_id, String receiver_id,String isImage,String msg_created_at) {
 
 
 
 
     setState(() {
-      print("test msg_from IDs 5.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= msg_from id ism $msg_from And msg_to Id is $msg_to  and myId is $myId");
+      print("test sender_id IDs 5.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= msg_from id ism $sender_id And msg_to Id is $receiver_id  and myId is $myId");
 
       isLoadingSendMessage = false;
-      _handleSubmit(msg_from, myName, msg_content, isImage, msg_created_at);
+      _handleSubmit(sender_id, myName, msg_content, isImage, msg_created_at);
 
      /* switch (data.id) {
         case EventMessageConstants.SEND_SUCCESSFUL:
@@ -408,25 +409,25 @@ class ChatScreenState extends State<ChatScreentest> with TickerProviderStateMixi
       if(items.length>=0){
         for (var i = 0; i < items.length; i++) {
 
-          print("value=================================msg_from is ${items[i].msg_from}");
+          print("value=================================msg_from is ${items[i].sender_id}");
           print("value=================================user_name is ${items[i].sender_name}");
           print("value=================================msg_content is ${items[i].msg_content}");
           print("value=================================isImage is ${items[i].isImage}");
-          print("value=================================msg_created_at is ${items[i].msg_created_at}");
+          print("value=================================msg_created_at is ${items[i].created_at}");
 
-          String user_id;
-          if(items[i].msg_from==myId){
-            user_id=items[i].msg_from;
+       /*   String user_id;
+          if(items[i].sender_id==myId){
+            user_id=items[i].sender_id;
           }else{
-            user_id=items[i].msg_to;
+            user_id=items[i].receiver_id;
 
-          }
+          }*/
           _handleSubmit(
-              items[i].msg_from,
+              items[i].sender_id,
               items[i].sender_name,
               items[i].msg_content,
               items[i].isImage,
-              items[i].msg_created_at);
+              items[i].created_at);
         }
       }
 

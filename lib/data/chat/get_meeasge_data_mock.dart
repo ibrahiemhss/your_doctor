@@ -12,12 +12,12 @@ class MockMessagesRepository implements GetMessagesRepository {
 
 var data = <Messages>[
   new Messages(
-    msg_from: "1",
+    sender_id: "1",
     isImage: "no",
     msg_content: "hello",
   ),
   new Messages(
-    msg_from: "2",
+    sender_id: "2",
     isImage: "false",
     msg_content: "hello",
   ),

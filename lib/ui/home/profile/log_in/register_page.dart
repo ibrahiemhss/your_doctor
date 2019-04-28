@@ -463,9 +463,9 @@ class _RegisterPageState extends State<RegisterPage>
       case EventUserConstants.USER_REGISTRATION_SUCCESSFUL:
         {
           setState(() {
-            globalKey.currentState.showSnackBar(new SnackBar(
+           /* globalKey.currentState.showSnackBar(new SnackBar(
               content: new Text(data.messageResponse.toString()),
-            ));
+            ));*/
             progressDialog.hideProgress();
             _goToLoginScreen();
           });
@@ -474,9 +474,9 @@ class _RegisterPageState extends State<RegisterPage>
       case EventUserConstants.USER_ALREADY_REGISTERED:
         {
           setState(() {
-            globalKey.currentState.showSnackBar(new SnackBar(
+           /* globalKey.currentState.showSnackBar(new SnackBar(
               content: new Text(data.messageResponse.toString()),
-            ));
+            ));*/
             progressDialog.hideProgress();
           });
         }
@@ -484,9 +484,9 @@ class _RegisterPageState extends State<RegisterPage>
       case EventUserConstants.USER_REGISTRATION_UN_SUCCESSFUL:
         {
           setState(() {
-            globalKey.currentState.showSnackBar(new SnackBar(
+          /*  globalKey.currentState.showSnackBar(new SnackBar(
               content: new Text(data.messageResponse.toString()),
-            ));
+            ));*/
             progressDialog.hideProgress();
           });
         }

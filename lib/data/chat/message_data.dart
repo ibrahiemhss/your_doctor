@@ -10,36 +10,34 @@ class Messages {
   final int msg_id;
   final String sender_name;
   final String reciver_name;
-  final String msg_from;
-  final String msg_to;
+  final String sender_id;
+  final String receiver_id;
   final String isImage;
 
   //final String timeStamp;
   final String msg_content;
-  final String msg_created_at;
+  final String created_at;
 
   Messages(
       {this.msg_id,
-        this.sender_name,
-        this.reciver_name,
-
-        this.msg_from,
-      this.msg_to,
+      this.sender_name,
+      this.reciver_name,
+      this.sender_id,
+      this.receiver_id,
       this.msg_content,
       this.isImage,
-      this.msg_created_at}) {}
+      this.created_at}) {}
 
   factory Messages.fromJson(Map<String, dynamic> json) {
     return new Messages(
       msg_id: json['msg_id'] as int,
       sender_name: json['sender_name'] as String,
       reciver_name: json['reciver_name'] as String,
-
-      msg_from: json['msg_from'] as String,
-      msg_to: json['msg_to'] as String,
+      sender_id: json['sender_id'] as String,
+      receiver_id: json['receiver_id'] as String,
       msg_content: json['msg_content'] as String,
       isImage: json['is_image'] as String,
-      msg_created_at: json['msg_created_at'] as String,
+      created_at: json['created_at'] as String,
     );
   }
 
@@ -47,12 +45,11 @@ class Messages {
       : msg_id = map['msg_id'],
         sender_name = map['sender_name'],
         reciver_name = map['reciver_name'],
-
-      msg_from = map['msg_from'],
-        msg_to = map['msg_to'],
+        receiver_id = map['receiver_id'],
+        sender_id = map['sender_id'],
         msg_content = map['msg_content'],
         isImage = map['is_image'],
-        msg_created_at = map['msg_created_at'];
+        created_at = map['created_at'];
 
   /// Class constructor
 
@@ -61,11 +58,17 @@ class Messages {
 }
 
 abstract class GetMessagesRepository {
-  Future<List<Messages>> getMessages(String msg_from, String msg_to);
+  Future<List<Messages>> getMessages(String sender_id, String receiver_id);
 }
 
 abstract class SendingMessageRepository {
-  Future<EventMessageObject> sendMessage(String msg_from, String msg_to,
-      String sender_name, String reciver_name,String msg_content,String msg_pic_file,  String isImage,String msg_created_at);
+  Future<EventMessageObject> sendMessage(
+      String sender_id,
+      String receiver_id,
+      String sender_name,
+      String reciver_name,
+      String msg_content,
+      String msg_pic_file,
+      String isImage,
+      String msg_created_at);
 }
-
