@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:your_doctor/util/constant.dart';
 
 class ChatMessage extends StatelessWidget {
@@ -37,12 +38,12 @@ class ChatMessage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
-                         new Text(name,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700, // light
-                                      color: Colors.white70),
-                                  textAlign: TextAlign.left),
+                          new Text(name,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700, // light
+                                  color: Colors.white70),
+                              textAlign: TextAlign.left),
 
 //-----------------------------if is Image not text-----------------------------
 
@@ -117,7 +118,8 @@ class ChatMessage extends StatelessWidget {
                                         textAlign: TextAlign.center),
                                   ),
                                 ),
-                          Text(date, style: TextStyle(color: Colors.white))
+                          Text(readTimestamp(date),
+                              style: TextStyle(color: Colors.white))
                         ],
                       ),
                     ),
@@ -155,11 +157,11 @@ class ChatMessage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           new Text(name,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700, // light
-                                      color: Colors.white70),
-                                  textAlign: TextAlign.left),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700, // light
+                                  color: Colors.white70),
+                              textAlign: TextAlign.left),
 
 //-----------------------------if is Image not text-----------------------------
 
@@ -235,12 +237,33 @@ class ChatMessage extends StatelessWidget {
                                         textAlign: TextAlign.center),
                                   ),
                                 ),
-                          Text(date, style: TextStyle(color: Colors.white))
+                          Text(readTimestamp(date),
+                              style: TextStyle(color: Colors.white))
                         ],
                       ),
                     ),
                   ],
                 ));
     ;
+  }
+
+  String readTimestamp(String timestamp) {
+    DateTime newDateTimeObj2 =
+        new DateFormat("yyyy-MM-dd HH:mm:ss").parse(timestamp);
+
+    Duration diff = DateTime.now().difference(newDateTimeObj2);
+    if (diff.inDays > 365)
+      return "${(diff.inDays / 365).floor()} ${(diff.inDays / 365).floor() == 1 ? "year" : "years"} ago";
+    if (diff.inDays > 30)
+      return "${(diff.inDays / 30).floor()} ${(diff.inDays / 30).floor() == 1 ? "month" : "months"} ago";
+    if (diff.inDays > 7)
+      return "${(diff.inDays / 7).floor()} ${(diff.inDays / 7).floor() == 1 ? "week" : "weeks"} ago";
+    if (diff.inDays > 0)
+      return "${diff.inDays} ${diff.inDays == 1 ? "day" : "days"} ago";
+    if (diff.inHours > 0)
+      return "${diff.inHours} ${diff.inHours == 1 ? "hour" : "hours"} ago";
+    if (diff.inMinutes > 0)
+      return "${diff.inMinutes} ${diff.inMinutes == 1 ? "minute" : "minutes"} ago";
+    return "just now";
   }
 }

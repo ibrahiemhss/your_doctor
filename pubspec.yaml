@@ -40,7 +40,9 @@ dependencies:
   cached_network_image: ^0.6.2
   intl: ^0.15.7
   fluttertoast: ^3.0.4
- # geolocator:
+  dio: ^2.1.3
+
+  # geolocator:
 
   uuid:
 

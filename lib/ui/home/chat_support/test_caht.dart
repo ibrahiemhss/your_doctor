@@ -121,8 +121,7 @@ class _ChatScreenState extends State<ChatScreen2> implements MessageContract {
     // TODO: implement onLoadMessagesError
   }
   @override
-  void onLoadSendingMessageCompleted(EventMessageObject data,
-      String msg_content,String msg_from, String msg_to,String isImage,String msg_created_at) {
+  void onLoadSendingMessageCompleted(EventMessageObject data) {
 
 
 

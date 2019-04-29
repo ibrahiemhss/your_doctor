@@ -80,6 +80,8 @@ class APIOperations {
   static const String MSG_PIC = "pic";
 
   static const String USER = "user";
+  static const String MSG = "msg";
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
