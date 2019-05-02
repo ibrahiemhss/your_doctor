@@ -1,9 +1,9 @@
+/*
 import 'dart:async';
 import 'dart:io';
 import 'package:intl/intl.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -131,7 +131,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
 
   Future uploadFile() async {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-    StorageReference reference = FirebaseStorage.instance.ref().child(fileName);
+   */
+/* StorageReference reference = FirebaseStorage.instance.ref().child(fileName);
     StorageUploadTask uploadTask = reference.putFile(imageFile);
     StorageTaskSnapshot storageTaskSnapshot = await uploadTask.onComplete;
     storageTaskSnapshot.ref.getDownloadURL().then((downloadUrl) {
@@ -145,7 +146,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
         isLoading = false;
       });
       Fluttertoast.showToast(msg: 'This file is not an image');
-    });
+    });*//*
+
   }
 
   void onSendMessage(String content, int type) {
@@ -153,6 +155,7 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
     if (content.trim() != '') {
       textEditingController.clear();
 
+*/
 /*
  var documentReference = Firestore.instance
           .collection('messages')
@@ -171,7 +174,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
             'type': type
           },
         );
-      });*/
+      });*//*
+
 
       listScrollController.animateTo(0.0,
           duration: Duration(milliseconds: 300), curve: Curves.easeOut);
@@ -207,7 +211,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                   ? Container(
                       child: Material(
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                          */
+/*placeholder: (context, url) => Container(
                                 child: CircularProgressIndicator(
                                   valueColor:
                                       AlwaysStoppedAnimation<Color>(themeColor),
@@ -233,7 +238,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                                   Radius.circular(8.0),
                                 ),
                                 clipBehavior: Clip.hardEdge,
-                              ),
+                              ),*//*
+
                           imageUrl: document[index].msg_content,
                           width: 200.0,
                           height: 200.0,
@@ -271,7 +277,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                 isLastMessageLeft(index)
                     ? Material(
                         child: CachedNetworkImage(
-                          placeholder: (context, url) => Container(
+                        */
+/*  placeholder: (context, url) => Container(
                                 child: CircularProgressIndicator(
                                   strokeWidth: 1.0,
                                   valueColor:
@@ -280,7 +287,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                                 width: 35.0,
                                 height: 35.0,
                                 padding: EdgeInsets.all(10.0),
-                              ),
+                              ),*//*
+
                           imageUrl: peerAvatar,
                           width: 35.0,
                           height: 35.0,
@@ -309,7 +317,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                         ? Container(
                             child: Material(
                               child: CachedNetworkImage(
-                                placeholder: (context, url) => Container(
+                               */
+/* placeholder: (context, url) => Container(
                                       child: CircularProgressIndicator(
                                         valueColor:
                                             AlwaysStoppedAnimation<Color>(
@@ -336,7 +345,8 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
                                         Radius.circular(8.0),
                                       ),
                                       clipBehavior: Clip.hardEdge,
-                                    ),
+                                    ),*//*
+
                                 imageUrl: document[index].msg_content,
                                 width: 200.0,
                                 height: 200.0,
@@ -424,6 +434,36 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
             children: <Widget>[
               // List of messages
               buildListMessage(),
+*/
+/*placeholder: (context, url) => Container(
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                      ThemeColors.ShadowColor),
+                                            ),
+                                            width: 200.0,
+                                            height: 200.0,
+                                            padding: EdgeInsets.all(70.0),
+                                            decoration: BoxDecoration(
+                                              color: ThemeColors.ShadowColor,
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(8.0),
+                                              ),
+                                            ),
+                                          ),
+                                      errorWidget: (context, url, error) =>
+                                          Material(
+                                            child: Image.asset(
+                                              'images/img_not_available.jpeg',
+                                              width: 200.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(8.0),
+                                            ),
+                                            clipBehavior: Clip.hardEdge,
+                                          ),*//*
 
               // Sticker
               (isShowSticker ? buildSticker() : Container()),
@@ -568,69 +608,11 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
   }
 
   Widget buildInput() {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          // Button send image
-          Material(
-            child: new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 1.0),
-              child: new IconButton(
-                icon: new Icon(Icons.image),
-                onPressed: getImage,
-                color: primaryColor,
-              ),
-            ),
-            color: Colors.white,
-          ),
-          Material(
-            child: new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 1.0),
-              child: new IconButton(
-                icon: new Icon(Icons.face),
-                onPressed: getSticker,
-                color: primaryColor,
-              ),
-            ),
-            color: Colors.white,
-          ),
+    return Container();*/
+/*
 
-          // Edit text
-          Flexible(
-            child: Container(
-              child: TextField(
-                style: TextStyle(color: primaryColor, fontSize: 15.0),
-                controller: textEditingController,
-                decoration: InputDecoration.collapsed(
-                  hintText: 'Type your message...',
-                  hintStyle: TextStyle(color: greyColor),
-                ),
-                focusNode: focusNode,
-              ),
-            ),
-          ),
+    );    *//*
 
-          // Button send message
-          Material(
-            child: new Container(
-              margin: new EdgeInsets.symmetric(horizontal: 8.0),
-              child: new IconButton(
-                icon: new Icon(Icons.send),
-                onPressed: () => onSendMessage(textEditingController.text, 0),
-                color: primaryColor,
-              ),
-            ),
-            color: Colors.white,
-          ),
-        ],
-      ),
-      width: double.infinity,
-      height: 50.0,
-      decoration: new BoxDecoration(
-          border:
-              new Border(top: new BorderSide(color: greyColor2, width: 0.5)),
-          color: Colors.white),
-    );
   }
 
   Widget buildListMessage() {
@@ -690,3 +672,4 @@ class ChatScreenState extends State<ChatScreen> implements MessageContract {
 
   }
 }
+*/

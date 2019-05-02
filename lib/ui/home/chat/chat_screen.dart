@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+//import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -130,20 +130,28 @@ class ChatScreenState extends State<ChatScreentest>
 //==============================================================================
   void _handleSubmit(
       [String sender_id,
-      String user_name,
+      String sender_name,
       String msg_content,
       String isImage,
       String msg_created_at]) {
-    print("sender id====$sender_id my id ====$myId");
+
+    print(
+        "test get sent data\n"
+            "sender_id is    ============================> ${sender_id} \n"
+            "myId is         ============================> $myId\n"
+            "sender name is  ============================> $sender_name \n"
+            "msg content is  ============================>$msg_content");
     _chatController.clear();
     ChatMessage message = new ChatMessage(
-        sender_id: sender_id,
         my_id: myId,
+        sender_id: sender_id,
         msg_content: msg_content,
         date: msg_created_at,
-        name: user_name,
+        name: sender_name,
         isImage: isImage);
     setState(() {
+      isLoading = false;
+      isLoadingSendMessage = false;
       _messagesWidgets.insert(0, message);
       isImageFile = false;
     });
@@ -181,7 +189,7 @@ class ChatScreenState extends State<ChatScreentest>
       _chatController.clear();
 
       setState(() {
-        _messagePresenter.loadSendMessage(int.parse(myId), dr_Id, myName, "", msg_content,
+        _messagePresenter.loadSendMessage(myId, dr_Id, myName, "", msg_content,
             imageFile, isImage, msg_created_at);
         isLoadingSendMessage = true;
       });
@@ -384,13 +392,14 @@ class ChatScreenState extends State<ChatScreentest>
               " And sender name Id is=========================== ${data.object.sender_name}  and myId is $myId\n"
               "msg content is ================================${data.object.msg_content}");
 
-      isLoadingSendMessage = false;
       _handleSubmit(
           data.object.sender_id.toString(),
           myName,
           data.object.msg_content,
           data.object.isImage,
           data.object.created_at);
+
+    });
 
       /* switch (data.id) {
         case EventMessageConstants.SEND_SUCCESSFUL:
@@ -434,13 +443,12 @@ class ChatScreenState extends State<ChatScreentest>
           }
           break;
       }*/
-    });
+
   }
 
   @override
   void onLoadMessagesCompleted(List<Messages> items) {
     setState(() {
-      isLoading = false;
 
       if (items.length >= 0) {
         for (var i = 0; i < items.length; i++) {
@@ -465,6 +473,9 @@ class ChatScreenState extends State<ChatScreentest>
           _handleSubmit(items[i].sender_id.toString(), items[i].sender_name,
               items[i].msg_content, items[i].isImage, items[i].created_at);
         }
+      }else{
+        isLoading = false;
+
       }
 
       print(

@@ -9,18 +9,16 @@ part of 'api_message_request.dart';
 ApiMessageRequest _$ApiRequestFromJson(Map<String, dynamic> json) =>
     new ApiMessageRequest(
         // operation: json['operation'] as String,
-        message: json[APIOperations.USER] == null
+        messageBody: json[APIOperations.USER] == null
             ? null
-            : new Messages.fromJson(
+            : new MessageBody.fromJson(
                 json[APIOperations.USER] as Map<String, dynamic>));
 
 abstract class _$ApiRequestSerializerMixin {
   String get operation;
-
-  Messages messageBody;
+  MessageBody get messageBody;
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-     //   APIOperations.PHONE: messageBody.id,
         APIOperations.MSG_CONTENT: messageBody.msg_content,
       };
 }

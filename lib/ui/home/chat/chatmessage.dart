@@ -25,7 +25,7 @@ class ChatMessage extends StatelessWidget {
     return
 //---------------------------if id current user---------------------------------
 
-        my_id == sender_id
+        sender_id == my_id
             ? new Container(
                 margin: const EdgeInsets.symmetric(vertical: 10.0),
                 child: new Row(
@@ -50,8 +50,8 @@ class ChatMessage extends StatelessWidget {
                           isImage == "y"
                               // Image
                               ? Container(
-                                  child: Material(
-                                    child: CachedNetworkImage(
+                             child: Material(
+                                   child: CachedNetworkImage(
                                       placeholder: (context, url) => Container(
                                             child: CircularProgressIndicator(
                                               valueColor:
@@ -169,7 +169,7 @@ class ChatMessage extends StatelessWidget {
                               // Image
                               ? Container(
                                   child: Material(
-                                    child: CachedNetworkImage(
+                                      child: CachedNetworkImage(
                                       placeholder: (context, url) => Container(
                                             child: CircularProgressIndicator(
                                               valueColor:

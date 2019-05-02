@@ -23,13 +23,13 @@ class MessagePresenter {
   }
  // [String text, int id, String imageUrl, String isImg, String name) {
 
-  void loadSendMessage(int on_sender_id, String receiver_id,
+  void loadSendMessage(String sender_id, String receiver_id,
   String sender_name, String reciver_name,String msg_content,File msg_pic_file,  String isImage,String msgCreatedAt) {
 
-    print("test sender_id IDs 2.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= on_sender_id id ism $on_sender_id And receiver_id Id is $receiver_id");
+    print("test sender_id IDs 2.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= on_sender_id id ism $sender_id And receiver_id Id is $receiver_id");
 //sender_id,,,,,receiver_id
     _sendRepository
-        .sendMessage( on_sender_id,  receiver_id,
+        .sendMessage( sender_id,  receiver_id,
         sender_name,reciver_name, msg_content, msg_pic_file,   isImage, msgCreatedAt)
         .then((c) => _view.onLoadSendingMessageCompleted(c))
         .catchError((onError) => _view.onLoadMessagesError());

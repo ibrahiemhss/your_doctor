@@ -8,6 +8,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:path/path.dart';
 
 import 'package:your_doctor/data/chat/base/event_chat_object.dart';
+import 'package:your_doctor/data/chat/base/message_body_data.dart';
 import 'package:your_doctor/data/chat/internet/api_message_request.dart';
 import 'package:your_doctor/data/chat/internet/api_message_response.dart';
 import 'package:your_doctor/data/chat/message_data.dart';
@@ -20,13 +21,13 @@ class MockSendMessageRepository implements SendingMessageRepository {
 
 
   @override
-  Future<EventMessageObject> sendMessage(int on_sender_id, String receiver_id,
+  Future<EventMessageObject> sendMessage(String sender_id, String receiver_id,
       String sender_name, String reciver_name,String msg_content,File msg_pic_file,  String isImage,String msg_created_at)
   async {
     if (msg_pic_file == null) {
       var queryParameters = {
-        APIOperations.SENDER_ID: on_sender_id.toString(),
-        APIOperations.RECEVER_ID: receiver_id,
+        APIOperations.SENDER_ID: sender_id,
+        APIOperations.RECEVER_ID: receiver_id.toString(),
         APIOperations.MSG_SENDER_NAME: sender_name,
         APIOperations.MSG_CONTENT: msg_content,
         APIOperations.MSG_PIC: msg_pic_file != null ? 'data:image/png;base64,' +
@@ -36,40 +37,28 @@ class MockSendMessageRepository implements SendingMessageRepository {
 
       };
 
-
-      ApiMessageRequest apiRequest = new ApiMessageRequest();
-      Messages messages = new Messages(on_sender_id: on_sender_id,
-          receiver_id: receiver_id,
-          msg_content: msg_content,
-          isImage: isImage);
-      print(
-          "test sender_id IDs 3.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= msg_from id ism $on_sender_id And receiver_id Id is $receiver_id");
-
       //id: id,
       //  text: text);
 
-      apiRequest.operation = APIOperations.SEND_MESSAGE;
-      apiRequest.message = messages;
 
       try {
         final encoding = APIConstants.OCTET_STREAM_ENCODING;
         final response = await http.post(APIConstants.Api_SEND_MESSAGE_URL,
             body: queryParameters, encoding: Encoding.getByName(encoding));
+        print("send response json is ================> ${response.toString()}");
         if (response != null) {
           if (response.statusCode == APIResponseCode.SC_OK &&
               response.body != null) {
             final responseJson = json.decode(response.body);
             ApiMessageResponse apiResponse =
             ApiMessageResponse.fromJson(responseJson);
-            if (apiResponse.message == 1) {
+            if (apiResponse.messageBody.message_status == 1) {
               return new EventMessageObject(
                   id: EventMessageConstants.SEND_SUCCESSFUL,
-                  messageResponse: apiResponse.message,
                   object: apiResponse.messageBody);
-            } else {
+            }else {
               return new EventMessageObject(
-                  id: EventMessageConstants.SEND_UN_SUCCESSFUL,
-                  messageResponse: apiResponse.message);
+                  id: EventMessageConstants.SEND_UN_SUCCESSFUL);
             }
           } else {
             return new EventMessageObject(
@@ -105,7 +94,7 @@ class MockSendMessageRepository implements SendingMessageRepository {
       var result;
 
 
-      request.fields[APIOperations.SENDER_ID] = on_sender_id.toString();
+      request.fields[APIOperations.SENDER_ID] = sender_id.toString();
       request.fields[APIOperations.RECEVER_ID] = receiver_id;
       request.fields[APIOperations.MSG_SENDER_NAME] = sender_name;
       request.fields[APIOperations.MSG_CONTENT] = msg_content;
@@ -122,22 +111,8 @@ class MockSendMessageRepository implements SendingMessageRepository {
       // send request
       var response = await request.send();
 
-
-      ApiMessageRequest apiRequest = new ApiMessageRequest();
-      Messages messages = new Messages(on_sender_id: on_sender_id,
-          receiver_id: receiver_id,
-          msg_content: msg_content,
-          isImage: isImage);
-      print(
-          "test sender_id IDs 3.=.=.=.=.=..=.=.==.=.=..=.=.=.=..= on_sender_id id ism $on_sender_id And receiver_id Id is $receiver_id");
-
-      //id: id,
-      //  text: text);
-
-      apiRequest.operation = APIOperations.SEND_MESSAGE;
-      apiRequest.message = messages;
       await response.stream.transform(utf8.decoder).listen((value) {
-        print(" =====================response value $value");
+        print("send response json with image is ================> ${value}");
         result = value;
       });
       try {
@@ -147,15 +122,13 @@ class MockSendMessageRepository implements SendingMessageRepository {
             final responseJson = json.decode(result);
             ApiMessageResponse apiResponse =
             ApiMessageResponse.fromJson(responseJson);
-            if (apiResponse.message == 1) {
+            if (apiResponse.messageBody.message_status == 1) {
               return new EventMessageObject(
                   id: EventMessageConstants.SEND_SUCCESSFUL,
-                  messageResponse: apiResponse.message,
                   object: apiResponse.messageBody);
             } else {
               return new EventMessageObject(
-                  id: EventMessageConstants.SEND_UN_SUCCESSFUL,
-                  messageResponse: apiResponse.message);
+                  id: EventMessageConstants.SEND_UN_SUCCESSFUL);
             }
           } else {
             return new EventMessageObject(

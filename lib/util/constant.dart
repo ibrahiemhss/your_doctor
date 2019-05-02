@@ -27,7 +27,7 @@ class APIOperations {
 
   static const String ERROR = "error";
   static const String ERROR_MESSAGE = "error_msg";
-  static const String FCM_SUCCESS = "success";
+  static const String MESSAGE_STATUS = "message_status";
   static const String FCM_FAILURE = "failure";
 
 

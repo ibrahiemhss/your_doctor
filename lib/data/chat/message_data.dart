@@ -27,7 +27,7 @@ class Messages {
       this.sender_name,
       this.reciver_name,
       this.sender_id,
-        this.on_sender_id,
+      this.on_sender_id,
       this.receiver_id,
       this.msg_content,
       this.isImage,
@@ -39,7 +39,6 @@ class Messages {
       sender_name: json['sender_name'] as String,
       reciver_name: json['reciver_name'] as String,
       on_sender_id: json['on_sender_id'] as int,
-
       sender_id: json['sender_id'] as String,
       receiver_id: json['receiver_id'] as String,
       msg_content: json['msg_content'] as String,
@@ -55,7 +54,7 @@ class Messages {
         receiver_id = map['receiver_id'],
         sender_id = map['sender_id'],
         on_sender_id = map['on_sender_id'],
-      msg_content = map['msg_content'],
+        msg_content = map['msg_content'],
         isImage = map['is_image'],
         created_at = map['created_at'];
 
@@ -71,7 +70,7 @@ abstract class GetMessagesRepository {
 
 abstract class SendingMessageRepository {
   Future<EventMessageObject> sendMessage(
-      int on_sender_id,
+      String sender_id,
       String receiver_id,
       String sender_name,
       String reciver_name,
